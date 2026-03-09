@@ -22,7 +22,7 @@ public:
 	template<typename ComponentType, typename... Param>
 	ComponentType* AddComponent(Param ... parameters);
 
-private:
+protected:
 	std::vector<Component*> components;
 	std::string name;
 	Transform transform;
