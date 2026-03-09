@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "Module.h"
 
 class ModuleManager
 {
@@ -11,7 +12,13 @@ public:
 	void Render();
 	void Destroy();
 
+	// Crée un module de type correspondant
+	template<typename ModuleType>
+	Module* CreateModule();
+
 private:
 	std::vector<Module*> modules;
 
 };
+
+#include "ModuleManager.inl"

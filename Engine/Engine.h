@@ -15,7 +15,7 @@ public:
 	void Stop();
 
 	// Récupère l'instance du moteur
-	Engine* GetInstance()
+	static Engine* GetInstance()
 	{
 
 		if (!instance)
@@ -25,20 +25,9 @@ public:
 
 	}
 
-	// Récupère l'instance du module manager du moteur
-	ModuleManager* GetModuleManager()
-	{
-
-		if (!moduleManager)
-			moduleManager = new ModuleManager();
-
-		return moduleManager;
-
-	}
-
 private:
 	static Engine* instance;
-	ModuleManager* moduleManager;
+	ModuleManager* moduleManager = new ModuleManager();
 	bool isStopped;
 
 };
