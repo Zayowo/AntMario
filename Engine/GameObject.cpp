@@ -1,6 +1,8 @@
 #include "GameObject.h"
 #include "Component.h"
 
+GameObject::GameObject(std::string name, Scene* scene) : name(name), scene(scene) {};
+
 void GameObject::Init()
 {
 
@@ -38,6 +40,13 @@ std::string GameObject::GetName()
 {
 
 	return name;
+
+}
+
+Scene* GameObject::GetScene()
+{
+
+	return scene;
 
 }
 

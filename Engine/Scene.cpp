@@ -31,3 +31,23 @@ void Scene::Destroy()
 		gameObject->Destroy();
 
 }
+
+GameObject* Scene::CreateGameObject(std::string name, sf::Vector2f pos)
+{
+
+	GameObject* gameObject = new GameObject(name, this);
+	gameObject->GetTransform().pos = pos;
+	gameObjects.push_back(gameObject);
+	return gameObject;
+
+}
+
+void Scene::DeleteGameObject(GameObject* gameObject)
+{
+
+	if (gameObject->GetScene() != this)
+		return;
+
+	gameObjectsToDelete.push_back(gameObject);
+
+}
