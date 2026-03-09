@@ -72,6 +72,12 @@
     <ClInclude Include="resource.h">
       <Filter>Fichiers de ressources</Filter>
     </ClInclude>
+    <ClInclude Include="FSMComponent.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -110,6 +116,12 @@
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Fichiers sources\Components</Filter>
     </ClCompile>
+    <ClCompile Include="FSMConponent.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ModuleManager.inl">
@@ -120,6 +132,12 @@
     </None>
     <None Include="SceneModule.inl">
       <Filter>Fichiers d%27en-tête\Modules</Filter>
+    </None>
+    <None Include="State.inl">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </None>
+    <None Include="FSMComponent.inl">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
