@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Models">
+      <UniqueIdentifier>{5b83b9fb-ef55-4154-ad0b-fcbf3ff1c226}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -38,6 +41,15 @@
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceModule.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="InputModule.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="InputInfo.h">
+      <Filter>Fichiers d%27en-tête\Models</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Fichiers d%27en-tête</Filter>
@@ -71,6 +83,12 @@
     <ClCompile Include="Component.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceModule.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="InputModule.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -80,6 +98,9 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </None>
     <None Include="GameObject.inl">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </None>
+    <None Include="SceneModule.inl">
       <Filter>Fichiers d%27en-tête</Filter>
     </None>
   </ItemGroup>
