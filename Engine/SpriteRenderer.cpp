@@ -23,11 +23,28 @@ void SpriteRenderer::Update(float dt)
 	sprite->setRotation(sf::degrees(transform.rot));
 	sprite->setScale(transform.scale);
 
+	if (_animationRule)
+	{
+		SpriteAnimationRule& rule = _animationRule.value();
+		animationTime += dt;
+		sprite->setTextureRect({ { rule.pos.x + rule.size.x, rule.pos.y }, rule.size });
+
+	}
+
 }
 
 void SpriteRenderer::Render(sf::RenderWindow* window)
 {
 
 	window->draw(*sprite);
+
+}
+
+
+void SpriteRenderer::SetAnimationRule(const SpriteAnimationRule animationRule)
+{
+
+	_animationRule = std::make_optional(animationRule);
+	animationTime = 0.f;
 
 }

@@ -145,6 +145,7 @@
     <ClInclude Include="ResourceModule.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneModule.h" />
+    <ClInclude Include="SpriteAnimationRule.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="TimeModule.h" />
     <ClInclude Include="ModuleManager.h" />
