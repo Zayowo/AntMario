@@ -51,6 +51,12 @@
     <ClInclude Include="InputInfo.h">
       <Filter>Fichiers d%27en-tête\Models</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
     <ClInclude Include="WindowModule.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -86,6 +92,9 @@
     <ClCompile Include="InputModule.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
     <ClCompile Include="WindowModule.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -100,5 +109,10 @@
     <None Include="SceneModule.inl">
       <Filter>Fichiers d%27en-tête</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine.rc">
+      <Filter>Fichiers de ressources</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
