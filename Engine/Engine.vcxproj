@@ -138,6 +138,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneModule.h" />
     <ClInclude Include="TimeModule.h" />
+    <ClInclude Include="ModuleManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
@@ -145,6 +146,10 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneModule.cpp" />
     <ClCompile Include="TimeModule.cpp" />
+    <ClCompile Include="ModuleManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ModuleManager.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

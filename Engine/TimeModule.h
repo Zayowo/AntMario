@@ -4,12 +4,14 @@
 
 class TimeModule : public Module
 {
-	void Init() override;
 
+public:
+	void Init() override;
 	void Update() override;
 
-private :
+private:
 	sf::Clock deltaClock;
 	float dt = 0;
+
 };
 

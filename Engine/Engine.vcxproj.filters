@@ -24,6 +24,9 @@
     <ClInclude Include="TimeModule.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleManager.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
     <ClInclude Include="SceneModule.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -41,11 +44,19 @@
     <ClCompile Include="TimeModule.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleManager.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
     <ClCompile Include="SceneModule.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ModuleManager.inl">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </None>
   </ItemGroup>
 </Project>
