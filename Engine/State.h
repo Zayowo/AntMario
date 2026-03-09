@@ -6,7 +6,7 @@ class State
     using Condition = std::function<bool(ContextType)>;
     using Statut = State<ContextType>;
 
-public:
+public:    
     virtual ~State() = default;
 
     virtual void Enter(ContextType contexte) {}
@@ -15,7 +15,7 @@ public:
 
     void AddTransition(Condition condition, Statut* newState);
 
-    Statut* TryGetNext(ContextType contexte);
+    State<ContextType>* TryGetNext(ContextType contexte);
 
 private:
     std::vector<std::pair<Condition, Statut*>> transitions;

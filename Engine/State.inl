@@ -6,7 +6,7 @@ void State<ContextType>::AddTransition(Condition condition, Statut* newState)
 }
 
 template<typename ContextType>
-State<ContextType>::Statut* State<ContextType>::TryGetNext(ContextType contexte)
+State<ContextType>* State<ContextType>::TryGetNext(ContextType contexte)
 {
     for (auto& transition : transitions)
     {
