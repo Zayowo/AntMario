@@ -110,6 +110,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,6 +127,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)include</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -137,12 +139,14 @@
     <ClInclude Include="Module.h" />
     <ClInclude Include="TimeModule.h" />
     <ClInclude Include="ModuleManager.h" />
+    <ClInclude Include="WindowModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="TimeModule.cpp" />
     <ClCompile Include="ModuleManager.cpp" />
+    <ClCompile Include="WindowModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ModuleManager.inl" />
