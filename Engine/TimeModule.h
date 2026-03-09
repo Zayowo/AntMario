@@ -6,7 +6,10 @@ class TimeModule : public Module
 {
 	void Init() override;
 
+	void Update() override;
+
 private :
 	sf::Clock deltaClock;
+	float dt = 0;
 };
 
