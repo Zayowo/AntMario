@@ -8,19 +8,19 @@ void Scene::Init()
 
 }
 
-void Scene::Update()
+void Scene::Update(float dt)
 {
 
 	for (GameObject* gameObject : gameObjects)
-		gameObject->Update();
+		gameObject->Update(dt);
 
 }
 
-void Scene::Render()
+void Scene::Render(sf::RenderWindow* window)
 {
 
 	for (GameObject* gameObject : gameObjects)
-		gameObject->Render();
+		gameObject->Render(window);
 
 }
 

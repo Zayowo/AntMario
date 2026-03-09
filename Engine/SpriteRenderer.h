@@ -2,13 +2,13 @@
 #include "Component.h"
 class SpriteRenderer : public Component
 {
-	void Update() override;
 
-	void Render() override;
-
-
+public:
+	void Update(float dt) override;
+	void Render(sf::RenderWindow* window) override;
 
 private:
 	sf::Sprite sprite;
+
 };
 

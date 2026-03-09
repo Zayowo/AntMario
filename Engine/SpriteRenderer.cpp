@@ -1,11 +1,11 @@
 #include "SpriteRenderer.h"
 
-void SpriteRenderer::Update()
+void SpriteRenderer::Update(float dt)
 {
 	sprite.setPosition(owner->GetTransform().pos);
 }
 
-void SpriteRenderer::Render()
+void SpriteRenderer::Render(sf::RenderWindow* window)
 {
 
 }

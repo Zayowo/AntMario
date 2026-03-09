@@ -27,7 +27,7 @@ public:
 
 	// Récupère un module présent dans le moteur
 	template<typename ModuleType>
-	static Module* GetModule()
+	static ModuleType* GetModule()
 	{
 
 		return moduleManager->GetModule<ModuleType>();

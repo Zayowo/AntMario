@@ -8,8 +8,8 @@ class Scene
 
 public:
 	void Init();
-	void Update();
-	void Render();
+	void Update(float dt);
+	void Render(sf::RenderWindow* window);
 	void Destroy();
 
 private:

@@ -1,18 +1,25 @@
 #include "SceneModule.h"
+#include "Engine.h"
+#include "WindowModule.h"
+#include "TimeModule.h"
 
 void SceneModule::Update()
 {
 
+	float dt = Engine::GetModule<TimeModule>()->GetDeltaTime();
+
 	for (Scene* scene : sceneStack)
-		scene->Update();
+		scene->Update(dt);
 
 }
 
 void SceneModule::Render()
 {
 
+	sf::RenderWindow* window = Engine::GetModule<WindowModule>()->GetRenderWindow();
+
 	for (Scene* scene : sceneStack)
-		scene->Render();
+		scene->Render(window);
 
 }
 

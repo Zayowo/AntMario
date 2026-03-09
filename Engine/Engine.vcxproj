@@ -141,8 +141,8 @@
     <ClInclude Include="InputInfo.h" />
     <ClInclude Include="InputModule.h" />
     <ClInclude Include="Module.h" />
-    <ClInclude Include="ResourceModule.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="ResourceModule.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneModule.h" />
     <ClInclude Include="SpriteRenderer.h" />

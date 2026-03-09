@@ -16,6 +16,18 @@
     <Filter Include="Fichiers d%27en-tête\Models">
       <UniqueIdentifier>{5b83b9fb-ef55-4154-ad0b-fcbf3ff1c226}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Modules">
+      <UniqueIdentifier>{2ea94985-e362-4ed8-9e9b-3c2311070929}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Components">
+      <UniqueIdentifier>{13cf0f8f-2a6f-48bc-8d06-92af475bb9a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Modules">
+      <UniqueIdentifier>{63b86970-50ea-4a6e-857a-f721ffb4943f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Components">
+      <UniqueIdentifier>{52899063-1387-4e3a-bd5e-e3a14b24214f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -24,13 +36,7 @@
     <ClInclude Include="Module.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="TimeModule.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneModule.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
@@ -42,36 +48,36 @@
     <ClInclude Include="GameObject.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceModule.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="InputModule.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="InputInfo.h">
       <Filter>Fichiers d%27en-tête\Models</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="SceneModule.h">
+      <Filter>Fichiers d%27en-tête\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="ResourceModule.h">
+      <Filter>Fichiers d%27en-tête\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="InputModule.h">
+      <Filter>Fichiers d%27en-tête\Modules</Filter>
     </ClInclude>
     <ClInclude Include="WindowModule.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeModule.h">
+      <Filter>Fichiers d%27en-tête\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Fichiers de ressources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="TimeModule.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleManager.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneModule.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
@@ -87,16 +93,22 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="ResourceModule.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="InputModule.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="SceneModule.cpp">
+      <Filter>Fichiers sources\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="TimeModule.cpp">
+      <Filter>Fichiers sources\Modules</Filter>
     </ClCompile>
     <ClCompile Include="WindowModule.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="InputModule.cpp">
+      <Filter>Fichiers sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Fichiers sources\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,7 +119,7 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </None>
     <None Include="SceneModule.inl">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Modules</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

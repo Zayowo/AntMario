@@ -1,6 +1,6 @@
 #pragma once
-#include <iostream>
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include <vector>
 
 class Component;
@@ -16,8 +16,8 @@ class GameObject
 
 public:
 	void Init();
-	void Update();
-	void Render();
+	void Update(float dt);
+	void Render(sf::RenderWindow* window);
 	void Destroy();
 
 

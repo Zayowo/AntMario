@@ -10,19 +10,19 @@ void GameObject::Init()
 }
 
 
-void GameObject::Update()
+void GameObject::Update(float dt)
 {
 
 	for (Component* component : components)
-		component->Update();
+		component->Update(dt);
 
 }
 
-void GameObject::Render()
+void GameObject::Render(sf::RenderWindow* window)
 {
 
 	for (Component* component : components)
-		component->Render();
+		component->Render(window);
 
 }
 

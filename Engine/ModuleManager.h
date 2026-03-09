@@ -18,7 +18,7 @@ public:
 
 	// Récupère un module de type
 	template<typename ModuleType>
-	Module* GetModule()
+	ModuleType* GetModule()
 	{
 
 		for (Module* module : modules)
