@@ -140,6 +140,9 @@
       <Project>{f4cd95b4-9195-4d0d-8ac0-fe09d9d9f1b7}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PrototypeScene.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

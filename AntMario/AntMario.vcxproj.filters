@@ -22,4 +22,9 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PrototypeScene.h">
+      <Filter>Fichiers d%27en-tête\Scenes</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

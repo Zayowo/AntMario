@@ -3,6 +3,7 @@
 
 class Component
 {
+	friend class GameObject;
 
 public:
 	virtual void Init() {};

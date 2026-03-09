@@ -1,3 +1,4 @@
+#include <iostream>
 #include "SpriteRenderer.h"
 #include "Engine.h"
 #include "ResourceModule.h"
@@ -22,8 +23,9 @@ void SpriteRenderer::Update(float dt)
 	sprite->setPosition(transform.pos);
 	sprite->setRotation(sf::degrees(transform.rot));
 	sprite->setScale(transform.scale);
+	sprite->setOrigin(sprite->getLocalBounds().size * 0.5f);
 
-	if (_animationRule)
+	if (_animationRule.has_value())
 	{
 		SpriteAnimationRule& rule = _animationRule.value();
 		animationTime += dt;

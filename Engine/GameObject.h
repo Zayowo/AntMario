@@ -2,15 +2,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include "Transform.h"
 
-class Component;
 class Scene;
-
-struct Transform {
-	sf::Vector2f pos;
-	float rot;
-	sf::Vector2f scale;
-};
+class Component;
 
 class GameObject
 {
@@ -38,7 +33,7 @@ public:
 
 	// Ajoute un component de type
 	template<typename ComponentType, typename... Param>
-	ComponentType* AddComponent(Param ... parameters);
+	ComponentType* AddComponent(Param... parameters);
 
 protected:
 	std::string name;

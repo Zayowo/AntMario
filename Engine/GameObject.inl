@@ -1,4 +1,5 @@
 #pragma once
+
 template<typename ComponentType>
 ComponentType* GameObject::GetComponent() {
 	for (Component* component : components) {
@@ -12,9 +13,12 @@ ComponentType* GameObject::GetComponent() {
 }
 
 template<typename ComponentType, typename... Param>
-ComponentType* GameObject::AddComponent(Param ... parameters) {
+ComponentType* GameObject::AddComponent(Param... parameters)
+{
+	
 	ComponentType* component = new ComponentType(parameters...);
-
+	component->owner = this;
 	components.push_back(component);
 	return component;
+
 }
