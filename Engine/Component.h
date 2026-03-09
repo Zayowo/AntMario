@@ -8,7 +8,7 @@ public:
 	virtual void Render() {};
 	virtual void Destroy() {};
 	GameObject* GetOwner() {};
-private:
+protected:
 	GameObject* owner;
 
 };

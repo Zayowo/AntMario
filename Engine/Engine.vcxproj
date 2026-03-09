@@ -142,10 +142,13 @@
     <ClInclude Include="InputModule.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ResourceModule.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneModule.h" />
+    <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="TimeModule.h" />
     <ClInclude Include="ModuleManager.h" />
+    <ClInclude Include="WindowModule.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Component.cpp" />
@@ -156,13 +159,18 @@
     <ClCompile Include="ResourceModule.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneModule.cpp" />
+    <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="TimeModule.cpp" />
     <ClCompile Include="ModuleManager.cpp" />
+    <ClCompile Include="WindowModule.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GameObject.inl" />
     <None Include="ModuleManager.inl" />
     <None Include="SceneModule.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Engine.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
