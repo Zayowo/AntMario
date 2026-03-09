@@ -2,24 +2,42 @@
 
 void SceneModule::Update()
 {
-	for (Scene* scene : scenes) {
+
+	for (Scene* scene : sceneStack)
 		scene->Update();
-	}
+
 }
 
 void SceneModule::Render()
 {
-	for (Scene* scene : scenes) {
+
+	for (Scene* scene : sceneStack)
 		scene->Render();
-	}
+
 }
 
-void SceneModule::PushStack(Scene* scene)
+void SceneModule::Destroy()
 {
-	scenes.push_back(scene);
+
+	for (Scene* scene : sceneStack)
+		scene->Destroy();
+
 }
 
-void SceneModule::PopStack()
+void SceneModule::PushScene(std::string name)
 {
-	scenes.pop_back();
+
+	if (!sceneConstructorMap[name])
+		return;
+
+	Scene* scene = sceneConstructorMap[name]();
+	sceneStack.push_back(scene);
+
+}
+
+void SceneModule::PopScene()
+{
+
+	sceneStack.pop_back();
+
 }

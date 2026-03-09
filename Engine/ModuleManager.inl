@@ -1,9 +1,10 @@
 
 template<typename ModuleType>
-Module* ModuleManager::CreateModule()
+Module* ModuleManager::RegisterModule()
 {
 
 	ModuleType* module = new ModuleType();
 	modules.push_back(module);
+	return module;
 
 }

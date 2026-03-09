@@ -12,9 +12,9 @@ public:
 	void Render();
 	void Destroy();
 
-	// Crée un module de type correspondant
+	// Enregistre un module de type
 	template<typename ModuleType>
-	Module* CreateModule();
+	Module* RegisterModule();
 
 private:
 	std::vector<Module*> modules;
