@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+class Component;
 
 struct Transform {
 	sf::Vector2f pos;
@@ -12,7 +13,14 @@ struct Transform {
 
 class GameObject
 {
+
 public:
+	void Init();
+	void Update();
+	void Render();
+	void Destroy();
+
+
 	std::string GetName();
 	Transform& GetTransform();
 	
