@@ -2,12 +2,16 @@
 #include "Engine.h"
 
 Engine* Engine::instance = nullptr;
+ModuleManager* Engine::moduleManager = nullptr;
 
 void Engine::Init()
 {
 
+	if (!moduleManager)
+		moduleManager = new ModuleManager();
+
 	moduleManager->Init();
-	std::cout << "Engine has been initialized!" << std::endl;
+	std::cout << "Engine is initialized!" << std::endl;
 
 }
 
@@ -21,7 +25,7 @@ void Engine::Run()
 	}
 
 	moduleManager->Destroy();
-	std::cout << "Engine has been stopped!" << std::endl;
+	std::cout << "Engine is stopped!" << std::endl;
 
 }
 

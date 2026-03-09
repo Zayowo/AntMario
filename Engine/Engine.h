@@ -25,9 +25,18 @@ public:
 
 	}
 
+	// Récupère un module présent dans le moteur
+	template<typename ModuleType>
+	static Module* GetModule()
+	{
+
+		return moduleManager->GetModule<ModuleType>();
+
+	}
+
 private:
 	static Engine* instance;
-	ModuleManager* moduleManager = new ModuleManager();
-	bool isStopped;
+	static ModuleManager* moduleManager;
+	bool isStopped = false;
 
 };

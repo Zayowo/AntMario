@@ -16,6 +16,19 @@ public:
 	template<typename ModuleType>
 	Module* RegisterModule();
 
+	// Récupère un module de type
+	template<typename ModuleType>
+	Module* GetModule()
+	{
+
+		for (Module* module : modules)
+			if (ModuleType* moduleType = dynamic_cast<ModuleType*>(module))
+				return moduleType;
+
+		return nullptr;
+
+	}
+
 private:
 	std::vector<Module*> modules;
 

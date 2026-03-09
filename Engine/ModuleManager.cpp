@@ -1,9 +1,11 @@
 #include "ModuleManager.h"
+#include "InputModule.h"
 #include "TimeModule.h"
 #include "SceneModule.h"
 
 void ModuleManager::Init() {
 
+	RegisterModule<InputModule>();
 	RegisterModule<TimeModule>();
 	RegisterModule<SceneModule>();
 
