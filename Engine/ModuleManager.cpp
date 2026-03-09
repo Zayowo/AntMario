@@ -1,8 +1,11 @@
 #include "ModuleManager.h"
+#include "TimeModule.h"
+#include "SceneModule.h"
 
 void ModuleManager::Init() {
 
-	
+	RegisterModule<TimeModule>();
+	RegisterModule<SceneModule>();
 
 	for (Module* module : modules)
 		module->Init();
