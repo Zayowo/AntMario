@@ -18,6 +18,9 @@ public:
 	// Supprime un game object de la scène
 	void DeleteGameObject(GameObject* gameObject);
 
+	// Récupère les game objects avec un nom
+	std::vector<GameObject*> GetGameObjectsByName(std::string name);
+
 private:
 	std::vector<GameObject*> gameObjects;
 	std::vector<GameObject*> gameObjectsToDelete;

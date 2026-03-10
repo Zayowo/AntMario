@@ -11,9 +11,6 @@ public:
 	virtual void Render(sf::RenderWindow* window) {};
 	virtual void Destroy() {};
 
-	// Récupère le game object qui possède ce component
-	GameObject* GetOwner();
-
 protected:
 	GameObject* owner;
 

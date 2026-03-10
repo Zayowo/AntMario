@@ -7,10 +7,6 @@ SpriteRenderer::SpriteRenderer(std::string path)
 {
 
 	ResourceModule* resourceModule = Engine::GetModule<ResourceModule>();
-
-	if (!resourceModule)
-		return;
-
 	sf::Texture& texture = resourceModule->GetTexture(path);
 	sprite = new sf::Sprite(texture);
 

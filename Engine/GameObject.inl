@@ -18,7 +18,7 @@ ComponentType* GameObject::AddComponent(Param... parameters)
 	
 	ComponentType* component = new ComponentType(parameters...);
 	component->owner = this;
-	components.push_back(component);
+	components.emplace_back(component);
 	return component;
 
 }

@@ -8,10 +8,10 @@
 void ModuleManager::Init() {
 
 	RegisterModule<ResourceModule>();
-	RegisterModule<WindowModule>();
 	RegisterModule<InputModule>();
 	RegisterModule<TimeModule>();
 	RegisterModule<SceneModule>();
+	RegisterModule<WindowModule>();
 
 	for (Module* module : modules)
 		module->Init();

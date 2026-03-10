@@ -147,10 +147,12 @@
     <ClInclude Include="SceneModule.h" />
     <ClInclude Include="SpriteAnimationRule.h" />
     <ClInclude Include="SpriteRenderer.h" />
+    <ClInclude Include="SquareCollider.h" />
     <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="TimeModule.h" />
     <ClInclude Include="ModuleManager.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="VelocityComponent.h" />
     <ClInclude Include="WindowModule.h" />
   </ItemGroup>
   <ItemGroup>
@@ -163,9 +165,11 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneModule.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
+    <ClCompile Include="SquareCollider.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="TimeModule.cpp" />
     <ClCompile Include="ModuleManager.cpp" />
+    <ClCompile Include="VelocityComponent.cpp" />
     <ClCompile Include="WindowModule.cpp" />
   </ItemGroup>
   <ItemGroup>

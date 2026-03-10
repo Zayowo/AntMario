@@ -7,7 +7,7 @@ class TextRenderer : public Component
 {
 
 public:
-	TextRenderer(std::string string);
+	TextRenderer(std::string path, std::string string);
 
 	void Update(float dt) override;
 	void Render(sf::RenderWindow* window) override;

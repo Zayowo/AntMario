@@ -38,7 +38,7 @@ void SceneModule::PushScene(std::string name)
 		return;
 
 	Scene* scene = sceneConstructorMap[name]();
-	sceneStack.push_back(scene);
+	sceneStack.emplace_back(scene);
 
 }
 
