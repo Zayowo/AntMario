@@ -87,6 +87,9 @@
     <ClInclude Include="SquareCollider.h">
       <Filter>Fichiers d%27en-tête\Components</Filter>
     </ClInclude>
+    <ClInclude Include="ButtonRenderer.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -132,6 +135,9 @@
       <Filter>Fichiers sources\Components</Filter>
     </ClCompile>
     <ClCompile Include="SquareCollider.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonRenderer.cpp">
       <Filter>Fichiers sources\Components</Filter>
     </ClCompile>
   </ItemGroup>

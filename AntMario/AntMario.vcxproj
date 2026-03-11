@@ -142,6 +142,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PrototypeScene.h" />
   </ItemGroup>

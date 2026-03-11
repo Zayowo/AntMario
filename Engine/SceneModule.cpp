@@ -48,3 +48,15 @@ void SceneModule::PopScene()
 	sceneStack.pop_back();
 
 }
+
+void SceneModule::SetScene(std::string name)
+{
+
+	if (!sceneConstructorMap[name])
+		return;
+
+	Scene* scene = sceneConstructorMap[name]();
+	sceneStack.clear();
+	sceneStack.emplace_back(scene);
+
+}

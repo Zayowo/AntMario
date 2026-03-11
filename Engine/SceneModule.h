@@ -13,11 +13,15 @@ public:
 	void Render() override;
 	void Destroy() override;
 
+
 	// Ajoute une scène dans la sceneStack
 	void PushScene(std::string name);
 
 	// Enlève la scène la plus récente dans la sceneStack
 	void PopScene();
+
+	// Applique une scène en enlevant les scènes actuelles
+	void SetScene(std::string name);
 
 	// Enregistre une scène
 	template<typename SceneType>
