@@ -43,7 +43,7 @@ void PlayerController::Update(float dt)
 
 	velocityComponent->SetX(velocityX);
 	if (velocityX != 0.f)
-		transform.scale.x = velocityX ;
+		transform.scale.x = velocityX > 0.f ? 1.f : -1.f;
 
 
 
