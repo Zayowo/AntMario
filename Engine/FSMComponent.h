@@ -14,6 +14,8 @@ public:
     template<typename StateType>
     StateType* CreateState();
 
+    ContextType& GetContext();
+
 private:
     std::vector<State*> states;
     ContextType context;

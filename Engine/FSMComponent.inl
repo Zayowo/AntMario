@@ -4,22 +4,22 @@ template<typename ContextType>
 void FSMComponent<ContextType>::Init(State* initial)
 {
     current = initial;
-    current->Enter(contexte);
+    current->Enter(context);
 }
 
 template<typename ContextType>
 void FSMComponent<ContextType>::Update(float dt)
 {
     if (current != nullptr) {
-        current->Execute(contexte);
+        current->Execute(context);
 
-        auto next = current->TryGetNext(contexte);
+        auto next = current->TryGetNext(context);
 
         if (next)
         {
-            current->Exit(contexte);
+            current->Exit(context);
             current = next;
-            current->Enter(contexte);
+            current->Enter(context);
         }
 
     }
@@ -34,4 +34,12 @@ StateType* FSMComponent<ContextType>::CreateState()
     states.push_back(state);
 
     return state;
+}
+
+template<typename ContextType>
+ContextType& FSMComponent<ContextType>::GetContext()
+{
+
+    return context;
+
 }

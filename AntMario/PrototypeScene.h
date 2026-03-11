@@ -5,6 +5,9 @@
 #include <SquareCollider.h>
 #include <ButtonRenderer.h>
 #include "PlayerController.h"
+#include "FSMComponent.h"
+#include "PlayerContext.h"
+#include "LittleState.h"
 
 class PrototypeScene : public Scene
 {
@@ -18,6 +21,17 @@ public:
 		player->AddComponent<VelocityComponent>(180.f);
 		player->AddComponent<PlayerController>();
 		player->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
+
+		FSMComponent<PlayerContext>* fsmPlayer = player->AddComponent<FSMComponent<PlayerContext>>();
+		PlayerContext& ctxPlayer = fsmPlayer->GetContext();
+		ctxPlayer.player = player;
+
+		LittleState* littleState = fsmPlayer->CreateState<LittleState>();
+		
+		fsmPlayer->Init(littleState);
+
+
+		
 
 	};
 

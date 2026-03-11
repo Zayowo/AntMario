@@ -2,8 +2,9 @@
 #include "GameObject.h"
 class PlayerContext
 {
+
+public:
 	GameObject* player;
 
-	PlayerContext(GameObject* p);
 };
 
