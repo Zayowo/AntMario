@@ -66,8 +66,8 @@ bool SquareCollider::IsColliding(GameObject* gameObject)
 		return false;
 
 	// Détéction de collisions en AABB
-	sf::FloatRect aBounds = shape->getLocalBounds();
-	sf::FloatRect bBounds = bCollider->shape->getLocalBounds();
+	sf::FloatRect aBounds = shape->getGlobalBounds();
+	sf::FloatRect bBounds = bCollider->shape->getGlobalBounds();
 
 	if (aBounds.findIntersection(bBounds))
 		return true;

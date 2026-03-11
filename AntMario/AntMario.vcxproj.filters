@@ -22,6 +22,12 @@
     <Filter Include="Fichiers sources\Components">
       <UniqueIdentifier>{e9252018-9407-47d8-868c-4299e0826c43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\PlayerState">
+      <UniqueIdentifier>{1b358d13-3423-4742-9939-879de70261cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\PlayerState">
+      <UniqueIdentifier>{3b9aa68d-b452-46b8-9644-265bcede9dbe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -29,6 +35,18 @@
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="LittleState.cpp">
+      <Filter>Fichiers sources\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="GoombaComponent.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Condition.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="BigState.cpp">
+      <Filter>Fichiers sources\PlayerState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,17 +59,23 @@
     <ClInclude Include="MainMenuScene.h">
       <Filter>Fichiers d%27en-tête\Scenes</Filter>
     </ClInclude>
-    <ClCompile Include="LittleState.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerContext.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="LittleState.h">
+      <Filter>Fichiers d%27en-tête\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="GoombaComponent.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="Condition.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="BigState.h">
+      <Filter>Fichiers d%27en-tête\PlayerState</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="PlayerContext.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>

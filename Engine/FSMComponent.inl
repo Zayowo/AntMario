@@ -11,7 +11,7 @@ template<typename ContextType>
 void FSMComponent<ContextType>::Update(float dt)
 {
     if (current != nullptr) {
-        current->Execute(context);
+        current->Execute(context, dt);
 
         auto next = current->TryGetNext(context);
 
@@ -31,7 +31,7 @@ template<typename StateType>
 StateType* FSMComponent<ContextType>::CreateState()
 {
     StateType* state = new StateType();
-    states.push_back(state);
+    states.emplace_back(state);
 
     return state;
 }

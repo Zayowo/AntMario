@@ -8,6 +8,9 @@
 #include "FSMComponent.h"
 #include "PlayerContext.h"
 #include "LittleState.h"
+#include "GoombaComponent.h"
+#include "BigState.h"
+#include "Condition.h"
 
 class PrototypeScene : public Scene
 {
@@ -15,7 +18,7 @@ class PrototypeScene : public Scene
 public:
 	PrototypeScene()
 	{
-
+		// player
 		GameObject* player = CreateGameObject("Player", { 150, 600 });
 		player->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
 		player->AddComponent<VelocityComponent>(180.f);
@@ -27,12 +30,19 @@ public:
 		ctxPlayer.player = player;
 
 		LittleState* littleState = fsmPlayer->CreateState<LittleState>();
+		BigState* bigState = fsmPlayer->CreateState<BigState>();
+		bigState->AddTransition(Condition::collisionWithEnemy, littleState);
 		
-		fsmPlayer->Init(littleState);
-
-
+		fsmPlayer->Init(bigState);
 		
 
+		// enemy
+		GameObject* goomba = CreateGameObject("Enemy", { 300, 600 });
+		goomba->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		goomba->AddComponent<VelocityComponent>(90.f);
+		goomba->AddComponent<GoombaComponent>();
+		goomba->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
+		ctxPlayer.enemies.emplace_back(goomba);
 	};
 
 };
