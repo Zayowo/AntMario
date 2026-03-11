@@ -4,7 +4,7 @@
 
 class LittleState : public State<PlayerContext>
 {
-public :
+public:
 	void Enter(PlayerContext pc) override;
 	void Execute(PlayerContext pc) override;
 	void Exit(PlayerContext pc) override;

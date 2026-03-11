@@ -141,9 +141,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputInfo.h" />
     <ClInclude Include="InputModule.h" />
-    <ClInclude Include="LittleState.h" />
     <ClInclude Include="Module.h" />
-    <ClInclude Include="PlayerContext.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceModule.h" />
     <ClInclude Include="Scene.h" />
@@ -160,9 +158,7 @@
     <ClCompile Include="FSMConponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputModule.cpp" />
-    <ClCompile Include="LittleState.cpp" />
     <ClCompile Include="Module.cpp" />
-    <ClCompile Include="PlayerContext.cpp" />
     <ClCompile Include="ResourceModule.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneModule.cpp" />

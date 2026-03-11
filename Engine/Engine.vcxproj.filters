@@ -81,13 +81,7 @@
     <ClInclude Include="FSMComponent.h">
       <Filter>Fichiers d%27en-tête\Components</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerContext.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="State.h">
-      <Filter>Fichiers d%27en-tête\State</Filter>
-    </ClInclude>
-    <ClInclude Include="LittleState.h">
       <Filter>Fichiers d%27en-tête\State</Filter>
     </ClInclude>
   </ItemGroup>
@@ -130,12 +124,6 @@
     </ClCompile>
     <ClCompile Include="FSMConponent.cpp">
       <Filter>Fichiers sources\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="LittleState.cpp">
-      <Filter>Fichiers sources\State</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerContext.cpp">
-      <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
       <Filter>Fichiers sources\State</Filter>
