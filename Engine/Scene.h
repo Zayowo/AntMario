@@ -7,10 +7,10 @@ class Scene
 {
 
 public:
-	void Init();
-	void Update(float dt);
-	void Render(sf::RenderWindow* window);
-	void Destroy();
+	virtual void Init();
+	virtual void Update(float dt);
+	virtual void Render(sf::RenderWindow* window);
+	virtual void Destroy();
 
 	// Crée un game object dans la scène
 	GameObject* CreateGameObject(std::string name, sf::Vector2f pos);

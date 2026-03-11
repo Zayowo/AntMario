@@ -18,6 +18,9 @@ public:
 	// Enregistre un callback lorsque le collider est en collision avec un autre collider d'un game object avec un nom spécifique
 	void RegisterCollisionCallback(std::string name, std::function<void(GameObject*)> callback);
 
+	// Récupère les bounds de la collision
+	sf::FloatRect GetBounds();
+
 private:
 	sf::RectangleShape* shape;
 	std::unordered_map<std::string, std::vector<std::function<void(GameObject*)>>> collisionCallbackMap;

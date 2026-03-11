@@ -16,8 +16,6 @@ void PlayerController::Init()
 	collider->RegisterCollisionCallback("Bonus2", [this](GameObject* other) { PickUpCoin(other); });
 	collider->RegisterCollisionCallback("Bonus3", [this](GameObject* other) { PickUpCoin(other); });
 
-
-
 }
 
 void PlayerController::Update(float dt)
@@ -38,14 +36,17 @@ void PlayerController::Update(float dt)
 	if (inputModule->Is(sf::Keyboard::Key::LShift, InputState::HELD))
 		velocityX *= 1.5f;
 
-	if (inputModule->Is(sf::Keyboard::Key::Space, InputState::PRESSED))
-		velocityComponent->SetY(-10.f);
+	std::cout << "Player's velocity on Y: " << velocityComponent->GetVelocity().y << std::endl;
+
+	if (
+		velocityComponent->GetVelocity().y <= 1.5f &&
+		inputModule->Is(sf::Keyboard::Key::Space, InputState::PRESSED)
+	)
+		velocityComponent->SetY(-900.f);
 
 	velocityComponent->SetX(velocityX);
 	if (velocityX != 0.f)
 		transform.scale.x = velocityX > 0.f ? 1.f : -1.f;
-
-
 
 }
 

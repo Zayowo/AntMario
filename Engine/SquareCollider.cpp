@@ -100,3 +100,10 @@ void SquareCollider::RegisterCollisionCallback(std::string name, std::function<v
 	collisionCallbackMap[name].emplace_back(callback);
 
 }
+
+sf::FloatRect SquareCollider::GetBounds()
+{
+
+	return shape->getGlobalBounds();
+
+}

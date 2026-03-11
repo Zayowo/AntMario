@@ -4,7 +4,7 @@
 void WindowModule::Init()
 {
 
-    window = new sf::RenderWindow(sf::VideoMode({ 1200, 900 }), "Ant Mario");
+    window = new sf::RenderWindow(sf::VideoMode({ 1200, 800 }), "Ant Mario");
 
 }
 
