@@ -16,14 +16,14 @@ public:
 
 			Engine::GetModule<SceneModule>()->SetScene("PrototypeScene");
 
-			});
+		});
 
 		GameObject* quitButton = CreateGameObject("Button", { 600, 450 });
 		quitButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Quit", []() {
 
 			Engine::GetInstance()->Stop();
 
-			});
+		});
 
 	};
 
