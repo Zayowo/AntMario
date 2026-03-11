@@ -11,6 +11,20 @@ SquareCollider::SquareCollider(sf::Vector2f size)
 
 };
 
+void SquareCollider::Init()
+{
+
+	Transform& transform = owner->GetTransform();
+	shape->setPosition(transform.pos);
+	shape->setRotation(sf::degrees(transform.rot));
+	shape->setScale(transform.scale);
+	shape->setOrigin(sf::Vector2f(
+		shape->getLocalBounds().size.x * transform.origin.x,
+		shape->getLocalBounds().size.y * transform.origin.y
+	));
+
+}
+
 void SquareCollider::Update(float dt)
 {
 

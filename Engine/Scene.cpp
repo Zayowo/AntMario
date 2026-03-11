@@ -12,6 +12,7 @@ void Scene::Init()
 void Scene::Update(float dt)
 {
 
+	// Ajoute les game objects dans la liste
 	for (GameObject* gameObjectToCreate : gameObjectsToCreate)
 		gameObjects.emplace_back(gameObjectToCreate);
 
@@ -23,6 +24,25 @@ void Scene::Update(float dt)
 
 	for (GameObject* gameObject : gameObjects)
 		gameObject->Update(dt);
+
+	if (gameObjectsToDelete.size() > 0) {
+
+		for (GameObject* gameObject : gameObjectsToDelete) {
+
+			auto it = std::find(gameObjects.begin(), gameObjects.end(), gameObject);
+			if (it != gameObjects.end()) {
+				std::iter_swap(it, gameObjects.end() - 1);
+				gameObjects.pop_back();
+			}
+
+			gameObject->Destroy();
+			delete gameObject;
+
+		}
+
+		gameObjectsToDelete.clear();
+
+	}
 
 }
 
