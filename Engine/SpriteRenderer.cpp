@@ -19,8 +19,11 @@ void SpriteRenderer::Update(float dt)
 	sprite->setPosition(transform.pos);
 	sprite->setRotation(sf::degrees(transform.rot));
 	sprite->setScale(transform.scale);
-	sprite->setOrigin(sprite->getLocalBounds().size * 0.5f);
-
+	sprite->setOrigin(sf::Vector2f(
+		sprite->getLocalBounds().size.x * transform.origin.x,
+		sprite->getLocalBounds().size.y * transform.origin.y
+	));
+	
 	if (_animationRule.has_value())
 	{
 		SpriteAnimationRule& rule = _animationRule.value();

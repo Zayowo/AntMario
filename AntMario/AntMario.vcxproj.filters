@@ -30,6 +30,15 @@
     <ClCompile Include="PlayerController.cpp">
       <Filter>Fichiers sources\Components</Filter>
     </ClCompile>
+    <ClCompile Include="BackgroundElement.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FixedCameraComponent.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FixedCameraComponent.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
     <ClCompile Include="Bonus.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -43,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="MainMenuScene.h">
       <Filter>Fichiers d%27en-tête\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundElement.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
     </ClInclude>
     <ClInclude Include="Bonus.h">
       <Filter>Fichiers d%27en-tête</Filter>

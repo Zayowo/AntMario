@@ -23,6 +23,7 @@ public:
 
 private:
 	std::vector<GameObject*> gameObjects;
+	std::vector<GameObject*> gameObjectsToCreate;
 	std::vector<GameObject*> gameObjectsToDelete;
 
 };

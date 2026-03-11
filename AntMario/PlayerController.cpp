@@ -1,4 +1,5 @@
 #include <Engine.h>
+#include <GameObject.h>
 #include <InputModule.h>
 #include <VelocityComponent.h>
 #include <SquareCollider.h>
