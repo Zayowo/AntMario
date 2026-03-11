@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ButtonRenderer.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="FSMComponent.h" />
@@ -146,13 +147,19 @@
     <ClInclude Include="ResourceModule.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneModule.h" />
+    <ClInclude Include="SpriteAnimationRule.h" />
     <ClInclude Include="SpriteRenderer.h" />
+    <ClInclude Include="SquareCollider.h" />
+    <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="TimeModule.h" />
     <ClInclude Include="ModuleManager.h" />
+    <ClInclude Include="Transform.h" />
+    <ClInclude Include="VelocityComponent.h" />
     <ClInclude Include="WindowModule.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ButtonRenderer.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="FSMConponent.cpp" />
@@ -163,9 +170,12 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneModule.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
+    <ClCompile Include="SquareCollider.cpp" />
+    <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="TimeModule.cpp" />
     <ClCompile Include="ModuleManager.cpp" />
+    <ClCompile Include="VelocityComponent.cpp" />
     <ClCompile Include="WindowModule.cpp" />
   </ItemGroup>
   <ItemGroup>

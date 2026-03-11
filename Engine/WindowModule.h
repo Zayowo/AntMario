@@ -4,6 +4,7 @@
 
 class WindowModule : public Module
 {
+
 public:
 	void Init() override;
 	void Update() override;
@@ -14,4 +15,5 @@ public:
 
 private:
 	sf::RenderWindow* window;
+
 };

@@ -1,10 +1,11 @@
+#pragma once
 
 template<typename ModuleType>
 Module* ModuleManager::RegisterModule()
 {
 
 	ModuleType* module = new ModuleType();
-	modules.push_back(module);
+	modules.emplace_back(module);
 	return module;
 
 }

@@ -135,12 +135,18 @@
   <ItemGroup>
     <ClCompile Include="LittleState.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
       <Project>{f4cd95b4-9195-4d0d-8ac0-fe09d9d9f1b7}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MainMenuScene.h" />
+    <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="PrototypeScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LittleState.h" />

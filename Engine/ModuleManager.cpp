@@ -1,4 +1,5 @@
 #include "ModuleManager.h"
+#include "ResourceModule.h"
 #include "WindowModule.h"
 #include "InputModule.h"
 #include "TimeModule.h"
@@ -6,10 +7,11 @@
 
 void ModuleManager::Init() {
 
-	RegisterModule<WindowModule>();
+	RegisterModule<ResourceModule>();
 	RegisterModule<InputModule>();
 	RegisterModule<TimeModule>();
 	RegisterModule<SceneModule>();
+	RegisterModule<WindowModule>();
 
 	for (Module* module : modules)
 		module->Init();
