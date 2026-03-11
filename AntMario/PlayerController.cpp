@@ -4,7 +4,6 @@
 #include <VelocityComponent.h>
 #include <SquareCollider.h>
 #include "PlayerController.h"
-#include <GameObject.h>
 #include <Scene.h>
 
 
@@ -36,12 +35,15 @@ void PlayerController::Update(float dt)
 	if (inputModule->Is(sf::Keyboard::Key::D, InputState::HELD))
 		velocityX += 1.f;
 
+	if (inputModule->Is(sf::Keyboard::Key::LShift, InputState::HELD))
+		velocityX *= 1.5f;
+
 	if (inputModule->Is(sf::Keyboard::Key::Space, InputState::PRESSED))
-		velocityComponent->SetY (-10.f);
+		velocityComponent->SetY(-10.f);
 
 	velocityComponent->SetX(velocityX);
 	if (velocityX != 0.f)
-		transform.scale.x = velocityX;
+		transform.scale.x = velocityX ;
 
 
 

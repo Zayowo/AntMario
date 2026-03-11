@@ -15,6 +15,7 @@ int main()
 	inputModule->RegisterInput(sf::Mouse::Button::Left);
 	inputModule->RegisterInput(sf::Keyboard::Key::Q);
 	inputModule->RegisterInput(sf::Keyboard::Key::D);
+	inputModule->RegisterInput(sf::Keyboard::Key::LShift);
 	inputModule->RegisterInput(sf::Keyboard::Key::Space);
 
 
