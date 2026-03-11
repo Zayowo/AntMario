@@ -10,16 +10,19 @@ void PlayerController::Update(float dt)
 	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
 	Transform& transform = owner->GetTransform();
 
-	sf::Vector2f velocity(0.0f, 0.0f);
+	float velocityX = 0.f;
 
 	if (inputModule->Is(sf::Keyboard::Key::Q, InputState::HELD))
-		velocity.x += -1.f;
+		velocityX += -1.f;
 
 	if (inputModule->Is(sf::Keyboard::Key::D, InputState::HELD))
-		velocity.x += 1.f;
+		velocityX += 1.f;
 
-	velocityComponent->SetVelocity(velocity);
-	if (velocity.x != 0.f)
-		transform.scale.x = velocity.x;
+	if (inputModule->Is(sf::Keyboard::Key::Space, InputState::PRESSED))
+		velocityComponent->SetY (-10.f);
+
+	velocityComponent->SetX(velocityX);
+	if (velocityX != 0.f)
+		transform.scale.x = velocityX;
 
 }

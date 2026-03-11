@@ -7,6 +7,9 @@ void VelocityComponent::Update(float dt)
 
 	Transform& transform = owner->GetTransform();
 	transform.pos += velocity * speed * dt;
+	
+	if (velocity.y != 0.0f)
+		velocity.y += 50 * dt;
 
 }
 
