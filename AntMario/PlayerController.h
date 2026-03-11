@@ -9,4 +9,6 @@ public:
 	void Init()override;
 	void Update(float dt) override;
 
+	void PickUpCoin(GameObject* other);
+
 };

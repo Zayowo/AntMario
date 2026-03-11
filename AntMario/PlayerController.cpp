@@ -12,11 +12,13 @@
 void PlayerController::Init()
 {
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
-	collider->RegisterCollisionCallback("Coins", [](GameObject* other) {
+	collider->RegisterCollisionCallback("Coins", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCollisionCallback("Bonus1", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCollisionCallback("Bonus2", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCollisionCallback("Bonus3", [this](GameObject* other) { PickUpCoin(other); });
 
-		other->GetScene()->DeleteGameObject(other);
 
-	});
+
 }
 
 void PlayerController::Update(float dt)
@@ -42,5 +44,12 @@ void PlayerController::Update(float dt)
 		transform.scale.x = velocityX;
 
 
+
+}
+
+void PlayerController::PickUpCoin(GameObject* other)
+{
+
+	other->GetScene()->DeleteGameObject(other);
 
 }
