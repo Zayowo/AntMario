@@ -18,20 +18,17 @@ public:
 	{
 
 		GameObject* sky = CreateGameObject("Sky", { 600, 400 });
-		sky->GetTransform().scale = sf::Vector2f(200.f, 2.f);
-		sky->AddComponent<SpriteRenderer>("Assets/Environment/SkyNormal.png");
-		
-		for (int i = 0; i < 2; i++)
-		{
+		sky->GetTransform().scale = sf::Vector2f(2.4f, 2.f);
+		sky->AddComponent<BackgroundElement>("Assets/Environment/Background.png", 1.f, sf::Vector2f(-900.f, 0.f));
 
-			GameObject* cloud = CreateGameObject("Cloud", { 0, 300 });
-			cloud->AddComponent<BackgroundElement>("Assets/Environment/Cloud.png", 0.75f, sf::Vector2f(i * 500, i * 50.f));
-
-		}
+		GameObject* sky1 = CreateGameObject("Sky", { 600, 400 });
+		sky1->GetTransform().scale = sf::Vector2f(2.4f, 2.f);
+		sky1->AddComponent<BackgroundElement>("Assets/Environment/Background.png", 1.f, sf::Vector2f(-300.f, 0.f));
 
 		GameObject* player = CreateGameObject("Player", { 150, 700 });
 		player->GetTransform().scale = sf::Vector2f(1.f, 0.75f);
 		player->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		player->AddComponent<FixedCameraComponent>(sf::Vector2f(1200.f, 800.f), 600.f, 1000.f);
 		player->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
 		player->AddComponent<PlayerController>();
 		player->AddComponent<VelocityComponent>(260.f);
@@ -57,12 +54,27 @@ public:
 		for (int i = 0; i < 50; i++)
 		{
 
-			GameObject* collider = CreateGameObject("Collider", { 0 + (float)(i * 64), 800 });
+			GameObject* collider = CreateGameObject("Collider", { 0 + (float)(i * 48), 800 });
 			collider->GetTransform().origin = sf::Vector2f(0.f, 1.f);
-			collider->AddComponent<SquareCollider>(sf::Vector2f(64.f, 64.f));
+			collider->GetTransform().scale = sf::Vector2f(1.5f, 1.5f);
+			collider->AddComponent<SpriteRenderer>("Assets/Environment/Block.png");
+			collider->AddComponent<SquareCollider>(sf::Vector2f(32.f, 32.f));
 
 		}
 
 	};
+
+	void Update(float dt) override
+	{
+
+		InputModule* inputModule = Engine::GetModule<InputModule>();
+		SceneModule* sceneModule = Engine::GetModule<SceneModule>();
+
+		if (inputModule->Is(sf::Keyboard::Key::Escape, InputState::PRESSED))
+			sceneModule->PushScene("PauseScene");
+
+		Scene::Update(dt);
+
+	}
 
 };

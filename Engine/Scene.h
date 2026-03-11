@@ -7,6 +7,8 @@ class Scene
 {
 
 public:
+	bool isBreakingUpdate = false;
+	
 	virtual void Init();
 	virtual void Update(float dt);
 	virtual void Render(sf::RenderWindow* window);

@@ -1,14 +1,24 @@
 #include "FixedCameraComponent.h"
 
-FixedCameraComponent::FixedCameraComponent(sf::Vector2f size) :
-	view(sf::Vector2f(0.f, 0.f), size)
+FixedCameraComponent::FixedCameraComponent(sf::Vector2f size, float minX, float maxX) :
+	view(sf::Vector2f(0.f, 0.f), size),
+	minX(minX),
+	maxX(maxX)
 {};
 
 void FixedCameraComponent::Update(float dt)
 {
 
 	Transform& transform = owner->GetTransform();
-	view.setCenter(sf::Vector2f(transform.pos.x, 450));
+	float viewX = transform.pos.x;
+
+	if (viewX < minX)
+		viewX = minX;
+
+	if (viewX > maxX)
+		viewX = maxX;
+
+	view.setCenter(sf::Vector2f(viewX, 400));
 
 }
 

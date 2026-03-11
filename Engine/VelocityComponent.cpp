@@ -87,28 +87,28 @@ void VelocityComponent::ResolveCollisions(GameObject* other)
     {
         // Collision par le haut (le joueur tombe sur un objet)
         float correction = otherBounds.position.y - playerBounds.size.y;
-        transform.pos.y = correction + (playerBounds.size.y * transform.origin.y);
+        transform.pos.y = correction + (playerBounds.size.y * transform.origin.y) + 0.0001f;
         velocity.y = 0.f;
     }
     else if (minOverlap == overlapBottom && velocity.y < 0.f)
     {
         // Collision par le bas (le joueur saute contre quelque chose)
         float correction = otherBounds.position.y + otherBounds.size.y;
-        transform.pos.y = correction - (playerBounds.size.y * (transform.origin.y));
+        transform.pos.y = correction - (playerBounds.size.y * (transform.origin.y)) - 0.0001f;
         velocity.y = 0.f;
     }
     else if (minOverlap == overlapLeft && velocity.x > 0.f)
     {
         // Collision par la gauche
         float correction = otherBounds.position.x - playerBounds.size.x;
-        transform.pos.x = correction + (playerBounds.size.x * transform.origin.x);
+        transform.pos.x = correction + (playerBounds.size.x * transform.origin.x) + 0.0001f;
         velocity.x = 0.f;
     }
     else if (minOverlap == overlapRight && velocity.x < 0.f)
     {
         // Collision par la droite
         float correction = otherBounds.position.x + otherBounds.size.x;
-        transform.pos.x = correction - (playerBounds.size.x * (transform.origin.x));
+        transform.pos.x = correction - (playerBounds.size.x * (transform.origin.x)) - 0.0001f;
         velocity.x = 0.f;
     }
 }

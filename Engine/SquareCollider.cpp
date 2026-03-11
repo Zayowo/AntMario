@@ -71,7 +71,9 @@ void SquareCollider::Render(sf::RenderWindow* window)
 		shape->getLocalBounds().size.y * transform.origin.y
 	));
 
+	#ifdef _DEBUG
 	window->draw(*shape);
+	#endif // _DEBUG
 
 }
 

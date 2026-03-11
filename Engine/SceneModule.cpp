@@ -8,8 +8,16 @@ void SceneModule::Update()
 
 	float dt = Engine::GetModule<TimeModule>()->GetDeltaTime();
 
-	for (Scene* scene : sceneStack)
+	for (int i = sceneStack.size() - 1; i >= 0; i--)
+	{
+
+		Scene* scene = sceneStack[i];
 		scene->Update(dt);
+
+		if (scene->isBreakingUpdate)
+			break;
+
+	}
 
 }
 

@@ -13,7 +13,6 @@ public:
 	void Render() override;
 	void Destroy() override;
 
-
 	// Ajoute une scène dans la sceneStack
 	void PushScene(std::string name);
 

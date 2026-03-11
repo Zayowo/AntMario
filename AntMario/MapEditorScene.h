@@ -4,6 +4,7 @@
 #include <SceneModule.h>
 #include <InputModule.h>
 #include <SpriteRenderer.h>
+#include "BackgroundElement.h"
 
 class MapEditorScene : public Scene
 {
@@ -13,8 +14,8 @@ public:
 	{
 
 		GameObject* sky = CreateGameObject("Sky", { 600, 400 });
-		sky->GetTransform().scale = sf::Vector2f(200.f, 2.f);
-		sky->AddComponent<SpriteRenderer>("Assets/Environment/SkyNormal.png");
+		sky->GetTransform().scale = sf::Vector2f(3.f, 3.f);
+		sky->AddComponent<BackgroundElement>("Assets/Environment/Background.png", 1.f, sf::Vector2f(-600.f, 0.f));
 
 	};
 

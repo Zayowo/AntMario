@@ -36,11 +36,9 @@ void PlayerController::Update(float dt)
 	if (inputModule->Is(sf::Keyboard::Key::LShift, InputState::HELD))
 		velocityX *= 1.5f;
 
-	std::cout << "Player's velocity on Y: " << velocityComponent->GetVelocity().y << std::endl;
-
 	if (
-		velocityComponent->GetVelocity().y <= 1.5f &&
-		inputModule->Is(sf::Keyboard::Key::Space, InputState::PRESSED)
+		velocityComponent->GetVelocity().y == 0.0f &&
+		inputModule->Is(sf::Keyboard::Key::Space, InputState::HELD)
 	)
 		velocityComponent->SetY(-900.f);
 
