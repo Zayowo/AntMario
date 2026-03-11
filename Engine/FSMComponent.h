@@ -5,19 +5,19 @@
 
 template<typename ContextType>
 class FSMComponent : public Component {
-    using Status = State<ContextType>;
+    using State = State<ContextType>;
 
 public:
+    void Init(State* initial);
+    void Update(float dt) override;
+
     template<typename StateType>
     StateType* CreateState();
 
-    void Init(Status* initial, ContextType contexte);
-    void Update(ContextType contexte);
-
 private:
-    std::vector<Status*> states;
-
-    Status* current = nullptr;
+    std::vector<State*> states;
+    ContextType context;
+    State* current = nullptr;
 	
 };
 
