@@ -81,14 +81,14 @@
     <ClInclude Include="FSMComponent.h">
       <Filter>Fichiers d%27en-tête\Components</Filter>
     </ClInclude>
-    <ClInclude Include="LittleState.h">
-      <Filter>Fichiers d%27en-tête\State</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerContext.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Fichiers d%27en-tête\State</Filter>
+    </ClInclude>
+    <ClInclude Include="LittleState.h">
+      <Filter>Fichiers d%27en-tête\State</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -134,11 +134,11 @@
     <ClCompile Include="LittleState.cpp">
       <Filter>Fichiers sources\State</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerContext.cpp">
       <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Fichiers sources\State</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,7 +155,7 @@
       <Filter>Fichiers d%27en-tête\Components</Filter>
     </None>
     <None Include="State.inl">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\State</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
