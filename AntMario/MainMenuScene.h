@@ -11,19 +11,26 @@ public:
 	MainMenuScene()
 	{
 
-		GameObject* playButton = CreateGameObject("Button", { 600, 350 });
-		playButton->AddComponent<ButtonRenderer>("Assets/UnhoveredButton.png", "Assets/HoveredButton.png", "Play", []() {
+		GameObject* playButton = CreateGameObject("Button", { 600, 300 });
+		playButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Play", []() {
 
 			Engine::GetModule<SceneModule>()->SetScene("PrototypeScene");
 
-			});
+		});
 
-		GameObject* quitButton = CreateGameObject("Button", { 600, 450 });
-		quitButton->AddComponent<ButtonRenderer>("Assets/UnhoveredButton.png", "Assets/HoveredButton.png", "Quit", []() {
+		GameObject* editorButton = CreateGameObject("Button", { 600, 400 });
+		editorButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Map Editor", []() {
+
+			Engine::GetModule<SceneModule>()->SetScene("MapEditorScene");
+
+		});
+
+		GameObject* quitButton = CreateGameObject("Button", { 600, 500 });
+		quitButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Quit", []() {
 
 			Engine::GetInstance()->Stop();
 
-			});
+		});
 
 	};
 

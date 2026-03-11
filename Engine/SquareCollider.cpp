@@ -5,12 +5,25 @@ SquareCollider::SquareCollider(sf::Vector2f size)
 {
 
 	shape = new sf::RectangleShape(size);
-	shape->setOrigin(size * 0.5f);
 	shape->setFillColor(sf::Color::Transparent);
 	shape->setOutlineColor(sf::Color::Red);
-	shape->setOutlineThickness(2.f);
+	shape->setOutlineThickness(-2.f);
 
 };
+
+void SquareCollider::Init()
+{
+
+	Transform& transform = owner->GetTransform();
+	shape->setPosition(transform.pos);
+	shape->setRotation(sf::degrees(transform.rot));
+	shape->setScale(transform.scale);
+	shape->setOrigin(sf::Vector2f(
+		shape->getLocalBounds().size.x * transform.origin.x,
+		shape->getLocalBounds().size.y * transform.origin.y
+	));
+
+}
 
 void SquareCollider::Update(float dt)
 {
@@ -53,6 +66,11 @@ void SquareCollider::Render(sf::RenderWindow* window)
 	shape->setPosition(transform.pos);
 	shape->setRotation(sf::degrees(transform.rot));
 	shape->setScale(transform.scale);
+	shape->setOrigin(sf::Vector2f(
+		shape->getLocalBounds().size.x * transform.origin.x,
+		shape->getLocalBounds().size.y * transform.origin.y
+	));
+
 	window->draw(*shape);
 
 }
@@ -73,5 +91,19 @@ bool SquareCollider::IsColliding(GameObject* gameObject)
 		return true;
 
 	return false;
+
+}
+
+void SquareCollider::RegisterCollisionCallback(std::string name, std::function<void(GameObject*)> callback)
+{
+
+	collisionCallbackMap[name].emplace_back(callback);
+
+}
+
+sf::FloatRect SquareCollider::GetBounds()
+{
+
+	return shape->getGlobalBounds();
 
 }

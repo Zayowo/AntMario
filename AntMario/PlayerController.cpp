@@ -1,7 +1,22 @@
 #include <Engine.h>
+#include <GameObject.h>
 #include <InputModule.h>
 #include <VelocityComponent.h>
+#include <SquareCollider.h>
 #include "PlayerController.h"
+#include <Scene.h>
+
+
+
+void PlayerController::Init()
+{
+	SquareCollider* collider = owner->GetComponent<SquareCollider>();
+	collider->RegisterCollisionCallback("Coins", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCollisionCallback("Bonus1", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCollisionCallback("Bonus2", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCollisionCallback("Bonus3", [this](GameObject* other) { PickUpCoin(other); });
+
+}
 
 void PlayerController::Update(float dt)
 {
@@ -10,16 +25,34 @@ void PlayerController::Update(float dt)
 	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
 	Transform& transform = owner->GetTransform();
 
-	sf::Vector2f velocity(0.0f, 0.0f);
+	float velocityX = 0.f;
 
 	if (inputModule->Is(sf::Keyboard::Key::Q, InputState::HELD))
-		velocity.x += -1.f;
+		velocityX += -1.f;
 
 	if (inputModule->Is(sf::Keyboard::Key::D, InputState::HELD))
-		velocity.x += 1.f;
+		velocityX += 1.f;
 
-	velocityComponent->SetVelocity(velocity);
-	if (velocity.x != 0.f)
-		transform.scale.x = velocity.x;
+	if (inputModule->Is(sf::Keyboard::Key::LShift, InputState::HELD))
+		velocityX *= 1.5f;
+
+	std::cout << "Player's velocity on Y: " << velocityComponent->GetVelocity().y << std::endl;
+
+	if (
+		velocityComponent->GetVelocity().y <= 1.5f &&
+		inputModule->Is(sf::Keyboard::Key::Space, InputState::PRESSED)
+	)
+		velocityComponent->SetY(-900.f);
+
+	velocityComponent->SetX(velocityX);
+	if (velocityX != 0.f)
+		transform.scale.x = velocityX > 0.f ? 1.f : -1.f;
+
+}
+
+void PlayerController::PickUpCoin(GameObject* other)
+{
+
+	other->GetScene()->DeleteGameObject(other);
 
 }
