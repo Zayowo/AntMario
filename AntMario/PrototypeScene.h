@@ -5,6 +5,8 @@
 #include <SquareCollider.h>
 #include <ButtonRenderer.h>
 #include "PlayerController.h"
+#include "Bonus.h"
+
 
 class PrototypeScene : public Scene
 {
@@ -18,6 +20,20 @@ public:
 		player->AddComponent<VelocityComponent>(180.f);
 		player->AddComponent<PlayerController>();
 		player->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
+
+
+		// De maniere temporaire pour vérifier si les bonus s'affichent bien
+		GameObject* bonus = CreateGameObject("Bonus", { 180, 600 });
+		bonus->AddComponent<Bonus>(BonusType::Coins);
+
+		GameObject* bonus1 = CreateGameObject("Bonus", { 240, 600 });
+		bonus1->AddComponent<Bonus>(BonusType::Bonus1);
+
+		GameObject* bonus2 = CreateGameObject("Bonus", { 310, 600 });
+		bonus2->AddComponent<Bonus>(BonusType::Bonus2);
+
+		GameObject* bonus3 = CreateGameObject("Bonus", { 400, 600 });
+		bonus3->AddComponent<Bonus>(BonusType::Bonus3);
 
 	};
 
