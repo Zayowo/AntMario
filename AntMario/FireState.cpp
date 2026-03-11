@@ -4,6 +4,10 @@
 #include <Engine.h>
 #include <GameObject.h>
 #include <SpriteRenderer.h>
+#include <VelocityComponent.h>
+#include "SquareCollider.h"
+#include "FireComponent.h"
+
 
 void FireState::Enter(PlayerContext& p)
 {
@@ -29,7 +33,10 @@ void FireState::Execute(PlayerContext& p, float dt) {
 		GameObject* ball = current->CreateGameObject("fireball", sf::Vector2f(200, 200));
 		std::cout << "balls" << std::endl;
 		ball->AddComponent<SpriteRenderer>("Assets/fireball.png");
-		
+		ball->AddComponent<SquareCollider>(sf::Vector2f(14.f, 14.f));
+		ball->AddComponent<FireComponent>();
+		VelocityComponent* veloBall = ball->AddComponent<VelocityComponent>(180.f);
+		veloBall->SetVelocity(sf::Vector2f(1.f, 0.f));
 	}
 
 

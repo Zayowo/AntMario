@@ -35,16 +35,16 @@ public:
 			cloud->AddComponent<BackgroundElement>("Assets/Environment/Cloud.png", 0.75f, sf::Vector2f(i * 500, i * 50.f));
 
 		}
-
-		GameObject* player = CreateGameObject("Player", { 150, 700 });
-		player->GetTransform().scale = sf::Vector2f(1.f, 0.75f);
-		player->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		
 		// player
-		GameObject* player = CreateGameObject("Player", { 150, 600 });
+		GameObject* player = CreateGameObject("Player", { 150, 700 });
 		player->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
 		player->AddComponent<PlayerController>();
 		player->AddComponent<VelocityComponent>(260.f);
 		player->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
+		player->GetTransform().scale = sf::Vector2f(1.f, 0.75f);
+		player->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+
 
 		// De maniere temporaire pour vérifier si les bonus s'affichent bien
 		GameObject* bonus = CreateGameObject("Coins", { 180, 600 });
