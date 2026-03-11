@@ -1,7 +1,21 @@
 #include <Engine.h>
 #include <InputModule.h>
 #include <VelocityComponent.h>
+#include <SquareCollider.h>
 #include "PlayerController.h"
+#include <GameObject.h>
+#include <Scene.h>
+
+
+
+void PlayerController::Init()
+{
+	SquareCollider* collider = owner->GetComponent<SquareCollider>();
+	collider->RegisterCollisionCallback("Coins", [](GameObject* other) {
+
+		other->GetScene()->DeleteGameObject(other);
+		});
+}
 
 void PlayerController::Update(float dt)
 {
@@ -24,5 +38,7 @@ void PlayerController::Update(float dt)
 	velocityComponent->SetX(velocityX);
 	if (velocityX != 0.f)
 		transform.scale.x = velocityX;
+
+
 
 }
