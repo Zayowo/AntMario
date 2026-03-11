@@ -48,6 +48,12 @@
     <ClCompile Include="BigState.cpp">
       <Filter>Fichiers sources\PlayerState</Filter>
     </ClCompile>
+    <ClCompile Include="FireState.cpp">
+      <Filter>Fichiers sources\PlayerState</Filter>
+    </ClCompile>
+    <ClCompile Include="FireComponent.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PrototypeScene.h">
@@ -73,6 +79,12 @@
     </ClInclude>
     <ClInclude Include="BigState.h">
       <Filter>Fichiers d%27en-tête\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="FireState.h">
+      <Filter>Fichiers d%27en-tête\PlayerState</Filter>
+    </ClInclude>
+    <ClInclude Include="FireComponent.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

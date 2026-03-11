@@ -10,6 +10,7 @@
 #include "LittleState.h"
 #include "GoombaComponent.h"
 #include "BigState.h"
+#include "FireState.h"
 #include "Condition.h"
 
 class PrototypeScene : public Scene
@@ -32,8 +33,10 @@ public:
 		LittleState* littleState = fsmPlayer->CreateState<LittleState>();
 		BigState* bigState = fsmPlayer->CreateState<BigState>();
 		bigState->AddTransition(Condition::collisionWithEnemy, littleState);
+		FireState* fireState = fsmPlayer->CreateState<FireState>();
+		fireState->AddTransition(Condition::collisionWithEnemy, littleState);
 		
-		fsmPlayer->Init(bigState);
+		fsmPlayer->Init(fireState);
 		
 
 		// enemy

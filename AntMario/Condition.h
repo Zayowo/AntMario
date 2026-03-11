@@ -4,5 +4,7 @@ class Condition
 {
 public:
 	static bool collisionWithEnemy(PlayerContext& p);
+
+
 };
 

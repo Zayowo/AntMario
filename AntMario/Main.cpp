@@ -16,6 +16,8 @@ int main()
 	inputModule->RegisterInput(sf::Keyboard::Key::Q);
 	inputModule->RegisterInput(sf::Keyboard::Key::D);
 
+	inputModule->RegisterInput(sf::Keyboard::Key::LShift);
+
 	// Ajout des scènes
 	SceneModule* sceneModule = Engine::GetModule<SceneModule>();
 	sceneModule->RegisterScene<MainMenuScene>("MainMenuScene");

@@ -135,6 +135,8 @@
   <ItemGroup>
     <ClCompile Include="BigState.cpp" />
     <ClCompile Include="Condition.cpp" />
+    <ClCompile Include="FireComponent.cpp" />
+    <ClCompile Include="FireState.cpp" />
     <ClCompile Include="GoombaComponent.cpp" />
     <ClCompile Include="LittleState.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -149,6 +151,8 @@
   <ItemGroup>
     <ClInclude Include="BigState.h" />
     <ClInclude Include="Condition.h" />
+    <ClInclude Include="FireComponent.h" />
+    <ClInclude Include="FireState.h" />
     <ClInclude Include="GoombaComponent.h" />
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="PlayerController.h" />
