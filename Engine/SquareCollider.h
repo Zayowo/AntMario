@@ -8,6 +8,7 @@ class SquareCollider : public Component
 public:
 	SquareCollider(sf::Vector2f size);
 
+	void Init() override;
 	void Update(float dt) override;
 	void Render(sf::RenderWindow* window) override;
 
