@@ -30,6 +30,15 @@
     <ClCompile Include="PlayerController.cpp">
       <Filter>Fichiers sources\Components</Filter>
     </ClCompile>
+    <ClCompile Include="BackgroundElement.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FixedCameraComponent.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FixedCameraComponent.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PrototypeScene.h">
@@ -40,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="MainMenuScene.h">
       <Filter>Fichiers d%27en-tête\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="BackgroundElement.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -12,6 +12,15 @@ void Scene::Init()
 void Scene::Update(float dt)
 {
 
+	for (GameObject* gameObjectToCreate : gameObjectsToCreate)
+		gameObjects.emplace_back(gameObjectToCreate);
+
+	for (GameObject* gameObjectToCreate : gameObjectsToCreate)
+		gameObjectToCreate->Init();
+
+	gameObjectsToCreate.clear();
+	gameObjectsToCreate.shrink_to_fit();
+
 	for (GameObject* gameObject : gameObjects)
 		gameObject->Update(dt);
 
@@ -38,7 +47,7 @@ GameObject* Scene::CreateGameObject(std::string name, sf::Vector2f pos)
 
 	GameObject* gameObject = new GameObject(name, this);
 	gameObject->GetTransform().pos = pos;
-	gameObjects.emplace_back(gameObject);
+	gameObjectsToCreate.emplace_back(gameObject);
 	return gameObject;
 
 }
@@ -59,7 +68,7 @@ std::vector<GameObject*> Scene::GetGameObjectsByName(std::string name)
 
 	for (GameObject* gameObject : gameObjects)
 		if (gameObject->GetName() == name)
-			gameObjectsByName.emplace_back(gameObject);
+			gameObjectsByName.push_back(gameObject);
 
 	return gameObjectsByName;
 

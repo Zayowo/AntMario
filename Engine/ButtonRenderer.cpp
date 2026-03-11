@@ -13,7 +13,7 @@ ButtonRenderer::ButtonRenderer(std::string unhoveredPath, std::string hoveredPat
 	hoveredTexture = &resourceModule->GetTexture(hoveredPath);
 	sprite = new sf::Sprite(*unhoveredTexture);
 
-	sf::Font& font = resourceModule->GetFont("Assets/Font.ttf");
+	sf::Font& font = resourceModule->GetFont("Assets/UI/Font.ttf");
 	text = new sf::Text(font, string, 24);
 
 };
