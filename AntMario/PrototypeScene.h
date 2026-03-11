@@ -42,15 +42,19 @@ public:
 		// De maniere temporaire pour vérifier si les bonus s'affichent bien
 		GameObject* bonus = CreateGameObject("Coins", { 180, 600 });
 		bonus->AddComponent<Bonus>(BonusType::Coins);
+		bonus->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
 
 		GameObject* bonus1 = CreateGameObject("Bonus1", { 240, 600 });
 		bonus1->AddComponent<Bonus>(BonusType::Bonus1);
+		bonus1->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
 
 		GameObject* bonus2 = CreateGameObject("Bonus2", { 310, 600 });
 		bonus2->AddComponent<Bonus>(BonusType::Bonus2);
+		bonus2->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
 
 		GameObject* bonus3 = CreateGameObject("Bonus3", { 400, 600 });
 		bonus3->AddComponent<Bonus>(BonusType::Bonus3);
+		bonus3->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
 
 	};
 

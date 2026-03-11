@@ -15,7 +15,8 @@ void PlayerController::Init()
 	collider->RegisterCollisionCallback("Coins", [](GameObject* other) {
 
 		other->GetScene()->DeleteGameObject(other);
-		});
+
+	});
 }
 
 void PlayerController::Update(float dt)
