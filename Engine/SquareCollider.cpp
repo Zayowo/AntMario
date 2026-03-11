@@ -79,3 +79,10 @@ bool SquareCollider::IsColliding(GameObject* gameObject)
 	return false;
 
 }
+
+void SquareCollider::RegisterCollisionCallback(std::string name, std::function<void(GameObject*)> callback)
+{
+
+	collisionCallbackMap[name].emplace_back(callback);
+
+}

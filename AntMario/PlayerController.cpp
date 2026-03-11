@@ -1,6 +1,8 @@
 #include <Engine.h>
+#include <GameObject.h>
 #include <InputModule.h>
 #include <VelocityComponent.h>
+#include <SquareCollider.h>
 #include "PlayerController.h"
 
 void PlayerController::Update(float dt)
