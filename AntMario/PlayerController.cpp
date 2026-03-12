@@ -17,6 +17,11 @@ void PlayerController::Init()
 	collider->RegisterCallback("Bonus2", [this](GameObject* other) { PickUpCoin(other); });
 	collider->RegisterCallback("Bonus3", [this](GameObject* other) { PickUpCoin(other); });
 
+
+	// Ajout des collisions entre les oppenents et le joueur
+	collider->RegisterCallback("opponent1", [this](GameObject* other) { BreakBrick(other); });
+	collider->RegisterCallback("opponent2", [this](GameObject* other) { BreakBrick(other); });
+	collider->RegisterCallback("opponent3", [this](GameObject* other) { BreakBrick(other); });
 }
 
 void PlayerController::Update(float dt)
