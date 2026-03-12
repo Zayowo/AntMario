@@ -21,11 +21,6 @@ void BackgroundElement::Init()
 
 }
 
-void BackgroundElement::Update(float dt)
-{
-
-}
-
 void BackgroundElement::Render(sf::RenderWindow* window)
 {
 

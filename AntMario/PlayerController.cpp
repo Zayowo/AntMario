@@ -35,14 +35,14 @@ void PlayerController::Update(float dt)
 		velocityX *= 1.5f;
 
 	if (
-		velocityComponent->GetVelocity().y == 0.0f &&
-		inputModule->Is(sf::Keyboard::Key::Space, InputState::HELD)
+		// À remplacer avec la jauge d'énergie (et si ce saut n'est pas le double saut en question)
+		inputModule->Is(sf::Keyboard::Key::Space, InputState::PRESSED)
 	)
-		velocityComponent->SetY(-750.f);
+		velocityComponent->SetY(-1050.f);
 
 	velocityComponent->SetX(velocityX);
 	if (velocityX != 0.f)
-		transform.scale.x = velocityX > 0.f ? 1.f : -1.f;
+		transform.scale.x = abs(transform.scale.x) * (velocityX > 0.f ? 1 : -1);
 
 }
 

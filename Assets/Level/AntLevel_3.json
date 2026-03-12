@@ -1,0 +1,86 @@
+{
+  "metadata": {
+    "tileSize": 40,
+    "width": 3600,
+    "height": 800
+  },
+  "tiles": [
+    {
+      "x": 16,
+      "y": 8,
+      "w": 1,
+      "h": 1,
+      "type": "LuckyCoin"
+    },
+    {
+      "x": 16,
+      "y": 9,
+      "w": 1,
+      "h": 1,
+      "type": "LuckyCoin"
+    },
+    {
+      "x": 16,
+      "y": 10,
+      "w": 1,
+      "h": 1,
+      "type": "LuckyCoin"
+    },
+    {
+      "x": 16,
+      "y": 12,
+      "w": 1,
+      "h": 1,
+      "type": "Brick"
+    },
+    {
+      "x": 26,
+      "y": 14,
+      "w": 2,
+      "h": 6,
+      "type": "Terrain"
+    },
+    {
+      "x": 14,
+      "y": 15,
+      "w": 1,
+      "h": 1,
+      "type": "LuckyCoin"
+    },
+    {
+      "x": 15,
+      "y": 15,
+      "w": 1,
+      "h": 1,
+      "type": "Brick"
+    },
+    {
+      "x": 16,
+      "y": 15,
+      "w": 1,
+      "h": 1,
+      "type": "Brick"
+    },
+    {
+      "x": 17,
+      "y": 15,
+      "w": 1,
+      "h": 1,
+      "type": "Brick"
+    },
+    {
+      "x": 18,
+      "y": 15,
+      "w": 1,
+      "h": 1,
+      "type": "LuckyCoin"
+    },
+    {
+      "x": 0,
+      "y": 18,
+      "w": 26,
+      "h": 2,
+      "type": "Terrain"
+    }
+  ]
+}

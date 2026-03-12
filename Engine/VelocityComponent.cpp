@@ -21,7 +21,7 @@ void VelocityComponent::Init()
 void VelocityComponent::Update(float dt)
 {
 
-	velocity.y += 1600.f * dt;
+	velocity.y += 1950.f * dt;
 
 	Transform& transform = owner->GetTransform();
 	transform.pos.x += velocity.x * speed * dt;
@@ -121,8 +121,11 @@ void VelocityComponent::ResolveCollisions(GameObject* other) {
         {
 
             transform.pos.y = otherBounds.position.y + otherBounds.size.y + (playerBounds.size.y * transform.origin.y) + 0.01f;
+            float _velocityY = velocity.y;
             if (velocity.y < 0) velocity.y = 0.01f;
-            SendHit(other, VelocityHitType::BOTTOM);
+            
+            if (_velocityY < 0.f)
+                SendHit(other, VelocityHitType::BOTTOM);
 
         }
 

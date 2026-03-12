@@ -11,4 +11,7 @@ public:
 	void BreakBrick(GameObject* other);
 	void PickUpCoin(GameObject* other);
 
+private:
+	float energy = 0.1f;
+
 };
