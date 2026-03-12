@@ -11,10 +11,10 @@
 void PlayerController::Init()
 {
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
-	collider->RegisterCollisionCallback("Coins", [this](GameObject* other) { PickUpCoin(other); });
+	/*collider->RegisterCollisionCallback("Coins", [this](GameObject* other) { PickUpCoin(other); });
 	collider->RegisterCollisionCallback("Bonus1", [this](GameObject* other) { PickUpCoin(other); });
 	collider->RegisterCollisionCallback("Bonus2", [this](GameObject* other) { PickUpCoin(other); });
-	collider->RegisterCollisionCallback("Bonus3", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCollisionCallback("Bonus3", [this](GameObject* other) { PickUpCoin(other); });*/
 
 }
 

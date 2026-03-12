@@ -51,6 +51,7 @@ public:
 		bonus->AddComponent<Bonus>(BonusType::Coins);
 		bonus->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
 
+
 		GameObject* bonus1 = CreateGameObject("Bonus1", { 240, 600 });
 		bonus1->AddComponent<Bonus>(BonusType::Bonus1);
 		bonus1->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
@@ -76,10 +77,25 @@ public:
 		PlayerContext& ctxPlayer = fsmPlayer->GetContext();
 		ctxPlayer.player = player;
 
+		//add bonus in context
+		ctxPlayer.bonuses.emplace_back(bonus2);
+		ctxPlayer.bonuses.emplace_back(bonus3);
+
+		//all state
 		LittleState* littleState = fsmPlayer->CreateState<LittleState>();
 		BigState* bigState = fsmPlayer->CreateState<BigState>();
-		bigState->AddTransition(Condition::collisionWithEnemy, littleState);
 		FireState* fireState = fsmPlayer->CreateState<FireState>();
+
+
+		//little state transition
+		littleState->AddTransition(Condition::collitionWithFireBonus, fireState);
+		littleState->AddTransition(Condition::collitionWithBigBonus, bigState);
+
+		//bigstate transition
+		bigState->AddTransition(Condition::collisionWithEnemy, littleState);
+		bigState->AddTransition(Condition::collitionWithFireBonus, fireState);
+
+		//firestate transition
 		fireState->AddTransition(Condition::collisionWithEnemy, littleState);
 		
 		fsmPlayer->Init(fireState);

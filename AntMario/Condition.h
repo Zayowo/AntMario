@@ -4,7 +4,7 @@ class Condition
 {
 public:
 	static bool collisionWithEnemy(PlayerContext& p);
-
-
+	static bool collitionWithFireBonus(PlayerContext& p);
+	static bool collitionWithBigBonus(PlayerContext& p);
 };
 
