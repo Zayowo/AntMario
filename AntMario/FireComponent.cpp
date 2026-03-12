@@ -9,7 +9,7 @@ void FireComponent::Init()
 {
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
 
-	collider->RegisterCollisionCallback("Collider", [this](GameObject*) {touchGround(); });
+	collider->RegisterCollisionCallback("Collider", [this](GameObject* other) {touchGround(); });
 }
 
 void FireComponent::Update(float dt)
@@ -37,9 +37,19 @@ void FireComponent::touchGround() {
 	VelocityComponent* vector = owner->GetComponent<VelocityComponent>();
 	sf::Vector2f velocity = vector->GetVelocity();
 
+	
+
+	float direction = 0;
+	if (owner->GetTransform().scale.x < 0)
+		direction = -1.f;
+	else
+		direction = 1.f;
+
+	std::cout << direction << std::endl;
+
 	float dt = Engine::GetModule<TimeModule>()->GetDeltaTime();
 	if (velocity.y <= 0) {
-		std::cout << velocity.y - (3000 * dt) << std::endl;
-		vector->SetVelocity({ velocity.x, velocity.y - (300*300*dt) });
+		std::cout << - (300000 * dt) << std::endl;
+		vector->SetVelocity({ velocity.x, - (300000*dt) });
 	}
 }

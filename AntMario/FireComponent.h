@@ -6,5 +6,6 @@ private:
 	void Init() override;
 	void Update(float dt) override;
 	void touchGround();
+	sf::Vector2f baseVelocity = { 0.f, 0.f };
 };
 

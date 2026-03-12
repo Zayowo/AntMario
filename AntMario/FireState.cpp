@@ -30,7 +30,7 @@ void FireState::Execute(PlayerContext& p, float dt) {
 	InputModule* inputM = Engine::GetModule<InputModule>();
 
 	if (inputM->Is(sf::Keyboard::Key::LShift, InputState::PRESSED)) {
-		GameObject* ball = current->CreateGameObject("fireball", sf::Vector2f(200, 200));
+		GameObject* ball = current->CreateGameObject("fireball", { playerPos.x + 20 * direction, playerPos.y - 30 });
 		std::cout << "balls" << std::endl;
 		ball->AddComponent<SpriteRenderer>("Assets/fireball.png");
 		ball->AddComponent<SquareCollider>(sf::Vector2f(14.f, 14.f));
