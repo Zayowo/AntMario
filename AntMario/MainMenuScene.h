@@ -19,9 +19,9 @@ public:
 		});
 
 		GameObject* editorButton = CreateGameObject("Button", { 600, 400 });
-		editorButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Map Editor", []() {
+		editorButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Settings", []() {
 
-			Engine::GetModule<SceneModule>()->SetScene("MapEditorScene");
+			// À ajouter!
 
 		});
 
@@ -33,5 +33,6 @@ public:
 		});
 
 	};
+
 
 };

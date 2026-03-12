@@ -13,7 +13,8 @@ void VelocityComponent::Init()
 	if (!collider)
 		return;
 
-	collider->RegisterCollisionCallback("Collider", [this](GameObject* other) { ResolveCollisions(other); });
+	collider->RegisterCallback("Collider", [this](GameObject* other) { ResolveCollisions(other); });
+    collider->RegisterCallback("Brick", [this](GameObject* other) { ResolveCollisions(other); });
 
 }
 
@@ -62,59 +63,83 @@ sf::Vector2f VelocityComponent::GetVelocity()
 
 }
 
-void VelocityComponent::ResolveCollisions(GameObject* other)
+void VelocityComponent::RegisterHit(std::string name, VelocityHitType hitType, std::function<void(GameObject*)> callback)
 {
-    if (!other)
-        return;
+
+    hitCallbackMap[name][hitType].push_back(callback);
+
+}
+
+void VelocityComponent::ResolveCollisions(GameObject* other) {
+
+    if (!other) return;
 
     auto collider = owner->GetComponent<SquareCollider>();
     auto otherCollider = other->GetComponent<SquareCollider>();
 
-    if (!collider || !otherCollider)
+    if (!collider || !otherCollider) return;
+
+
+    sf::FloatRect playerBounds = collider->GetBounds();
+    sf::FloatRect otherBounds = otherCollider->GetBounds();
+
+    // Calcul de l'intersection
+    sf::FloatRect intersection;
+    if (playerBounds.findIntersection(otherBounds))
+        intersection = *playerBounds.findIntersection(otherBounds);
+    else
         return;
 
     Transform& transform = owner->GetTransform();
 
-    // Récupérer les bounds en espace GLOBAL (position transformée)
-    sf::FloatRect playerBounds = collider->GetBounds();
-    sf::FloatRect otherBounds = otherCollider->GetBounds();
+    // Déterminer l'axe de collision dominant
+    // Si la largeur de l'intersection est plus petite que sa hauteur, c'est une collision horizontale
+    if (intersection.size.x < intersection.size.y) {
 
-    // Calculer les chevauchements
-    float overlapLeft = (playerBounds.position.x + playerBounds.size.x) - otherBounds.position.x;
-    float overlapRight = (otherBounds.position.x + otherBounds.size.x) - playerBounds.position.x;
-    float overlapTop = (playerBounds.position.y + playerBounds.size.y) - otherBounds.position.y;
-    float overlapBottom = (otherBounds.position.y + otherBounds.size.y) - playerBounds.position.y;
+        if (playerBounds.position.x < otherBounds.position.x)
+        {
 
-    // Trouver le chevauchement minimum
-    float minOverlap = std::min({ overlapLeft, overlapRight, overlapTop, overlapBottom });
+            transform.pos.x = otherBounds.position.x - (playerBounds.size.x * (1.0f - transform.origin.x)) - 0.01f;
+            SendHit(other, VelocityHitType::LEFT);
 
-    // Appliquer la correction en tenant compte de l'origin
-    if (minOverlap == overlapTop && velocity.y > 0.f)
-    {
-        // Collision par le haut (le joueur tombe sur un objet)
-        float correction = otherBounds.position.y - playerBounds.size.y;
-        transform.pos.y = correction + (playerBounds.size.y * transform.origin.y);
-        velocity.y = 0.f;
-    }
-    else if (minOverlap == overlapBottom && velocity.y < 0.f)
-    {
-        // Collision par le bas (le joueur saute contre quelque chose)
-        float correction = otherBounds.position.y + otherBounds.size.y;
-        transform.pos.y = correction - (playerBounds.size.y * (transform.origin.y));
-        velocity.y = 0.f;
-    }
-    else if (minOverlap == overlapLeft && velocity.x > 0.f)
-    {
-        // Collision par la gauche
-        float correction = otherBounds.position.x - playerBounds.size.x;
-        transform.pos.x = correction + (playerBounds.size.x * transform.origin.x);
+        }
+        else
+        {
+
+            transform.pos.x = otherBounds.position.x + otherBounds.size.x + (playerBounds.size.x * transform.origin.x) + 0.01f;
+            SendHit(other, VelocityHitType::RIGHT);
+
+        }
         velocity.x = 0.f;
+
     }
-    else if (minOverlap == overlapRight && velocity.x < 0.f)
+    else
     {
-        // Collision par la droite
-        float correction = otherBounds.position.x + otherBounds.size.x;
-        transform.pos.x = correction - (playerBounds.size.x * (transform.origin.x));
-        velocity.x = 0.f;
+        if (playerBounds.position.y < otherBounds.position.y)
+        {
+
+            transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y)) - 0.01f;
+            if (velocity.y > 0) velocity.y = 0.f;
+            SendHit(other, VelocityHitType::TOP);
+
+        }
+        else
+        {
+
+            transform.pos.y = otherBounds.position.y + otherBounds.size.y + (playerBounds.size.y * transform.origin.y) + 0.01f;
+            if (velocity.y < 0) velocity.y = 0.01f;
+            SendHit(other, VelocityHitType::BOTTOM);
+
+        }
+
     }
+
+}
+
+void VelocityComponent::SendHit(GameObject* other, VelocityHitType hitType)
+{
+
+	for (auto callback : hitCallbackMap[other->GetName()][hitType])
+        callback(other);
+
 }

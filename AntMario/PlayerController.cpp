@@ -6,10 +6,11 @@
 #include "PlayerController.h"
 #include <Scene.h>
 
-
-
 void PlayerController::Init()
 {
+	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
+	velocityComponent->RegisterHit("Brick", VelocityHitType::BOTTOM, [this](GameObject* other) { BreakBrick(other); });
+
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
 	collider->RegisterCollisionCallback("Coins", [this](GameObject* other) { PickUpCoin(other); });
 	collider->RegisterCollisionCallback("Bonus1", [this](GameObject* other) { PickUpCoin(other); });
@@ -35,17 +36,22 @@ void PlayerController::Update(float dt)
 	if (inputModule->Is(sf::Keyboard::Key::LShift, InputState::HELD))
 		velocityX *= 1.5f;
 
-	//std::cout << "Player's velocity on Y: " << velocityComponent->GetVelocity().y << std::endl;
-
 	if (
-		velocityComponent->GetVelocity().y <= 1.5f &&
-		inputModule->Is(sf::Keyboard::Key::Space, InputState::PRESSED)
+		velocityComponent->GetVelocity().y == 0.0f &&
+		inputModule->Is(sf::Keyboard::Key::Space, InputState::HELD)
 	)
-		velocityComponent->SetY(-900.f);
+		velocityComponent->SetY(-750.f);
 
 	velocityComponent->SetX(velocityX);
 	if (velocityX != 0.f)
 		transform.scale.x = velocityX > 0.f ? 1.f : -1.f;
+
+}
+
+void PlayerController::BreakBrick(GameObject* other)
+{
+
+	other->GetScene()->DeleteGameObject(other);
 
 }
 

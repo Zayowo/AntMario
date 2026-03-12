@@ -24,9 +24,15 @@ void BackgroundElement::Init()
 void BackgroundElement::Update(float dt)
 {
 
+}
+
+void BackgroundElement::Render(sf::RenderWindow* window)
+{
+
+	sf::View view = window->getView();
 	Transform& transform = owner->GetTransform();
 	sf::Vector2f elementPos = sf::Vector2f(
-		transform.pos.x + offset.x + player->GetTransform().pos.x * depth,
+		transform.pos.x + offset.x + view.getCenter().x * depth,
 		transform.pos.y + offset.y
 	);
 
@@ -34,11 +40,6 @@ void BackgroundElement::Update(float dt)
 	sprite->setRotation(sf::degrees(transform.rot));
 	sprite->setScale(transform.scale);
 	sprite->setOrigin(sprite->getLocalBounds().size * 0.5f);
-
-}
-
-void BackgroundElement::Render(sf::RenderWindow* window)
-{
 
 	window->draw(*sprite);
 

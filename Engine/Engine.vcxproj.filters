@@ -34,6 +34,9 @@
     <Filter Include="Fichiers sources\State">
       <UniqueIdentifier>{9866de7a-d9d2-43ed-91d7-953bde5d6d1d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Utils">
+      <UniqueIdentifier>{cfebcbce-2d49-49f1-bfb1-c9c3a5f22563}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -101,6 +104,12 @@
     </ClInclude>
     <ClInclude Include="State.h">
       <Filter>Fichiers d%27en-tête\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Json.h">
+      <Filter>Fichiers d%27en-tête\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="VelocityHitType.h">
+      <Filter>Fichiers d%27en-tête\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
