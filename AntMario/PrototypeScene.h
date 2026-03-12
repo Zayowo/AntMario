@@ -38,9 +38,9 @@ public:
 		
 		// player
 		GameObject* player = CreateGameObject("Player", { 150, 700 });
-		player->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
 		player->AddComponent<PlayerController>();
 		player->AddComponent<VelocityComponent>(260.f);
+		player->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
 		player->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
 		player->GetTransform().scale = sf::Vector2f(1.f, 0.75f);
 		player->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
@@ -78,8 +78,6 @@ public:
 		ctxPlayer.player = player;
 
 		//add bonus in context
-		ctxPlayer.bonuses.emplace_back(bonus2);
-		ctxPlayer.bonuses.emplace_back(bonus3);
 
 		//all state
 		LittleState* littleState = fsmPlayer->CreateState<LittleState>();

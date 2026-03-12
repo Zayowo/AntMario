@@ -35,8 +35,8 @@ void FireState::Execute(PlayerContext& p, float dt) {
 		ball->AddComponent<SpriteRenderer>("Assets/fireball.png");
 		ball->AddComponent<SquareCollider>(sf::Vector2f(14.f, 14.f));
 		ball->AddComponent<FireComponent>();
-		VelocityComponent* veloBall = ball->AddComponent<VelocityComponent>(180.f);
-		veloBall->SetVelocity(sf::Vector2f(1.f, 0.f));
+		VelocityComponent* veloBall = ball->AddComponent<VelocityComponent>(360.f);
+		veloBall->SetVelocity(sf::Vector2f(direction, 0.f));
 	}
 
 

@@ -29,7 +29,7 @@ void FireComponent::Update(float dt)
 	if (vector->GetVelocity().y == 0)
 	{
 
-		vector->SetY(-300);
+		vector->SetY(-350);
 
 	}
 
