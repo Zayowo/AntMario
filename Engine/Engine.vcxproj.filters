@@ -28,6 +28,12 @@
     <Filter Include="Fichiers sources\Components">
       <UniqueIdentifier>{52899063-1387-4e3a-bd5e-e3a14b24214f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\State">
+      <UniqueIdentifier>{58fd7519-0fd6-4ff7-8b0b-b9e8c2464ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\State">
+      <UniqueIdentifier>{9866de7a-d9d2-43ed-91d7-953bde5d6d1d}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Fichiers d%27en-tête\Utils">
       <UniqueIdentifier>{cfebcbce-2d49-49f1-bfb1-c9c3a5f22563}</UniqueIdentifier>
     </Filter>
@@ -93,6 +99,12 @@
     <ClInclude Include="ButtonRenderer.h">
       <Filter>Fichiers d%27en-tête\Components</Filter>
     </ClInclude>
+    <ClInclude Include="FSMComponent.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Fichiers d%27en-tête\State</Filter>
+    </ClInclude>
     <ClInclude Include="Json.h">
       <Filter>Fichiers d%27en-tête\Utils</Filter>
     </ClInclude>
@@ -149,6 +161,12 @@
     <ClCompile Include="ButtonRenderer.cpp">
       <Filter>Fichiers sources\Components</Filter>
     </ClCompile>
+    <ClCompile Include="FSMConponent.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Fichiers sources\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ModuleManager.inl">
@@ -159,6 +177,12 @@
     </None>
     <None Include="SceneModule.inl">
       <Filter>Fichiers d%27en-tête\Modules</Filter>
+    </None>
+    <None Include="FSMComponent.inl">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </None>
+    <None Include="State.inl">
+      <Filter>Fichiers d%27en-tête\State</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

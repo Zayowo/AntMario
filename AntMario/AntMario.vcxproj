@@ -137,8 +137,15 @@
     <ClCompile Include="FixedCameraComponent.cpp" />
     <ClCompile Include="FixedCameraComponent.h" />
     <ClCompile Include="Bonus.cpp" />
+    <ClCompile Include="BigState.cpp" />
+    <ClCompile Include="Condition.cpp" />
+    <ClCompile Include="FireComponent.cpp" />
+    <ClCompile Include="FireState.cpp" />
+    <ClCompile Include="GoombaComponent.cpp" />
+    <ClCompile Include="LittleState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="PlayerContext.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
@@ -148,10 +155,19 @@
   <ItemGroup>
     <ClInclude Include="BackgroundElement.h" />
     <ClInclude Include="Bonus.h" />
+    <ClInclude Include="BigState.h" />
+    <ClInclude Include="Condition.h" />
+    <ClInclude Include="FireComponent.h" />
+    <ClInclude Include="FireState.h" />
+    <ClInclude Include="GoombaComponent.h" />
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="PauseScene.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PrototypeScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LittleState.h" />
+    <ClInclude Include="PlayerContext.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

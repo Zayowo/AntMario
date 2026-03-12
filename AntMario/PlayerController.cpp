@@ -12,7 +12,10 @@ void PlayerController::Init()
 	velocityComponent->RegisterHit("Brick", VelocityHitType::BOTTOM, [this](GameObject* other) { BreakBrick(other); });
 
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
-	collider->RegisterCallback("Coins", [this](GameObject* other) { PickUpCoin(other); });
+	/*collider->RegisterCollisionCallback("Coins", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCollisionCallback("Bonus1", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCollisionCallback("Bonus2", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCollisionCallback("Bonus3", [this](GameObject* other) { PickUpCoin(other); });*/
 
 }
 
@@ -33,6 +36,8 @@ void PlayerController::Update(float dt)
 
 	if (inputModule->Is(sf::Keyboard::Key::LShift, InputState::HELD))
 		velocityX *= 1.5f;
+
+	std::cout << "Player's velocity on Y: " << velocityComponent->GetVelocity().y << std::endl;
 
 	if (
 		// À remplacer avec la jauge d'énergie (et si ce saut n'est pas le double saut en question)

@@ -19,6 +19,8 @@ public:
 	void SetX(float x);
 	void SetY(float y);
 
+	/*void SetTrajector(std::function<void> tj);*/
+
 	// Récupère la vélocité actuelle
 	sf::Vector2f GetVelocity();
 
@@ -28,7 +30,6 @@ public:
 private:
 	float speed;
 	sf::Vector2f velocity = sf::Vector2f(0.f, 0.f);
-	std::unordered_map<std::string, std::unordered_map<VelocityHitType, std::vector<std::function<void(GameObject*)>>>> hitCallbackMap;
 
 	// Résous les collisions lorsque le game object entre en collisions avec un block (et pas que)
 	void ResolveCollisions(GameObject* other);

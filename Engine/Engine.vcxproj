@@ -138,6 +138,7 @@
     <ClInclude Include="ButtonRenderer.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="FSMComponent.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputInfo.h" />
     <ClInclude Include="InputModule.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="SquareCollider.h" />
     <ClInclude Include="TextRenderer.h" />
+    <ClInclude Include="State.h" />
     <ClInclude Include="TimeModule.h" />
     <ClInclude Include="ModuleManager.h" />
     <ClInclude Include="Transform.h" />
@@ -162,6 +164,7 @@
     <ClCompile Include="ButtonRenderer.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="FSMConponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputModule.cpp" />
     <ClCompile Include="Module.cpp" />
@@ -171,15 +174,18 @@
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="SquareCollider.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
+    <ClCompile Include="State.cpp" />
     <ClCompile Include="TimeModule.cpp" />
     <ClCompile Include="ModuleManager.cpp" />
     <ClCompile Include="VelocityComponent.cpp" />
     <ClCompile Include="WindowModule.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="FSMComponent.inl" />
     <None Include="GameObject.inl" />
     <None Include="ModuleManager.inl" />
     <None Include="SceneModule.inl" />
+    <None Include="State.inl" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Engine.rc" />
