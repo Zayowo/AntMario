@@ -12,10 +12,10 @@ void PlayerController::Init()
 	velocityComponent->RegisterHit("Brick", VelocityHitType::BOTTOM, [this](GameObject* other) { BreakBrick(other); });
 
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
-	collider->RegisterCollisionCallback("Coins", [this](GameObject* other) { PickUpCoin(other); });
-	collider->RegisterCollisionCallback("Bonus1", [this](GameObject* other) { PickUpCoin(other); });
-	collider->RegisterCollisionCallback("Bonus2", [this](GameObject* other) { PickUpCoin(other); });
-	collider->RegisterCollisionCallback("Bonus3", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCallback("Coins", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCallback("Bonus1", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCallback("Bonus2", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCallback("Bonus3", [this](GameObject* other) { PickUpCoin(other); });
 }
 
 void PlayerController::Update(float dt)
