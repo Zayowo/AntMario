@@ -1,21 +1,24 @@
 #include <Engine.h>
+#include <Scene.h>
 #include <GameObject.h>
 #include <InputModule.h>
+#include <ResourceModule.h>
 #include <VelocityComponent.h>
 #include <SquareCollider.h>
 #include "PlayerController.h"
-#include <Scene.h>
+#include "BonusComponent.h"
 
 void PlayerController::Init()
 {
+
+	// À éviter, mais c'est temporaire...
+	gameController = owner->GetScene()->GetGameObjectsByName("GameController")[0]->GetComponent<GameController>();
+
 	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
-	velocityComponent->RegisterHit("Brick", VelocityHitType::BOTTOM, [this](GameObject* other) { BreakBrick(other); });
+	velocityComponent->RegisterHit("Brick", VelocityHitType::BOTTOM, [this](GameObject* brick) { BreakBrick(brick); });
 
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
-	collider->RegisterCallback("Coins", [this](GameObject* other) { PickUpCoin(other); });
-	collider->RegisterCallback("Bonus1", [this](GameObject* other) { PickUpCoin(other); });
-	collider->RegisterCallback("Bonus2", [this](GameObject* other) { PickUpCoin(other); });
-	collider->RegisterCallback("Bonus3", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCallback("Coins", [this](GameObject* coin) { PickUp(coin); });
 
 }
 
@@ -37,11 +40,26 @@ void PlayerController::Update(float dt)
 	if (inputModule->Is(sf::Keyboard::Key::LShift, InputState::HELD))
 		velocityX *= 1.5f;
 
-	if (
-		// À remplacer avec la jauge d'énergie (et si ce saut n'est pas le double saut en question)
-		inputModule->Is(sf::Keyboard::Key::Space, InputState::PRESSED)
-	)
-		velocityComponent->SetY(-1050.f);
+	if (inputModule->Is(sf::Keyboard::Key::Space, InputState::PRESSED))
+
+	{
+
+		if (velocityComponent->IsGrounded())
+		{
+			isDoubleJump = false;
+			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.f);
+			velocityComponent->SetY(-840.f);
+		}
+
+		else if (!isDoubleJump)
+		{
+
+			isDoubleJump = true;
+			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.25f);
+			velocityComponent->SetY(-840.f);
+
+		}
+	}
 
 	velocityComponent->SetX(velocityX);
 	if (velocityX != 0.f)
@@ -49,16 +67,31 @@ void PlayerController::Update(float dt)
 
 }
 
-void PlayerController::BreakBrick(GameObject* other)
+void PlayerController::BreakBrick(GameObject* brick)
 {
 
-	other->GetScene()->DeleteGameObject(other);
+	Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Brick.wav", 0.75f, 1.f);
+	brick->GetScene()->DeleteGameObject(brick);
 
 }
 
-void PlayerController::PickUpCoin(GameObject* other)
+void PlayerController::PickUp(GameObject* bonus)
 {
 
-	other->GetScene()->DeleteGameObject(other);
+	BonusComponent* bonusComponent = bonus->GetComponent<BonusComponent>();
+	
+	if (!bonusComponent)
+		return;
+
+	switch (bonusComponent->GetType())
+	{
+	case (BonusType::COINS):
+		gameController->SetCoins(gameController->GetCoins() + 1);
+		Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Coin.wav", 0.75f, 1.f);
+		std::cout << "Player picked up coins!" << std::endl;
+		break;
+	}
+
+	bonus->GetScene()->DeleteGameObject(bonus);
 
 }

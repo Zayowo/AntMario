@@ -39,6 +39,7 @@ protected:
 	std::string name;
 	Scene* scene;
 	Transform transform;
+	bool isActive = false;
 	std::vector<Component*> components;
 
 };

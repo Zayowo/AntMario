@@ -3,7 +3,8 @@
 #include "Engine.h"
 #include "ResourceModule.h"
 
-SpriteRenderer::SpriteRenderer(std::string path)
+SpriteRenderer::SpriteRenderer(std::string path) :
+	path(path)
 {
 
 	ResourceModule* resourceModule = Engine::GetModule<ResourceModule>();
@@ -41,6 +42,15 @@ void SpriteRenderer::Render(sf::RenderWindow* window)
 
 }
 
+void SpriteRenderer::SetTiling(sf::Vector2f size, bool isTiled)
+{
+
+	sprite->setTextureRect({ { 0, 0 }, (sf::Vector2i)size });
+	ResourceModule* resourceModule = Engine::GetModule<ResourceModule>();
+	sf::Texture& texture = resourceModule->GetTexture(path);
+	texture.setRepeated(isTiled);
+
+}
 
 void SpriteRenderer::SetAnimationRule(const SpriteAnimationRule animationRule)
 {

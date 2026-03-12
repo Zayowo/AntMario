@@ -28,6 +28,9 @@
     <Filter Include="Fichiers d%27en-tête\PlayerState">
       <UniqueIdentifier>{3b9aa68d-b452-46b8-9644-265bcede9dbe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Models">
+      <UniqueIdentifier>{6aba04fb-a5e5-462c-93bd-00b274833d0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -66,6 +69,12 @@
     <ClCompile Include="Bonus.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="BonusComponent.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GameController.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PrototypeScene.h">
@@ -97,6 +106,15 @@
     </ClInclude>
     <ClInclude Include="FireComponent.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="BonusComponent.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BonusType.h">
+      <Filter>Fichiers d%27en-tête\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="GameController.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

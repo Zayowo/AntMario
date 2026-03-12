@@ -19,6 +19,9 @@ public:
 	// Si elle n'est pas trouvé, on crée une nouvelle font à partir du path
 	sf::Sound& GetSound(std::string path);
 
+	// Joue un son
+	void PlaySound(std::string path, float volume, float pitch);
+
 private:
 	std::unordered_map<std::string, sf::Texture*> textureMap;
 	std::unordered_map<std::string, sf::Font*> fontMap;

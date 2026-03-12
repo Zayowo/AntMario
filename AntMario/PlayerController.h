@@ -1,5 +1,6 @@
 #pragma once
 #include <Component.h>
+#include "GameController.h"
 
 class PlayerController : public Component
 {
@@ -7,11 +8,15 @@ class PlayerController : public Component
 public:
 	void Init()override;
 	void Update(float dt) override;
+	
+	// Casse une brick
+	void BreakBrick(GameObject* brick);
 
-	void BreakBrick(GameObject* other);
-	void PickUpCoin(GameObject* other);
+	// Récupère un bonus
+	void PickUp(GameObject* bonus);
 
 private:
-	float energy = 0.1f;
+	bool isDoubleJump = false;
+	GameController* gameController;
 
 };

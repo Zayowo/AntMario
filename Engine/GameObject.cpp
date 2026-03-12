@@ -1,10 +1,15 @@
 #include "GameObject.h"
 #include "Component.h"
 
-GameObject::GameObject(std::string name, Scene* scene) : name(name), scene(scene) {};
+GameObject::GameObject(std::string name, Scene* scene) :
+	name(name),
+	scene(scene)
+{};
 
 void GameObject::Init()
 {
+
+	isActive = true;
 
 	for (Component* component : components)
 		component->Init();
