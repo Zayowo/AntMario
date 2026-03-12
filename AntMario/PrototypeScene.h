@@ -78,6 +78,10 @@ public:
 			}
 
 		}
+		GameObject* coin = CreateGameObject("Coins", { 210, 600 });
+		coin->AddComponent<Bonus>(BonusType::Coins);
+		coin->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
+
 		GameObject* bonus1 = CreateGameObject("Bonus1", { 240, 600 });
 		bonus1->AddComponent<Bonus>(BonusType::Bonus1);
 		bonus1->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
