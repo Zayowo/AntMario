@@ -22,3 +22,16 @@ sf::Font& ResourceModule::GetFont(std::string path)
 	return *fontMap[path];
 
 }
+
+sf::Sound& ResourceModule::GetSound(std::string path)
+{
+
+	if (!soundMap.contains(path))
+	{
+		sf::SoundBuffer* soundBuffer = new sf::SoundBuffer(path);
+		soundMap[path] = new sf::Sound(*soundBuffer);
+	}
+
+	return *soundMap[path];
+
+}

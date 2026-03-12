@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "Module.h"
 
 class ResourceModule : public Module
@@ -14,8 +15,13 @@ public:
 	// Si elle n'est pas trouvé, on crée une nouvelle font à partir du path
 	sf::Font& GetFont(std::string path);
 
+	// Récupère un son
+	// Si elle n'est pas trouvé, on crée une nouvelle font à partir du path
+	sf::Sound& GetSound(std::string path);
+
 private:
 	std::unordered_map<std::string, sf::Texture*> textureMap;
 	std::unordered_map<std::string, sf::Font*> fontMap;
+	std::unordered_map<std::string, sf::Sound*> soundMap;
 
 };

@@ -11,7 +11,7 @@ void TimeModule::Init()
 void TimeModule::Update()
 {
 
-	dt = deltaClock.restart().asSeconds();
+	dt = (deltaClock.restart().asSeconds() * speed);
 
 }
 
@@ -19,5 +19,12 @@ float TimeModule::GetDeltaTime()
 {
 
 	return dt;
+
+}
+
+float& TimeModule::GetSpeed()
+{
+
+	return speed;
 
 }

@@ -50,11 +50,19 @@ void VelocityComponent::SetY(float y)
 
 }
 
-//void VelocityComponent::SetTrajector(std::function<void> tj)
-//{
-//    trajector = tj;
-//
-//}
+void VelocityComponent::AddX(float x)
+{
+
+    velocity.x += x;
+
+}
+
+void VelocityComponent::AddY(float y)
+{
+
+    velocity.y += y;
+
+}
 
 sf::Vector2f VelocityComponent::GetVelocity()
 {

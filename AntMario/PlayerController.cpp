@@ -37,8 +37,6 @@ void PlayerController::Update(float dt)
 	if (inputModule->Is(sf::Keyboard::Key::LShift, InputState::HELD))
 		velocityX *= 1.5f;
 
-	std::cout << "Player's velocity on Y: " << velocityComponent->GetVelocity().y << std::endl;
-
 	if (
 		// À remplacer avec la jauge d'énergie (et si ce saut n'est pas le double saut en question)
 		inputModule->Is(sf::Keyboard::Key::Space, InputState::PRESSED)

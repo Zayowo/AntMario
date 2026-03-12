@@ -1,16 +1,17 @@
 #pragma once
 #include <Scene.h>
+#include <TimeModule.h>
 #include <SpriteRenderer.h>
 #include <VelocityComponent.h>
 #include <SquareCollider.h>
 #include <ButtonRenderer.h>
 #include <Json.h>
+#include <iostream>
+#include <fstream>
 #include "BackgroundElement.h"
 #include "FixedCameraComponent.h"
 #include "PlayerController.h"
 #include "Bonus.h"
-#include <iostream>
-#include <fstream>
 
 using json = nlohmann::json;
 
@@ -88,9 +89,18 @@ public:
 
 		InputModule* inputModule = Engine::GetModule<InputModule>();
 		SceneModule* sceneModule = Engine::GetModule<SceneModule>();
+		TimeModule* timeModule = Engine::GetModule<TimeModule>();
 
 		if (inputModule->Is(sf::Keyboard::Key::Escape, InputState::PRESSED))
 			sceneModule->PushScene("PauseScene");
+
+		if (inputModule->Is(sf::Keyboard::Key::PageUp, InputState::PRESSED))
+			timeModule->GetSpeed() *= 2.f;
+
+		if (inputModule->Is(sf::Keyboard::Key::PageDown, InputState::PRESSED))
+			timeModule->GetSpeed() /= 2.f;
+
+		std::cout << timeModule->GetSpeed() << std::endl;
 
 		Scene::Update(dt);
 
