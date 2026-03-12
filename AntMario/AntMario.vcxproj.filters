@@ -59,9 +59,6 @@
     <ClInclude Include="Bonus.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="MapEditorScene.h">
-      <Filter>Fichiers d%27en-tête\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="PauseScene.h">
       <Filter>Fichiers d%27en-tête\Scenes</Filter>
     </ClInclude>

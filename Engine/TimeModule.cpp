@@ -1,4 +1,5 @@
 #include "TimeModule.h"
+#include <iostream>
 
 void TimeModule::Init()
 {

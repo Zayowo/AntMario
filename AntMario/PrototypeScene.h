@@ -4,11 +4,15 @@
 #include <VelocityComponent.h>
 #include <SquareCollider.h>
 #include <ButtonRenderer.h>
+#include <Json.h>
 #include "BackgroundElement.h"
 #include "FixedCameraComponent.h"
 #include "PlayerController.h"
 #include "Bonus.h"
+#include <iostream>
+#include <fstream>
 
+using json = nlohmann::json;
 
 class PrototypeScene : public Scene
 {
@@ -17,13 +21,13 @@ public:
 	PrototypeScene()
 	{
 
-		GameObject* sky = CreateGameObject("Sky", { 600, 400 });
-		sky->GetTransform().scale = sf::Vector2f(2.4f, 2.f);
-		sky->AddComponent<BackgroundElement>("Assets/Environment/Background.png", 1.f, sf::Vector2f(-900.f, 0.f));
+		//GameObject* sky = CreateGameObject("Sky", { 600, 400 });
+		//sky->GetTransform().scale = sf::Vector2f(2.4f, 2.f);
+		//sky->AddComponent<BackgroundElement>("Assets/Environment/Background.png", 1.f, sf::Vector2f(-900.f, 0.f));
 
-		GameObject* sky1 = CreateGameObject("Sky", { 600, 400 });
-		sky1->GetTransform().scale = sf::Vector2f(2.4f, 2.f);
-		sky1->AddComponent<BackgroundElement>("Assets/Environment/Background.png", 1.f, sf::Vector2f(-300.f, 0.f));
+		//GameObject* sky1 = CreateGameObject("Sky", { 600, 400 });
+		//sky1->GetTransform().scale = sf::Vector2f(2.4f, 2.f);
+		//sky1->AddComponent<BackgroundElement>("Assets/Environment/Background.png", 1.f, sf::Vector2f(-300.f, 0.f));
 
 		GameObject* player = CreateGameObject("Player", { 150, 700 });
 		player->GetTransform().scale = sf::Vector2f(1.f, 0.75f);
@@ -34,31 +38,36 @@ public:
 		player->AddComponent<VelocityComponent>(260.f);
 		player->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
 
-		// De maniere temporaire pour vérifier si les bonus s'affichent bien
-		GameObject* bonus = CreateGameObject("Coins", { 180, 600 });
-		bonus->AddComponent<Bonus>(BonusType::Coins);
-		bonus->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
+		std::ifstream file("Assets/Level/AntLevel_2.json");
+		json data;
+		file >> data;
 
-		GameObject* bonus1 = CreateGameObject("Bonus1", { 240, 600 });
-		bonus1->AddComponent<Bonus>(BonusType::Bonus1);
-		bonus1->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
-
-		GameObject* bonus2 = CreateGameObject("Bonus2", { 310, 600 });
-		bonus2->AddComponent<Bonus>(BonusType::Bonus2);
-		bonus2->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
-
-		GameObject* bonus3 = CreateGameObject("Bonus3", { 400, 600 });
-		bonus3->AddComponent<Bonus>(BonusType::Bonus3);
-		bonus3->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
-
-		for (int i = 0; i < 50; i++)
+		for (const auto& tile : data["tiles"])
 		{
 
-			GameObject* collider = CreateGameObject("Collider", { 0 + (float)(i * 48), 800 });
-			collider->GetTransform().origin = sf::Vector2f(0.f, 1.f);
-			collider->GetTransform().scale = sf::Vector2f(1.5f, 1.5f);
-			collider->AddComponent<SpriteRenderer>("Assets/Environment/Block.png");
-			collider->AddComponent<SquareCollider>(sf::Vector2f(32.f, 32.f));
+			std::string tileType = tile["type"];
+			float xPos = tile["x"] * 40.f;
+			float yPos = tile["y"] * 40.f;
+			float width = tile["w"];
+			float height = tile["h"];
+
+			if (tileType == "Terrain")
+			{
+
+				GameObject* collider = CreateGameObject("Collider", { xPos, yPos });
+				collider->GetTransform().origin = sf::Vector2f(0.f, 0.f);
+				collider->AddComponent<SquareCollider>(sf::Vector2f(width * 40.f, height * 40.f));
+
+			}
+
+			if (tileType == "Brick")
+			{
+
+				GameObject* collider = CreateGameObject("Brick", { xPos, yPos });
+				collider->GetTransform().origin = sf::Vector2f(0.f, 0.f);
+				collider->AddComponent<SquareCollider>(sf::Vector2f(width * 40.f, height * 40.f));
+
+			}
 
 		}
 

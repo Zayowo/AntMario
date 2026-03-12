@@ -16,7 +16,7 @@ public:
 	bool IsColliding(GameObject* gameObject);
 
 	// Enregistre un callback lorsque le collider est en collision avec un autre collider d'un game object avec un nom spécifique
-	void RegisterCollisionCallback(std::string name, std::function<void(GameObject*)> callback);
+	void RegisterCallback(std::string name, std::function<void(GameObject*)> callback);
 
 	// Récupère les bounds de la collision
 	sf::FloatRect GetBounds();

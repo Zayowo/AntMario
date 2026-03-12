@@ -28,6 +28,9 @@
     <Filter Include="Fichiers sources\Components">
       <UniqueIdentifier>{52899063-1387-4e3a-bd5e-e3a14b24214f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Utils">
+      <UniqueIdentifier>{cfebcbce-2d49-49f1-bfb1-c9c3a5f22563}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -89,6 +92,12 @@
     </ClInclude>
     <ClInclude Include="ButtonRenderer.h">
       <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Json.h">
+      <Filter>Fichiers d%27en-tête\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="VelocityHitType.h">
+      <Filter>Fichiers d%27en-tête\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

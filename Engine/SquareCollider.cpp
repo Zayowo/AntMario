@@ -5,7 +5,7 @@ SquareCollider::SquareCollider(sf::Vector2f size)
 {
 
 	shape = new sf::RectangleShape(size);
-	shape->setFillColor(sf::Color::Transparent);
+	shape->setFillColor(sf::Color(255, 0, 0, 25));
 	shape->setOutlineColor(sf::Color::Red);
 	shape->setOutlineThickness(-2.f);
 
@@ -96,7 +96,7 @@ bool SquareCollider::IsColliding(GameObject* gameObject)
 
 }
 
-void SquareCollider::RegisterCollisionCallback(std::string name, std::function<void(GameObject*)> callback)
+void SquareCollider::RegisterCallback(std::string name, std::function<void(GameObject*)> callback)
 {
 
 	collisionCallbackMap[name].emplace_back(callback);

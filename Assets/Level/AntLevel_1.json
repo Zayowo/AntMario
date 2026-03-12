@@ -1,0 +1,35 @@
+{
+  "metadata": {
+    "tileSize": 40
+  },
+  "tiles": [
+    {
+      "x": 28,
+      "y": 0,
+      "w": 2,
+      "h": 20,
+      "type": "Terrain"
+    },
+    {
+      "x": 24,
+      "y": 15,
+      "w": 4,
+      "h": 5,
+      "type": "Terrain"
+    },
+    {
+      "x": 16,
+      "y": 16,
+      "w": 4,
+      "h": 4,
+      "type": "Terrain"
+    },
+    {
+      "x": 0,
+      "y": 18,
+      "w": 16,
+      "h": 2,
+      "type": "Terrain"
+    }
+  ]
+}

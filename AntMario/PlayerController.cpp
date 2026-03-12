@@ -6,15 +6,13 @@
 #include "PlayerController.h"
 #include <Scene.h>
 
-
-
 void PlayerController::Init()
 {
+	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
+	velocityComponent->RegisterHit("Brick", VelocityHitType::BOTTOM, [this](GameObject* other) { BreakBrick(other); });
+
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
-	collider->RegisterCollisionCallback("Coins", [this](GameObject* other) { PickUpCoin(other); });
-	collider->RegisterCollisionCallback("Bonus1", [this](GameObject* other) { PickUpCoin(other); });
-	collider->RegisterCollisionCallback("Bonus2", [this](GameObject* other) { PickUpCoin(other); });
-	collider->RegisterCollisionCallback("Bonus3", [this](GameObject* other) { PickUpCoin(other); });
+	collider->RegisterCallback("Coins", [this](GameObject* other) { PickUpCoin(other); });
 
 }
 
@@ -40,11 +38,18 @@ void PlayerController::Update(float dt)
 		velocityComponent->GetVelocity().y == 0.0f &&
 		inputModule->Is(sf::Keyboard::Key::Space, InputState::HELD)
 	)
-		velocityComponent->SetY(-900.f);
+		velocityComponent->SetY(-750.f);
 
 	velocityComponent->SetX(velocityX);
 	if (velocityX != 0.f)
 		transform.scale.x = velocityX > 0.f ? 1.f : -1.f;
+
+}
+
+void PlayerController::BreakBrick(GameObject* other)
+{
+
+	other->GetScene()->DeleteGameObject(other);
 
 }
 

@@ -1,5 +1,7 @@
 #pragma once
+#include <functional>
 #include "Component.h"
+#include "VelocityHitType.h"
 
 class VelocityComponent : public Component
 {
@@ -20,11 +22,18 @@ public:
 	// Récupère la vélocité actuelle
 	sf::Vector2f GetVelocity();
 
+	// Enregistre un callback lorsque la vélocité entre en collision avec un nom de collider dans une certaine direction
+	void RegisterHit(std::string name, VelocityHitType hitType, std::function<void(GameObject*)> callback);
+
 private:
 	float speed;
 	sf::Vector2f velocity = sf::Vector2f(0.f, 0.f);
+	std::unordered_map<std::string, std::unordered_map<VelocityHitType, std::vector<std::function<void(GameObject*)>>>> hitCallbackMap;
 
 	// Résous les collisions lorsque le game object entre en collisions avec un block (et pas que)
 	void ResolveCollisions(GameObject* other);
+
+	// Envoie les callbacks enregistrés dans le hitCallbackMap en fonction du type de collision
+	void SendHit(GameObject* other, VelocityHitType hitType);
 
 };
