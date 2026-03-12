@@ -30,8 +30,21 @@ sf::Sound& ResourceModule::GetSound(std::string path)
 	{
 		sf::SoundBuffer* soundBuffer = new sf::SoundBuffer(path);
 		soundMap[path] = new sf::Sound(*soundBuffer);
+		std::cout << "Sound created at `" + path + "`" << std::endl;
 	}
 
 	return *soundMap[path];
+
+}
+
+void ResourceModule::PlaySound(std::string path, float volume, float pitch)
+{
+
+	if (!soundMap.contains(path))
+		GetSound(path);
+	
+	soundMap[path]->setVolume(volume);
+	soundMap[path]->setPitch(pitch);
+	soundMap[path]->play();
 
 }

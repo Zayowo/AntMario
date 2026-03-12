@@ -21,6 +21,9 @@ void VelocityComponent::Init()
 void VelocityComponent::Update(float dt)
 {
 
+    if (velocity.y < 0.f || velocity.y > 6.5f)
+        isGrounded = false;
+
 	velocity.y += 1950.f * dt;
 
 	Transform& transform = owner->GetTransform();
@@ -71,6 +74,13 @@ sf::Vector2f VelocityComponent::GetVelocity()
 
 }
 
+bool VelocityComponent::IsGrounded()
+{
+
+    return isGrounded;
+
+}
+
 void VelocityComponent::RegisterHit(std::string name, VelocityHitType hitType, std::function<void(GameObject*)> callback)
 {
 
@@ -107,14 +117,14 @@ void VelocityComponent::ResolveCollisions(GameObject* other) {
         if (playerBounds.position.x < otherBounds.position.x)
         {
 
-            transform.pos.x = otherBounds.position.x - (playerBounds.size.x * (1.0f - transform.origin.x)) - 0.01f;
+            transform.pos.x = otherBounds.position.x - (playerBounds.size.x * (1.0f - transform.origin.x));
             SendHit(other, VelocityHitType::LEFT);
 
         }
         else
         {
 
-            transform.pos.x = otherBounds.position.x + otherBounds.size.x + (playerBounds.size.x * transform.origin.x) + 0.01f;
+            transform.pos.x = otherBounds.position.x + otherBounds.size.x + (playerBounds.size.x * transform.origin.x);
             SendHit(other, VelocityHitType::RIGHT);
 
         }
@@ -126,15 +136,20 @@ void VelocityComponent::ResolveCollisions(GameObject* other) {
         if (playerBounds.position.y < otherBounds.position.y)
         {
 
-            transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y)) - 0.01f;
-            if (velocity.y > 0) velocity.y = 0.f;
+            transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y));
+            if (velocity.y > 0)
+            {
+                velocity.y = 0.f;
+                isGrounded = true;
+            }
+
             SendHit(other, VelocityHitType::TOP);
 
         }
         else
         {
 
-            transform.pos.y = otherBounds.position.y + otherBounds.size.y + (playerBounds.size.y * transform.origin.y) + 0.01f;
+            transform.pos.y = otherBounds.position.y + otherBounds.size.y + (playerBounds.size.y * transform.origin.y);
             float _velocityY = velocity.y;
             if (velocity.y < 0) velocity.y = 0.01f;
             

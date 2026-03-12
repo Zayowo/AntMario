@@ -12,12 +12,8 @@ public:
 	// Récupère le deltaTime
 	float GetDeltaTime();
 
-	// Récupère la vitesse (en référence, eheh)
-	float& GetSpeed();
-
 private:
 	sf::Clock deltaClock;
-	float speed = 1.f;
 	float dt = 0.f;
 
 };

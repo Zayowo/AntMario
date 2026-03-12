@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BackgroundElement.cpp" />
+    <ClCompile Include="BonusComponent.cpp" />
     <ClCompile Include="FixedCameraComponent.cpp" />
     <ClCompile Include="FixedCameraComponent.h" />
     <ClCompile Include="Bonus.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="FireComponent.cpp" />
     <ClCompile Include="FireState.cpp" />
     <ClCompile Include="GoombaComponent.cpp" />
+    <ClCompile Include="GameController.cpp" />
     <ClCompile Include="LittleState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Oppenent.cpp" />
@@ -157,9 +159,12 @@
     <ClInclude Include="BackgroundElement.h" />
     <ClInclude Include="Bonus.h" />
     <ClInclude Include="BigState.h" />
+    <ClInclude Include="BonusComponent.h" />
+    <ClInclude Include="BonusType.h" />
     <ClInclude Include="Condition.h" />
     <ClInclude Include="FireComponent.h" />
     <ClInclude Include="FireState.h" />
+    <ClInclude Include="GameController.h" />
     <ClInclude Include="GoombaComponent.h" />
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="Oppenent.h" />

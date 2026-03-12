@@ -11,14 +11,12 @@ void FixedCameraComponent::Update(float dt)
 
 	Transform& transform = owner->GetTransform();
 	float viewX = transform.pos.x;
+	float smoothSpeed = 3.5f;
 
-	if (viewX < minX)
-		viewX = minX;
+	viewX = view.getCenter().x + (viewX - view.getCenter().x) * smoothSpeed * dt;
+	viewX = std::clamp(viewX, minX, maxX);
 
-	if (viewX > maxX)
-		viewX = maxX;
-
-	view.setCenter(sf::Vector2f(viewX, 400));
+	view.setCenter(sf::Vector2f(viewX, 400.f));
 
 }
 

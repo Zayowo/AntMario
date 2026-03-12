@@ -26,11 +26,15 @@ public:
 	// Récupère la vélocité actuelle
 	sf::Vector2f GetVelocity();
 
+	// Récupère le isGrounded
+	bool IsGrounded();
+
 	// Enregistre un callback lorsque la vélocité entre en collision avec un nom de collider dans une certaine direction
 	void RegisterHit(std::string name, VelocityHitType hitType, std::function<void(GameObject*)> callback);
 
 private:
 	float speed;
+	bool isGrounded = false;
 	sf::Vector2f velocity = sf::Vector2f(0.f, 0.f);
 	std::unordered_map<std::string, std::unordered_map<VelocityHitType, std::vector<std::function<void(GameObject*)>>>> hitCallbackMap;
 
