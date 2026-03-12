@@ -5,8 +5,12 @@
 
 bool Condition::collisionWithEnemy(PlayerContext& p)
 {
+
 	SquareCollider* colideP = p.player->GetComponent<SquareCollider>();
-	for (GameObject* enemy : p.enemies) {
+
+	std::vector<GameObject*> goombas = p.player->GetScene()->GetGameObjectsByName("Goomba");
+	
+	for (GameObject* enemy : goombas) {
 		if (colideP->IsColliding(enemy) && p.invulnerability <= 0) {
 			p.invulnerability = 1.5f;
 			return true;

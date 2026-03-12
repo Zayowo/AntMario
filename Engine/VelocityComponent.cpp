@@ -15,6 +15,7 @@ void VelocityComponent::Init()
 
 	collider->RegisterCallback("Collider", [this](GameObject* other) { ResolveCollisions(other); });
     collider->RegisterCallback("Brick", [this](GameObject* other) { ResolveCollisions(other); });
+    collider->RegisterCallback("Goomba", [this](GameObject* other) { ResolveCollisions(other); });
 
 }
 
@@ -72,6 +73,9 @@ void VelocityComponent::RegisterHit(std::string name, VelocityHitType hitType, s
 
 void VelocityComponent::ResolveCollisions(GameObject* other) {
 
+    if (other == owner)
+        return;
+    
     if (!other) return;
 
     auto collider = owner->GetComponent<SquareCollider>();

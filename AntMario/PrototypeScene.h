@@ -121,12 +121,13 @@ public:
 		
 
 		// enemy
-		GameObject* goomba = CreateGameObject("Enemy", { 300, 600 });
-		goomba->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
-		goomba->AddComponent<VelocityComponent>(90.f);
+		GameObject* goomba = CreateGameObject("Goomba", { 600, 700 });
+		goomba->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
 		goomba->AddComponent<GoombaComponent>();
+		goomba->AddComponent<VelocityComponent>(90.f);
+		goomba->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
 		goomba->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
-		ctxPlayer.enemies.emplace_back(goomba);
+		
 	};
 
 	void Update(float dt) override

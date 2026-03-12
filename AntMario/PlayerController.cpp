@@ -10,6 +10,7 @@ void PlayerController::Init()
 {
 	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
 	velocityComponent->RegisterHit("Brick", VelocityHitType::BOTTOM, [this](GameObject* other) { BreakBrick(other); });
+	velocityComponent->RegisterHit("Goomba", VelocityHitType::TOP, [this](GameObject* other) { StepOnGoomba(other); });
 
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
 	collider->RegisterCallback("Coins", [this](GameObject* other) { PickUpCoin(other); });
@@ -58,4 +59,13 @@ void PlayerController::BreakBrick(GameObject* other)
 void PlayerController::PickUpCoin(GameObject* other)
 {
 	other->GetScene()->DeleteGameObject(other);
+}
+
+void PlayerController::StepOnGoomba(GameObject* other)
+{
+
+	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
+	velocityComponent->SetY(-350.f);
+	other->GetScene()->DeleteGameObject(other);
+
 }

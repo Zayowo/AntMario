@@ -10,5 +10,6 @@ public:
 
 	void BreakBrick(GameObject* other);
 	void PickUpCoin(GameObject* other);
+	void StepOnGoomba(GameObject* other);
 
 };
