@@ -6,7 +6,7 @@ class PiranhaComponent : public Component
 private:
 	void Init() override;
 	void Update(float dt) override;
-	//void TouchByBall(GameObject* o);
+	void TouchByBall(GameObject* o);
 
 	float max = 60.f;
 	float y = 0.f;
