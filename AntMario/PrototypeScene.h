@@ -2,6 +2,7 @@
 #include <Scene.h>
 #include <TimeModule.h>
 #include <SpriteRenderer.h>
+#include <TilemapRenderer.h>
 #include <VelocityComponent.h>
 #include <SquareCollider.h>
 #include <ButtonRenderer.h>
@@ -41,125 +42,119 @@ public:
 		sky1->GetTransform().scale = sf::Vector2f(2.4f, 2.f);
 		sky1->AddComponent<BackgroundElement>("Assets/Environment/Background.png", 1.f, sf::Vector2f(-300.f, 0.f));
 
+		//GameObject* opponent1 = CreateGameObject("opponent1", { 200, 700 });
+		//opponent1->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
+		//opponent1->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		//opponent1->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		//opponent1->AddComponent<VelocityComponent>(260.f);
+		//opponent1->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
 
-		GameObject* opponent1 = CreateGameObject("opponent1", { 200, 700 });
-		opponent1->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
-		opponent1->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
-		opponent1->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
-		opponent1->AddComponent<VelocityComponent>(260.f);
-		opponent1->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
+		//GameObject* opponent2 = CreateGameObject("opponent2", { 250, 700 });
+		//opponent2->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
+		//opponent2->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		//opponent2->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		//opponent2->AddComponent<VelocityComponent>(260.f);
+		//opponent2->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
 
-		GameObject* opponent2 = CreateGameObject("opponent2", { 250, 700 });
-		opponent2->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
-		opponent2->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
-		opponent2->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
-		opponent2->AddComponent<VelocityComponent>(260.f);
-		opponent2->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
+		//GameObject* opponent3 = CreateGameObject("opponent3", { 300, 700 });
+		//opponent3->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
+		//opponent3->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		//opponent3->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		//opponent3->AddComponent<VelocityComponent>(260.f);
+		//opponent3->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
 
-		GameObject* opponent3 = CreateGameObject("opponent3", { 300, 700 });
-		opponent3->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
-		opponent3->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
-		opponent3->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
-		opponent3->AddComponent<VelocityComponent>(260.f);
-		opponent3->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
+		// 1. INITIALISATION DU TILEMAP
+		// On crée un seul GameObject pour TOUT le décor statique
+		GameObject* tilemapObject = CreateGameObject("LevelTilemap", { 0.f, 0.f });
+		tilemapObject->GetTransform().origin = { 0.f, 0.f };
 
-        // 2. PHASE VISUELLE ET OBJETS INTERACTIFS
-        // On utilise la liste "tiles" qui contient tout ce qui a été dessiné
-        for (const auto& tile : data["tiles"]) {
-            std::string tileType = tile["type"];
-            float xPos = tile["x"].get<float>() * gridSize;
-            float yPos = tile["y"].get<float>() * gridSize;
-            float width = tile["w"].get<float>();
-            float height = tile["h"].get<float>();
-            float g = gridSize;
+		// On ajoute le composant TilemapRenderer (on passe la texture et la taille d'une tuile)
+		// On suppose ici que le niveau fait 500x50 tuiles max, à ajuster selon tes besoins
+		TilemapRenderer* tilemap = tilemapObject->AddComponent<TilemapRenderer>("Assets/Environment/Tileset.png", sf::Vector2u(gridSize, gridSize), 500, 50);
 
-            // --- CAS DU TERRAIN (Visuel uniquement ici) ---
-            if (tileType.find("T_") == 0 || tileType == "TERRAIN") {
-                for (int ix = 0; ix < (int)width; ix++) {
-                    for (int iy = 0; iy < (int)height; iy++) {
-                        float finalX = xPos + (ix * gridSize);
-                        float finalY = yPos + (iy * gridSize);
+		// 2. PHASE DE LECTURE DES DONNÉES
+		for (const auto& tile : data["tiles"]) {
+			std::string tileType = tile["type"];
+			float xPos = tile["x"].get<float>() * gridSize;
+			float yPos = tile["y"].get<float>() * gridSize;
+			float width = tile["w"].get<float>();
+			float height = tile["h"].get<float>();
+			int g = (int)gridSize;
 
-                        // Création du GameObject visuel (Pas de SquareCollider ici !)
-                        GameObject* visualTile = CreateGameObject("TerrainTile", { finalX, finalY });
-                        visualTile->GetTransform().origin = sf::Vector2f(0.f, 0.f);
+			// --- CAS DU TERRAIN ---
+			if (tileType.find("T_") == 0 || tileType == "TERRAIN") {
 
-                        SpriteRenderer* sprite = visualTile->AddComponent<SpriteRenderer>("Assets/Environment/Tileset.png");
+				sf::Vector2i uvCoords;
+				if (tileType == "T_TOP_LEFT")           uvCoords = { 0, 0 };
+				else if (tileType == "T_TOP")           uvCoords = { g, 0 };
+				else if (tileType == "T_TOP_RIGHT")     uvCoords = { g * 2, 0 };
+				else if (tileType == "T_LEFT")          uvCoords = { 0, g };
+				else if (tileType == "T_CENTER" ||
+					tileType == "TERRAIN")         uvCoords = { g, g };
+				else if (tileType == "T_RIGHT")         uvCoords = { g * 2, g };
+				else if (tileType == "T_BOTTOM_LEFT")   uvCoords = { 0, g * 2 };
+				else if (tileType == "T_BOTTOM")        uvCoords = { g, g * 2 };
+				else if (tileType == "T_BOTTOM_RIGHT")  uvCoords = { g * 2, g * 2 };
 
-                        sf::IntRect uvRect;
-                        sf::Vector2i size(g, g);
+				for (int ix = 0; ix < (int)width; ix++) {
+					for (int iy = 0; iy < (int)height; iy++) {
+						int gridX = (int)tile["x"].get<float>() + ix;
+						int gridY = (int)tile["y"].get<float>() + iy;
 
-                        if (tileType == "T_TOP_LEFT")          uvRect = sf::IntRect(sf::Vector2i(0, 0), size);
-                        else if (tileType == "T_TOP")          uvRect = sf::IntRect(sf::Vector2i(g, 0), size);
-                        else if (tileType == "T_TOP_RIGHT")    uvRect = sf::IntRect(sf::Vector2i(g * 2, 0), size);
-                        else if (tileType == "T_LEFT")         uvRect = sf::IntRect(sf::Vector2i(0, g), size);
-                        else if (tileType == "T_CENTER" ||
-                            tileType == "TERRAIN")        uvRect = sf::IntRect(sf::Vector2i(g, g), size);
-                        else if (tileType == "T_RIGHT")        uvRect = sf::IntRect(sf::Vector2i(g * 2, g), size);
-                        else if (tileType == "T_BOTTOM_LEFT")  uvRect = sf::IntRect(sf::Vector2i(0, g * 2), size);
-                        else if (tileType == "T_BOTTOM")       uvRect = sf::IntRect(sf::Vector2i(g, g * 2), size);
-                        else if (tileType == "T_BOTTOM_RIGHT") uvRect = sf::IntRect(sf::Vector2i(g * 2, g * 2), size);
+						// Utilisation de la nouvelle méthode SetTile
+						tilemap->SetTile(gridX, gridY, uvCoords);
+					}
+				}
+			}
+			// --- CAS DES OBJETS INTERACTIFS ---
+			else if (tileType == "BRICK") {
+				for (int i = 0; i < (int)width; i++) {
+					for (int j = 0; j < (int)height; j++) {
+						GameObject* brick = CreateGameObject("Block", { xPos + i * gridSize, yPos + j * gridSize });
+						brick->GetTransform().origin = { 0.f, 0.f };
+						brick->AddComponent<SquareCollider>(sf::Vector2f(gridSize, gridSize));
+						brick->AddComponent<SpriteRenderer>("Assets/Environment/Brick.png");
+						brick->AddComponent<InteractableBlockComponent>(InteractableBlockType::BRICK);
+					}
+				}
+			}
+			else if (tileType == "BLOCK_COINS") {
+				for (int i = 0; i < (int)width; i++) {
+					for (int j = 0; j < (int)height; j++) {
+						GameObject* block = CreateGameObject("Block", { xPos + i * gridSize, yPos + j * gridSize });
+						block->GetTransform().origin = { 0.f, 0.f };
+						block->AddComponent<SquareCollider>(sf::Vector2f(gridSize, gridSize));
+						block->AddComponent<SpriteRenderer>("Assets/Environment/LuckyBlock.png");
+						block->AddComponent<InteractableBlockComponent>(InteractableBlockType::COINS);
+					}
+				}
+			}
+			else if (tileType == "COINS") {
+				for (int i = 0; i < (int)width; i++) {
+					for (int j = 0; j < (int)height; j++) {
+						float finalX = xPos + (i * gridSize) + gridSize * 0.5f;
+						float finalY = yPos + (j * gridSize) + gridSize * 0.5f;
 
-                        sprite->SetTextureRect(uvRect);
-                    }
-                }
-            }
-            // --- CAS DES BRIQUES ---
-            else if (tileType == "BRICK") {
-                for (int i = 0; i < (int)width; i++) {
-                    for (int j = 0; j < (int)height; j++) {
-                        GameObject* brick = CreateGameObject("Block", { xPos + i * gridSize, yPos + j * gridSize });
-                        brick->GetTransform().origin = sf::Vector2f(0.f, 0.f);
-                        brick->AddComponent<SquareCollider>(sf::Vector2f(gridSize, gridSize));
-                        brick->AddComponent<SpriteRenderer>("Assets/Environment/Brick.png");
-                        brick->AddComponent<InteractableBlockComponent>(InteractableBlockType::BRICK);
-                    }
-                }
-            }
-            // --- CAS DES BLOCS A PIECES ---
-            else if (tileType == "BLOCK_COINS") {
-                for (int i = 0; i < (int)width; i++) {
-                    for (int j = 0; j < (int)height; j++) {
-                        GameObject* blockCoins = CreateGameObject("Block", { xPos + i * gridSize, yPos + j * gridSize });
-                        blockCoins->GetTransform().origin = sf::Vector2f(0.f, 0.f);
-                        blockCoins->AddComponent<SquareCollider>(sf::Vector2f(gridSize, gridSize));
-                        blockCoins->AddComponent<SpriteRenderer>("Assets/Environment/LuckyBlock.png");
-                        blockCoins->AddComponent<InteractableBlockComponent>(InteractableBlockType::COINS);
-                    }
-                }
-            }
-            // --- CAS DES PIECES ---
-            else if (tileType == "COINS") {
-                for (int i = 0; i < (int)width; i++) {
-                    for (int j = 0; j < (int)height; j++) {
-                        // Centrage de la pièce
-                        float finalX = xPos + (i * gridSize) + gridSize * 0.5f;
-                        float finalY = yPos + (j * gridSize) + gridSize * 0.5f;
+						GameObject* coins = CreateGameObject("Bonus", { finalX, finalY });
+						coins->AddComponent<SpriteRenderer>("Assets/Environment/Coins.png");
+						coins->AddComponent<SquareCollider>(sf::Vector2f(gridSize, gridSize));
+						coins->AddComponent<BonusComponent>(BonusType::COINS);
+					}
+				}
+			}
+		}
 
-                        GameObject* coins = CreateGameObject("Bonus", { finalX, finalY });
-                        coins->AddComponent<SpriteRenderer>("Assets/Environment/Coins.png");
-                        coins->AddComponent<SquareCollider>(sf::Vector2f(gridSize, gridSize));
-                        coins->AddComponent<BonusComponent>(BonusType::COINS);
-                    }
-                }
-            }
-        }
+		// 3. PHASE PHYSIQUE
+		for (const auto& col : data["colliders"]) {
+			float cx = col["x"].get<float>() * gridSize;
+			float cy = col["y"].get<float>() * gridSize;
+			float cw = col["w"].get<float>() * gridSize;
+			float ch = col["h"].get<float>() * gridSize;
 
-        // 3. PHASE PHYSIQUE : COLLIDERS DU TERRAIN FUSIONNÉS
-        // On crée les corps physiques uniquement pour le décor fusionné par l'éditeur
-        for (const auto& col : data["colliders"]) {
-            float cx = col["x"].get<float>() * gridSize;
-            float cy = col["y"].get<float>() * gridSize;
-            float cw = col["w"].get<float>() * gridSize;
-            float ch = col["h"].get<float>() * gridSize;
-
-            // On crée un objet invisible qui sert uniquement de collider pour le sol
-            GameObject* terrainPhysic = CreateGameObject("Terrain", { cx, cy });
-            terrainPhysic->GetTransform().origin = sf::Vector2f(0.f, 0.f);
-            terrainPhysic->AddComponent<SquareCollider>(sf::Vector2f(cw, ch));
-
-            // Note: Pas de SpriteRenderer ici car le visuel a été géré au dessus !
-        }
+			GameObject* terrainPhysic = CreateGameObject("Terrain", { cx, cy });
+			terrainPhysic->GetTransform().origin = { 0.f, 0.f };
+			terrainPhysic->AddComponent<SquareCollider>(sf::Vector2f(cw, ch));
+		}
 
 		GameObject* player = CreateGameObject("Player", { 150, 700 });
 		player->GetTransform().scale = sf::Vector2f(0.55f, 0.55f);
