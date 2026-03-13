@@ -34,6 +34,12 @@
     <Filter Include="Fichiers d%27en-tête\Components\Enemy">
       <UniqueIdentifier>{1e886684-0268-4f39-996a-3708234fe077}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\Components\Enemy\Turtle">
+      <UniqueIdentifier>{55b47b88-36c8-4795-8193-eefab4f80d1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Components\Enemy\Turtle">
+      <UniqueIdentifier>{ba8e36a2-23e6-49e5-87ec-7127c8a56dac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -78,8 +84,14 @@
     <ClCompile Include="EnemyComponent.cpp">
       <Filter>Fichiers sources\Components\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="TurtleComponent.cpp">
-      <Filter>Fichiers sources\Components\Enemy</Filter>
+    <ClCompile Include="InitialTurtle.cpp">
+      <Filter>Fichiers sources\Components\Enemy\Turtle</Filter>
+    </ClCompile>
+    <ClCompile Include="ShellTurtle.cpp">
+      <Filter>Fichiers sources\Components\Enemy\Turtle</Filter>
+    </ClCompile>
+    <ClCompile Include="TurtleContext.h">
+      <Filter>Fichiers d%27en-tête\Components\Enemy\Turtle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,14 +125,17 @@
     <ClInclude Include="EnemyComponent.h">
       <Filter>Fichiers d%27en-tête\Components\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="TurtleComponent.h">
-      <Filter>Fichiers d%27en-tête\Components\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="PiranhaComponent.h">
       <Filter>Fichiers d%27en-tête\Components\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="GoombaComponent.h">
       <Filter>Fichiers d%27en-tête\Components\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="InitialTurtle.h">
+      <Filter>Fichiers d%27en-tête\Components\Enemy\Turtle</Filter>
+    </ClInclude>
+    <ClInclude Include="ShellTurtle.h">
+      <Filter>Fichiers d%27en-tête\Components\Enemy\Turtle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

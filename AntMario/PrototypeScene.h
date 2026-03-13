@@ -101,7 +101,7 @@ public:
 
 		//add bonus in context
 
-		//all state
+		//ALL STATE :
 		LittleState* littleState = fsmPlayer->CreateState<LittleState>();
 		BigState* bigState = fsmPlayer->CreateState<BigState>();
 		FireState* fireState = fsmPlayer->CreateState<FireState>();
@@ -135,7 +135,7 @@ public:
 		piranha->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
 		piranha->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
 
-		
+		GameObject* turtle = CreateGameObject("Turtle", { 700, 720 })
 	};
 
 	void Update(float dt) override
