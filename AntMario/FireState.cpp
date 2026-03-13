@@ -29,14 +29,19 @@ void FireState::Execute(PlayerContext& p, float dt) {
 
 	InputModule* inputM = Engine::GetModule<InputModule>();
 
+	std::vector<GameObject*> fireballs = current->GetGameObjectsByName("Fireball");
 	if (inputM->Is(sf::Keyboard::Key::LShift, InputState::PRESSED)) {
-		GameObject* ball = current->CreateGameObject("fireball", { playerPos.x + 20 * direction, playerPos.y - 30 });
-		std::cout << "balls" << std::endl;
-		ball->AddComponent<SpriteRenderer>("Assets/fireball.png");
-		ball->AddComponent<SquareCollider>(sf::Vector2f(14.f, 14.f));
-		ball->AddComponent<FireComponent>();
-		VelocityComponent* veloBall = ball->AddComponent<VelocityComponent>(180.f);
-		veloBall->SetVelocity(sf::Vector2f(1.f, 0.f));
+		if (fireballs.size() < 2) {
+			GameObject* ball = current->CreateGameObject("Fireball", { playerPos.x + 20 * direction, playerPos.y - 30 });
+			std::cout << "balls" << std::endl;
+			ball->AddComponent<SpriteRenderer>("Assets/fireball.png");
+			float scale = 1.25f;
+			ball->GetTransform().scale = sf::Vector2f(scale, scale);
+			ball->AddComponent<SquareCollider>(sf::Vector2f(14.f * scale, 14.f * scale));
+			ball->AddComponent<FireComponent>();
+			VelocityComponent* veloBall = ball->AddComponent<VelocityComponent>(500.f);
+			veloBall->SetVelocity(sf::Vector2f(direction, 0.f));
+		}
 	}
 
 

@@ -91,6 +91,9 @@ void VelocityComponent::RegisterHit(std::string name, VelocityHitType hitType, s
 
 void VelocityComponent::ResolveCollisions(GameObject* other) {
 
+    if (other == owner)
+        return;
+    
     if (!other) return;
 
     auto collider = owner->GetComponent<SquareCollider>();

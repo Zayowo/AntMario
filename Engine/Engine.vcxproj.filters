@@ -102,6 +102,12 @@
     <ClInclude Include="FSMComponent.h">
       <Filter>Fichiers d%27en-tête\Components</Filter>
     </ClInclude>
+    <ClInclude Include="FSMComponent.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Fichiers d%27en-tête\State</Filter>
+    </ClInclude>
     <ClInclude Include="State.h">
       <Filter>Fichiers d%27en-tête\State</Filter>
     </ClInclude>
@@ -110,6 +116,7 @@
     </ClInclude>
     <ClInclude Include="VelocityHitType.h">
       <Filter>Fichiers d%27en-tête\Models</Filter>
+    </ClInclude>
     </ClInclude>
     <ClInclude Include="TilemapRenderer.h">
       <Filter>Fichiers d%27en-tête\Components</Filter>

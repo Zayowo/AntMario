@@ -168,6 +168,21 @@ public:
 		GameObject* gameController = CreateGameObject("GameController", { 0.f, 0.f });
 		gameController->AddComponent<GameController>();
 
+		// enemy
+		GameObject* goomba = CreateGameObject("Goomba", { 600, 700 });
+		goomba->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		goomba->AddComponent<GoombaComponent>();
+		goomba->AddComponent<VelocityComponent>(90.f);
+		goomba->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		goomba->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
+
+
+		GameObject* piranha = CreateGameObject("Piranha", { 700, 720 });
+		piranha->AddComponent<PiranhaComponent>();
+		piranha->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		piranha->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
+
+		
 	};
 
 	void Update(float dt) override
@@ -180,41 +195,6 @@ public:
 			sceneModule->PushScene("PauseScene");
 
 		Scene::Update(dt);
-
-		// déplacement des opponents vers la gauche seulement
-		auto _opponent1 = GetGameObjectsByName("opponent1");
-		if (_opponent1.size() == 0);
-		else if (auto opponent1 = _opponent1[0])
-		{
-			VelocityComponent* vel = opponent1->GetComponent<VelocityComponent>();
-			vel->SetX(-1.f); // Direction seulement vers la gauche
-		}
-
-		auto _opponent2 = GetGameObjectsByName("opponent2");
-		if (_opponent2.size() == 0);
-		else if (auto opponent2 = _opponent2[0])
-		{
-			VelocityComponent* vel = opponent2->GetComponent<VelocityComponent>();
-			vel->SetX(-1.f); // Direction seulement vers la gauche
-		}
-
-		auto _opponent3 = GetGameObjectsByName("opponent3");
-		if (_opponent3.size() == 0);
-		else if (auto opponent3 = _opponent3[0])
-		{
-			static float timer = 0.f;
-			static bool goingDown = true;
-
-			timer += dt;
-
-			if (timer >= 3.f) // Change de direction toutes les 3 secondes
-			{
-				goingDown = !goingDown;
-				timer = 0.f;
-			}
-			opponent3->GetComponent <VelocityComponent>()->SetY(goingDown ? 1.f : -1.f);
-		}
-
 
 	}
 
