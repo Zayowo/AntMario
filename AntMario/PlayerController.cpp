@@ -3,7 +3,9 @@
 #include <GameObject.h>
 #include <InputModule.h>
 #include <ResourceModule.h>
+#include <TimeModule.h>
 #include <VelocityComponent.h>
+#include <SpriteRenderer.h>
 #include <SquareCollider.h>
 #include "PlayerController.h"
 #include "BonusComponent.h"
@@ -25,6 +27,7 @@ void PlayerController::Init()
 
 	velocityComponent->RegisterHit("Block", VelocityHitType::BOTTOM, [this](GameObject* block) { HitInteractableBlock(block); });
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::TOP, [this](GameObject* goomba) { StepOnGoomba(goomba);  });
+	velocityComponent->RegisterHit("ReverseWalk", VelocityHitType::BOTTOM, [this](GameObject* block) { WalkUpsideDown(block); });
 
 
 	// Gestion du collider
@@ -32,6 +35,7 @@ void PlayerController::Init()
 	if (!collider) std::cerr << "PlayerController: No SquareCollider detected!" << std::endl;
 
 	collider->RegisterCallback("Bonus", [this](GameObject* coins) { PickUp(coins); });
+	collider->RegisterCallback("BloodOrb", [this](GameObject* orb) { PickUp(orb); });
 
 }
 
@@ -59,15 +63,19 @@ void PlayerController::Update(float dt)
 		if (velocityComponent->IsGrounded())
 		{
 			isDoubleJump = false;
-			//Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.f);
+			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.f);
 			velocityComponent->SetY(-840.f);
 		}
 
-		else if (!isDoubleJump)
+		else if (
+			!isDoubleJump &&
+			gameController->GetEnergy() >= 2.5f
+		)
 		{
 
 			isDoubleJump = true;
-			//Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.25f);
+			gameController->SetEnergy(gameController->GetEnergy() - 2.5f, 100.f);
+			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.25f);
 			velocityComponent->SetY(-840.f);
 
 		}
@@ -127,6 +135,11 @@ void PlayerController::PickUp(GameObject* bonus)
 		Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Coin.wav", 0.75f, 1.f);
 		std::cout << "Player picked up coins!" << std::endl;
 		break;
+
+	case (BonusType::BLOOD_ORB):
+		gameController->SetEnergy(gameController->GetEnergy() + 5.f, 100.f);
+		std::cout << "Player picked up a blood orb!" << std::endl;
+		break;
 	}
 
 	bonus->GetScene()->DeleteGameObject(bonus);
@@ -136,8 +149,29 @@ void PlayerController::PickUp(GameObject* bonus)
 void PlayerController::StepOnGoomba(GameObject* goomba)
 {
 
+	sf::Vector2f pos = goomba->GetTransform().pos + sf::Vector2f(0.f, -20.f);
+	GameObject* orb = goomba->GetScene()->CreateGameObject("BloodOrb", pos);
+	orb->AddComponent<SpriteRenderer>("Assets/BloodOrb.png");
+	orb->AddComponent<SquareCollider>(sf::Vector2f(20.f, 20.f));
+	orb->AddComponent<BonusComponent>(BonusType::BLOOD_ORB);
+
 	goomba->GetScene()->DeleteGameObject(goomba);
-	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
-	velocityComponent->SetY(-450.f);
+
+	velocityComponent->SetY(-400.f);
+
+}
+
+void PlayerController::WalkUpsideDown(GameObject* block)
+{
+
+	if (gameController->GetEnergy() <= 0.f)
+		return;
+
+	if (isDoubleJump)
+		return;
+
+	float dt = Engine::GetModule<TimeModule>()->GetDeltaTime();
+	gameController->SetEnergy(gameController->GetEnergy() - 5 * dt, 100.f);
+	velocityComponent->SetY(-10.f);
 
 }

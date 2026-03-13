@@ -27,7 +27,7 @@ private:
 	// Valeurs du HUD
 	int coins = 0;
 	int lives = 3;
-	float energy = 100.0f;
+	float energy = 0.0f;
 	float maxEnergy = 100.0f;
 	float totalTime = 0.0f;
 

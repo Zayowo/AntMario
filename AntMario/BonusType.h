@@ -1,10 +1,13 @@
 #pragma once
 
+// Les types de bonus disponibles dans le jeu
 enum class BonusType
 {
-	COINS, //Pièces à collectionner
-	Bonus1, //Bonus qui rend le joueur invincible sur un coup
-	Bonus2, //Bonus qui rend le joueur grand  
-	Bonus3 //Bonus permettant au joueur de lancer des projectiles
+
+	COINS,
+	BLOOD_ORB,
+	Bonus1,
+	Bonus2,
+	Bonus3
 
 };

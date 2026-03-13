@@ -29,7 +29,7 @@ public:
 	PrototypeScene()
 	{
 
-		std::ifstream file("Assets/Level/AntLevel_9.json");
+		std::ifstream file("Assets/Level/AntLevel_10.json");
 		json data;
 		file >> data;
 
@@ -104,6 +104,17 @@ public:
 					}
 				}
 			}
+			else if (tileType == "REVERSE_WALK") {
+				for (int i = 0; i < (int)width; i++) {
+					for (int j = 0; j < (int)height; j++) {
+						GameObject* block = CreateGameObject("ReverseWalk", { xPos + i * gridSize, yPos + j * gridSize });
+						block->GetTransform().origin = { 0.f, 0.f };
+						block->AddComponent<SquareCollider>(sf::Vector2f(gridSize, gridSize));
+						block->AddComponent<SpriteRenderer>("Assets/Environment/ReverseWalk.png");
+					}
+				}
+			}
+
 			else if (tileType == "COINS") {
 				for (int i = 0; i < (int)width; i++) {
 					for (int j = 0; j < (int)height; j++) {
@@ -146,13 +157,13 @@ public:
 			terrainPhysic->AddComponent<SquareCollider>(sf::Vector2f(cw, ch));
 		}
 
-		GameObject* player = CreateGameObject("Player", { 150, 700 });
+		GameObject* player = CreateGameObject("Player", { 500, 700 });
 		player->GetTransform().scale = sf::Vector2f(0.55f, 0.55f);
 		player->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
 		player->AddComponent<FixedCameraComponent>(sf::Vector2f(1000.f, 666.f), 500.f, levelWidth - 500.f);
 		player->AddComponent<SpriteRenderer>("Assets/Player.png");
 		player->AddComponent<PlayerController>();
-		player->AddComponent<VelocityComponent>(220.f);
+		player->AddComponent<VelocityComponent>(200.f);
 		player->AddComponent<SquareCollider>(sf::Vector2f(50.f, 135.f));
 
 		GameObject* gameController = CreateGameObject("GameController", { 0.f, 0.f });

@@ -18,6 +18,9 @@ public:
 	// Écrase un goomba
 	void StepOnGoomba(GameObject* goomba);
 
+	// Marche à l'envers sur un block "ReverseWalk"
+	void WalkUpsideDown(GameObject* block);
+
 private:
 	bool isDoubleJump = false;
 	InputModule* inputModule;

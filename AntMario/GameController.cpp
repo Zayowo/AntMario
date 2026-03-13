@@ -15,25 +15,25 @@ void GameController::Init()
 
 	// Texte des vies
 	livesText = new sf::Text(font, "", 24);
-	livesText->setFillColor(sf::Color::Red);
-	livesText->setPosition(sf::Vector2f(UI_OFFSET_X, UI_OFFSET_Y + ELEMENT_SPACING));
+	//livesText->setFillColor(sf::Color::Red);
+	//livesText->setPosition(sf::Vector2f(UI_OFFSET_X, UI_OFFSET_Y + ELEMENT_SPACING));
 
 	// Texte du chronomètre
 	timerText = new sf::Text(font, "", 24);
-	timerText->setFillColor(sf::Color::White);
-	timerText->setPosition(sf::Vector2f(UI_OFFSET_X, UI_OFFSET_Y + ELEMENT_SPACING * 2));
+	//timerText->setFillColor(sf::Color::White);
+	//timerText->setPosition(sf::Vector2f(UI_OFFSET_X, UI_OFFSET_Y + ELEMENT_SPACING * 2));
 
 	// Barre d'énergie - fond
 	energyBarBackground.setSize(sf::Vector2f(ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT));
 	energyBarBackground.setFillColor(sf::Color::Black);
 	energyBarBackground.setOutlineThickness(2.0f);
 	energyBarBackground.setOutlineColor(sf::Color::White);
-	energyBarBackground.setPosition(sf::Vector2f(UI_OFFSET_X, UI_OFFSET_Y + ELEMENT_SPACING * 3));
+	energyBarBackground.setPosition(sf::Vector2f(UI_OFFSET_X, UI_OFFSET_Y + ELEMENT_SPACING));
 
 	// Barre d'énergie - valeur
 	energyBar.setSize(sf::Vector2f(ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT));
 	energyBar.setFillColor(sf::Color::Green);
-	energyBar.setPosition(sf::Vector2f(UI_OFFSET_X, UI_OFFSET_Y + ELEMENT_SPACING * 3));
+	energyBar.setPosition(sf::Vector2f(UI_OFFSET_X, UI_OFFSET_Y + ELEMENT_SPACING ));
 }
 
 void GameController::Update(float dt)
@@ -75,8 +75,8 @@ void GameController::Render(sf::RenderWindow* window)
 
 	// Dessiner les éléments du HUD
 	window->draw(*coinsText);
-	window->draw(*livesText);
-	window->draw(*timerText);
+	//window->draw(*livesText);
+	//window->draw(*timerText);
 	window->draw(energyBarBackground);
 	window->draw(energyBar);
 
