@@ -10,3 +10,12 @@ bool IsLoaded(GameObject* gameObject)
 	return abs(gameObject->GetTransform().pos.x - ref_renderWindow->getView().getCenter().x) < 1000.f;
 
 }
+
+void LogPrint(std::string message)
+{
+
+#ifdef _DEBUG
+	std::cout << message << std::endl;
+#endif // _DEBUG
+
+}

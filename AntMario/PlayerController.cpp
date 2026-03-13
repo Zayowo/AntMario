@@ -10,6 +10,7 @@
 #include "PlayerController.h"
 #include "BonusComponent.h"
 #include "InteractableBlockComponent.h"
+#include "Utils.h"
 
 void PlayerController::Init()
 {
@@ -105,13 +106,13 @@ void PlayerController::HitInteractableBlock(GameObject* block)
 		gameController->SetCoins(gameController->GetCoins() + 1);
 		Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Coin.wav", 0.75f, 1.f);
 		blockComponent->SetUsed(true);
-		std::cout << "Player hit a coins block!" << std::endl;
+		LogPrint("Player hit a coins block!");
 		break;
 
 	case (InteractableBlockType::BRICK):
 		Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Brick.wav", 0.75f, 1.f);
 		block->GetScene()->DeleteGameObject(block);
-		std::cout << "Player hit a brick block!" << std::endl;
+		LogPrint("Player hit a brick block!");
 		break;
 
 	default:
@@ -133,12 +134,12 @@ void PlayerController::PickUp(GameObject* bonus)
 	case (BonusType::COINS):
 		gameController->SetCoins(gameController->GetCoins() + 1);
 		Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Coin.wav", 0.75f, 1.f);
-		std::cout << "Player picked up coins!" << std::endl;
+		LogPrint("Player picked up coins!");
 		break;
 
 	case (BonusType::BLOOD_ORB):
 		gameController->SetEnergy(gameController->GetEnergy() + 5.f, 100.f);
-		std::cout << "Player picked up a blood orb!" << std::endl;
+		LogPrint("Player picked up a blood orb!");
 		break;
 	}
 
