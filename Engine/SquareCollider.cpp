@@ -37,11 +37,6 @@ void SquareCollider::Update(float dt)
 	if (!scene)
 		return;
 
-	sf::RenderWindow* window = Engine::GetModule<WindowModule>()->GetRenderWindow();
-
-	if (abs(owner->GetTransform().pos.x - window->getView().getCenter().x) > 1000.f)
-		return;
-
 	for (auto [name, callbacks] : collisionCallbackMap)
 	{
 

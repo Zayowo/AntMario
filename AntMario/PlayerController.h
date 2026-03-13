@@ -15,6 +15,9 @@ public:
 	// Récupère un bonus
 	void PickUp(GameObject* bonus);
 
+	// Écrase un goomba
+	void StepOnGoomba(GameObject* goomba);
+
 private:
 	bool isDoubleJump = false;
 	GameController* gameController;

@@ -17,6 +17,8 @@
 #include "GameController.h"
 #include "Oppenent.h"
 #include "Bonus.h"
+#include "GoombaComponent.h"
+#include "PiranhaComponent.h"
 
 using json = nlohmann::json;
 
@@ -27,7 +29,7 @@ public:
 	PrototypeScene()
 	{
 
-		std::ifstream file("Assets/Level/AntLevel_8.json");
+		std::ifstream file("Assets/Level/AntLevel_9.json");
 		json data;
 		file >> data;
 
@@ -36,43 +38,19 @@ public:
 
 		GameObject* sky = CreateGameObject("Sky", { 600, 600 });
 		sky->GetTransform().scale = sf::Vector2f(2.4f, 2.f);
+		sky->SetIsAlwaysLoaded(true);
 		sky->AddComponent<BackgroundElement>("Assets/Environment/Background.png", 1.f, sf::Vector2f(-900.f, 0.f));
 
 		GameObject* sky1 = CreateGameObject("Sky", { 600, 600 });
 		sky1->GetTransform().scale = sf::Vector2f(2.4f, 2.f);
+		sky1->SetIsAlwaysLoaded(true);
 		sky1->AddComponent<BackgroundElement>("Assets/Environment/Background.png", 1.f, sf::Vector2f(-300.f, 0.f));
 
-		//GameObject* opponent1 = CreateGameObject("opponent1", { 200, 700 });
-		//opponent1->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
-		//opponent1->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
-		//opponent1->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
-		//opponent1->AddComponent<VelocityComponent>(260.f);
-		//opponent1->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
-
-		//GameObject* opponent2 = CreateGameObject("opponent2", { 250, 700 });
-		//opponent2->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
-		//opponent2->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
-		//opponent2->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
-		//opponent2->AddComponent<VelocityComponent>(260.f);
-		//opponent2->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
-
-		//GameObject* opponent3 = CreateGameObject("opponent3", { 300, 700 });
-		//opponent3->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
-		//opponent3->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
-		//opponent3->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
-		//opponent3->AddComponent<VelocityComponent>(260.f);
-		//opponent3->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
-
-		// 1. INITIALISATION DU TILEMAP
-		// On crée un seul GameObject pour TOUT le décor statique
 		GameObject* tilemapObject = CreateGameObject("LevelTilemap", { 0.f, 0.f });
 		tilemapObject->GetTransform().origin = { 0.f, 0.f };
-
-		// On ajoute le composant TilemapRenderer (on passe la texture et la taille d'une tuile)
-		// On suppose ici que le niveau fait 500x50 tuiles max, à ajuster selon tes besoins
+		tilemapObject->SetIsAlwaysLoaded(true);
 		TilemapRenderer* tilemap = tilemapObject->AddComponent<TilemapRenderer>("Assets/Environment/Tileset.png", sf::Vector2u(gridSize, gridSize), 500, 50);
 
-		// 2. PHASE DE LECTURE DES DONNÉES
 		for (const auto& tile : data["tiles"]) {
 			std::string tileType = tile["type"];
 			float xPos = tile["x"].get<float>() * gridSize;
@@ -81,7 +59,6 @@ public:
 			float height = tile["h"].get<float>();
 			int g = (int)gridSize;
 
-			// --- CAS DU TERRAIN ---
 			if (tileType.find("T_") == 0 || tileType == "TERRAIN") {
 
 				sf::Vector2i uvCoords;
@@ -100,13 +77,11 @@ public:
 					for (int iy = 0; iy < (int)height; iy++) {
 						int gridX = (int)tile["x"].get<float>() + ix;
 						int gridY = (int)tile["y"].get<float>() + iy;
-
-						// Utilisation de la nouvelle méthode SetTile
 						tilemap->SetTile(gridX, gridY, uvCoords);
 					}
 				}
 			}
-			// --- CAS DES OBJETS INTERACTIFS ---
+
 			else if (tileType == "BRICK") {
 				for (int i = 0; i < (int)width; i++) {
 					for (int j = 0; j < (int)height; j++) {
@@ -142,6 +117,21 @@ public:
 					}
 				}
 			}
+			else if (tileType == "GOOMBA") {
+				for (int i = 0; i < (int)width; i++) {
+					for (int j = 0; j < (int)height; j++) {
+						float finalX = xPos + (i * gridSize) + gridSize * 0.5f;
+						float finalY = yPos + (j * gridSize) + gridSize * 0.5f;
+
+						GameObject* goomba = CreateGameObject("Goomba", { finalX, finalY });
+						goomba->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+						goomba->AddComponent<GoombaComponent>();
+						goomba->AddComponent<SpriteRenderer>("Assets/Goomba.png");
+						goomba->AddComponent<VelocityComponent>(90.f);
+						goomba->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
+					}
+				}
+			}
 		}
 
 		// 3. PHASE PHYSIQUE
@@ -167,21 +157,7 @@ public:
 
 		GameObject* gameController = CreateGameObject("GameController", { 0.f, 0.f });
 		gameController->AddComponent<GameController>();
-
-		// enemy
-		GameObject* goomba = CreateGameObject("Goomba", { 600, 700 });
-		goomba->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
-		goomba->AddComponent<GoombaComponent>();
-		goomba->AddComponent<VelocityComponent>(90.f);
-		goomba->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
-		goomba->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
-
-
-		GameObject* piranha = CreateGameObject("Piranha", { 700, 720 });
-		piranha->AddComponent<PiranhaComponent>();
-		piranha->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
-		piranha->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
-
+		gameController->SetIsAlwaysLoaded(true);
 		
 	};
 

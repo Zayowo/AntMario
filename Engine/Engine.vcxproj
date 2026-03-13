@@ -157,6 +157,7 @@
     <ClInclude Include="TimeModule.h" />
     <ClInclude Include="ModuleManager.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Utils.h" />
     <ClInclude Include="VelocityComponent.h" />
     <ClInclude Include="VelocityHitType.h" />
     <ClInclude Include="WindowModule.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="TilemapRenderer.cpp" />
     <ClCompile Include="TimeModule.cpp" />
     <ClCompile Include="ModuleManager.cpp" />
+    <ClCompile Include="Utils.cpp" />
     <ClCompile Include="VelocityComponent.cpp" />
     <ClCompile Include="WindowModule.cpp" />
   </ItemGroup>

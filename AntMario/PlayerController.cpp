@@ -17,6 +17,7 @@ void PlayerController::Init()
 
 	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
 	velocityComponent->RegisterHit("Block", VelocityHitType::BOTTOM, [this](GameObject* block) { HitInteractableBlock(block); });
+	velocityComponent->RegisterHit("Goomba", VelocityHitType::TOP, [this](GameObject* goomba) { StepOnGoomba(goomba);  });
 
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
 	collider->RegisterCallback("Bonus", [this](GameObject* coins) { PickUp(coins); });
@@ -119,5 +120,14 @@ void PlayerController::PickUp(GameObject* bonus)
 	}
 
 	bonus->GetScene()->DeleteGameObject(bonus);
+
+}
+
+void PlayerController::StepOnGoomba(GameObject* goomba)
+{
+
+	goomba->GetScene()->DeleteGameObject(goomba);
+	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
+	velocityComponent->SetY(-450.f);
 
 }
