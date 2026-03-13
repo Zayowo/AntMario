@@ -17,6 +17,9 @@ public:
 
 private:
 	bool isDoubleJump = false;
+	InputModule* inputModule;
 	GameController* gameController;
+	VelocityComponent* velocityComponent;
+	SquareCollider* collider;
 
 };

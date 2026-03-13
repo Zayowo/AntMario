@@ -12,13 +12,24 @@
 void PlayerController::Init()
 {
 
+	inputModule = Engine::GetModule<InputModule>();
+	if (!inputModule) std::cerr << "PlayerController: No InputModule detected!" << std::endl;
+
 	// À éviter, mais c'est temporaire...
 	gameController = owner->GetScene()->GetGameObjectsByName("GameController")[0]->GetComponent<GameController>();
 
-	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
+
+	// Gestion du velocity
+	velocityComponent = owner->GetComponent<VelocityComponent>();
+	if (!velocityComponent) std::cerr << "PlayerController: No VelocityComponent detected!" << std::endl;
+
 	velocityComponent->RegisterHit("Block", VelocityHitType::BOTTOM, [this](GameObject* block) { HitInteractableBlock(block); });
 
-	SquareCollider* collider = owner->GetComponent<SquareCollider>();
+
+	// Gestion du collider
+	collider = owner->GetComponent<SquareCollider>();
+	if (!collider) std::cerr << "PlayerController: No SquareCollider detected!" << std::endl;
+
 	collider->RegisterCallback("Bonus", [this](GameObject* coins) { PickUp(coins); });
 
 }
@@ -27,7 +38,6 @@ void PlayerController::Update(float dt)
 {
 
 	InputModule* inputModule = Engine::GetModule<InputModule>();
-	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
 	Transform& transform = owner->GetTransform();
 
 	float velocityX = 0.f;
