@@ -144,6 +144,7 @@
     <ClCompile Include="GoombaComponent.cpp" />
     <ClCompile Include="LittleState.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PiranhaComponent.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerContext.cpp" />
   </ItemGroup>
@@ -162,6 +163,7 @@
     <ClInclude Include="GoombaComponent.h" />
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="PauseScene.h" />
+    <ClInclude Include="PiranhaComponent.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PrototypeScene.h" />
   </ItemGroup>

@@ -66,6 +66,9 @@
     <ClCompile Include="Bonus.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="PiranhaComponent.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PrototypeScene.h">
@@ -96,6 +99,9 @@
       <Filter>Fichiers d%27en-tête\PlayerState</Filter>
     </ClInclude>
     <ClInclude Include="FireComponent.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="PiranhaComponent.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

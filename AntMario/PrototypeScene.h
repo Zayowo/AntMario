@@ -18,6 +18,7 @@
 #include "BigState.h"
 #include "FireState.h"
 #include "Condition.h"
+#include "PiranhaComponent.h"
 
 using json = nlohmann::json;
 
@@ -127,6 +128,13 @@ public:
 		goomba->AddComponent<VelocityComponent>(90.f);
 		goomba->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
 		goomba->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
+
+
+		GameObject* piranha = CreateGameObject("Piranha", { 700, 720 });
+		piranha->AddComponent<PiranhaComponent>();
+		piranha->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		goomba->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
+
 		
 	};
 
