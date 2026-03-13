@@ -133,7 +133,7 @@ public:
 		GameObject* piranha = CreateGameObject("Piranha", { 700, 720 });
 		piranha->AddComponent<PiranhaComponent>();
 		piranha->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
-		goomba->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
+		piranha->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
 
 		
 	};

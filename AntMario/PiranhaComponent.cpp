@@ -8,8 +8,8 @@ void PiranhaComponent::Init() {
 	yOrigin = owner->GetTransform().pos.y;
 
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
-
-	collider->RegisterCallback("Fireball", [this](GameObject* o) { TouchByBall(o); });
+	collider->RegisterCallback("Fireball", [this](GameObject* o) { 
+		TouchByBall(o); });
 
 }
 
@@ -49,7 +49,6 @@ void PiranhaComponent::Update(float dt)
 }
 
 void PiranhaComponent::TouchByBall(GameObject* other) {
-	std::cout << "test" << std::endl;
-	other->GetScene()->DeleteGameObject(other);
 	owner->GetScene()->DeleteGameObject(owner);
 }
+

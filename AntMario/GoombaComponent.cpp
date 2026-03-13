@@ -18,7 +18,6 @@ void GoombaComponent::Update(float dt)
 
 
 void GoombaComponent::TouchByBall(GameObject* other) {
-	other->GetScene()->DeleteGameObject(other);
 	owner->GetScene()->DeleteGameObject(owner);
 }
 
