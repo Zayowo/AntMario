@@ -21,6 +21,11 @@ void PlayerController::Init()
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
 	collider->RegisterCallback("Bonus", [this](GameObject* coins) { PickUp(coins); });
 
+
+	// Ajout des collisions entre les oppenents et le joueur
+	collider->RegisterCallback("opponent1", [this](GameObject* other) { BreakBrick(other); });
+	collider->RegisterCallback("opponent2", [this](GameObject* other) { BreakBrick(other); });
+	collider->RegisterCallback("opponent3", [this](GameObject* other) { BreakBrick(other); });
 }
 
 void PlayerController::Update(float dt)
