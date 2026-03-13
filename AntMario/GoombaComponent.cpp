@@ -4,9 +4,9 @@
 #include <Scene.h>
 
 void GoombaComponent::Init() {
-
+	//recupere les initialisation en commun
+	EnemyComponent::Init();
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
-	collider->RegisterCallback("Fireball", [this](GameObject* o) { TouchByBall(o); });
 	
 }
 
@@ -16,10 +16,6 @@ void GoombaComponent::Update(float dt)
 	velocity->SetX(-1.f);
 }
 
-
-void GoombaComponent::TouchByBall(GameObject* other) {
-	owner->GetScene()->DeleteGameObject(owner);
-}
 
 void GoombaComponent::StepByPlayer(GameObject* other)
 {

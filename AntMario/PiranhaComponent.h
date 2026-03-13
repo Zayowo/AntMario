@@ -1,12 +1,11 @@
 #pragma once
-#include <Component.h>
+#include "EnemyComponent.h"
 
-class PiranhaComponent : public Component
+class PiranhaComponent : public EnemyComponent
 {
 private:
 	void Init() override;
 	void Update(float dt) override;
-	void TouchByBall(GameObject* o);
 
 	float max = 60.f;
 	float y = 0.f;

@@ -1,13 +1,11 @@
 #pragma once
-#include <Component.h>
+#include "EnemyComponent.h"
 
 //need SquareCollider in the owner
-class GoombaComponent : public Component
+class GoombaComponent : public EnemyComponent
 {
 	void Init() override;
 	void Update(float dt) override;
-
-	void TouchByBall(GameObject* other);
 	void StepByPlayer(GameObject* other);
 
 };

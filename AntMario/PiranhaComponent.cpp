@@ -3,13 +3,11 @@
 #include <Scene.h>
 
 void PiranhaComponent::Init() {
+	//recupere les initialisation en commun
+	EnemyComponent::Init();
 	// position au sol + offset ?
 	owner->GetTransform().origin = { 0.f, 0.f };
 	yOrigin = owner->GetTransform().pos.y;
-
-	SquareCollider* collider = owner->GetComponent<SquareCollider>();
-	collider->RegisterCallback("Fireball", [this](GameObject* o) { 
-		TouchByBall(o); });
 
 }
 
@@ -46,9 +44,5 @@ void PiranhaComponent::Update(float dt)
 		}
 
 	}
-}
-
-void PiranhaComponent::TouchByBall(GameObject* other) {
-	owner->GetScene()->DeleteGameObject(owner);
 }
 
