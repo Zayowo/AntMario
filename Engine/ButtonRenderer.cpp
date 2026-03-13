@@ -22,11 +22,11 @@ void ButtonRenderer::Update(float dt)
 {
 
 	Transform& transform = owner->GetTransform();
-	sprite->setPosition(transform.GetViewRelativePos());
+	sprite->setPosition(transform.pos);
 	sprite->setRotation(sf::degrees(transform.rot));
 	sprite->setScale(transform.scale);
 
-	text->setPosition(transform.GetViewRelativePos() - sf::Vector2f(0.f, 1.5f));
+	text->setPosition(transform.pos - sf::Vector2f(0.f, 1.5f));
 	text->setRotation(sf::degrees(transform.rot));
 	text->setScale(transform.scale);
 	text->setOrigin(text->getLocalBounds().size * 0.5f);

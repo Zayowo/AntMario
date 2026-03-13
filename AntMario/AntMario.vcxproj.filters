@@ -75,6 +75,9 @@
     <ClCompile Include="GameController.cpp">
       <Filter>Fichiers sources\Components</Filter>
     </ClCompile>
+    <ClCompile Include="InteractableBlockComponent.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PrototypeScene.h">
@@ -115,6 +118,12 @@
     </ClInclude>
     <ClInclude Include="GameController.h">
       <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractableBlockComponent.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractableBlockType.h">
+      <Filter>Fichiers d%27en-tête\Models</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

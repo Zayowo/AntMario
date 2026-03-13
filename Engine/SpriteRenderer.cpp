@@ -42,6 +42,13 @@ void SpriteRenderer::Render(sf::RenderWindow* window)
 
 }
 
+void SpriteRenderer::SetTextureRect(sf::IntRect rect)
+{
+
+	sprite->setTextureRect(rect);
+
+}
+
 void SpriteRenderer::SetTiling(sf::Vector2f size, bool isTiled)
 {
 
@@ -57,5 +64,15 @@ void SpriteRenderer::SetAnimationRule(const SpriteAnimationRule animationRule)
 
 	_animationRule = std::make_optional(animationRule);
 	animationTime = 0.f;
+
+}
+
+void SpriteRenderer::SetTexture(std::string path)
+{
+
+	this->path = path;
+	ResourceModule* resourceModule = Engine::GetModule<ResourceModule>();
+	sf::Texture& texture = resourceModule->GetTexture(path);
+	sprite->setTexture(texture);
 
 }

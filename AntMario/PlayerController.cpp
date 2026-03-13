@@ -7,6 +7,7 @@
 #include <SquareCollider.h>
 #include "PlayerController.h"
 #include "BonusComponent.h"
+#include "InteractableBlockComponent.h"
 
 void PlayerController::Init()
 {
@@ -15,10 +16,10 @@ void PlayerController::Init()
 	gameController = owner->GetScene()->GetGameObjectsByName("GameController")[0]->GetComponent<GameController>();
 
 	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
-	velocityComponent->RegisterHit("Brick", VelocityHitType::BOTTOM, [this](GameObject* brick) { BreakBrick(brick); });
+	velocityComponent->RegisterHit("Block", VelocityHitType::BOTTOM, [this](GameObject* block) { HitInteractableBlock(block); });
 
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
-	collider->RegisterCallback("Coins", [this](GameObject* coin) { PickUp(coin); });
+	collider->RegisterCallback("Bonus", [this](GameObject* coins) { PickUp(coins); });
 
 }
 
@@ -67,11 +68,36 @@ void PlayerController::Update(float dt)
 
 }
 
-void PlayerController::BreakBrick(GameObject* brick)
+void PlayerController::HitInteractableBlock(GameObject* block)
 {
 
-	Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Brick.wav", 0.75f, 1.f);
-	brick->GetScene()->DeleteGameObject(brick);
+	InteractableBlockComponent* blockComponent = block->GetComponent<InteractableBlockComponent>();
+
+	if (!blockComponent)
+		return;
+
+	if (blockComponent->IsUsed())
+		return;
+
+	switch (blockComponent->GetType())
+	{
+	case (InteractableBlockType::COINS):
+
+		gameController->SetCoins(gameController->GetCoins() + 1);
+		Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Coin.wav", 0.75f, 1.f);
+		blockComponent->SetUsed(true);
+		std::cout << "Player hit a coins block!" << std::endl;
+		break;
+
+	case (InteractableBlockType::BRICK):
+		Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Brick.wav", 0.75f, 1.f);
+		block->GetScene()->DeleteGameObject(block);
+		std::cout << "Player hit a brick block!" << std::endl;
+		break;
+
+	default:
+		break;
+	}
 
 }
 

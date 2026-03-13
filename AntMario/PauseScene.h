@@ -28,4 +28,25 @@ public:
 
 	};
 
+	void Update(float dt)
+	{
+
+		sf::RenderWindow* window = Engine::GetModule<WindowModule>()->GetRenderWindow();
+		sf::View currentView = window->getView();
+		window->setView(window->getDefaultView());
+		Scene::Update(dt);
+		window->setView(currentView);
+
+	}
+
+	void Render(sf::RenderWindow* window)
+	{
+
+		sf::View currentView = window->getView();
+		window->setView(window->getDefaultView());
+		Scene::Render(window);
+		window->setView(currentView);
+
+	}
+
 };

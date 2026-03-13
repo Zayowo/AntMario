@@ -13,14 +13,15 @@ void VelocityComponent::Init()
 	if (!collider)
 		return;
 
-	collider->RegisterCallback("Collider", [this](GameObject* other) { ResolveCollisions(other); });
-    collider->RegisterCallback("Brick", [this](GameObject* other) { ResolveCollisions(other); });
+	collider->RegisterCallback("Terrain", [this](GameObject* other) { ResolveCollisions(other); });
+    collider->RegisterCallback("Block", [this](GameObject* other) { ResolveCollisions(other); });
 
 }
 
 void VelocityComponent::Update(float dt)
 {
 
+    // C'est moche, mais c'est comme ça j'imagine...
     if (velocity.y < 0.f || velocity.y > 6.5f)
         isGrounded = false;
 

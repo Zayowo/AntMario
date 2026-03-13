@@ -144,6 +144,7 @@
     <ClCompile Include="FireState.cpp" />
     <ClCompile Include="GoombaComponent.cpp" />
     <ClCompile Include="GameController.cpp" />
+    <ClCompile Include="InteractableBlockComponent.cpp" />
     <ClCompile Include="LittleState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PlayerController.cpp" />
@@ -165,6 +166,8 @@
     <ClInclude Include="FireState.h" />
     <ClInclude Include="GameController.h" />
     <ClInclude Include="GoombaComponent.h" />
+    <ClInclude Include="InteractableBlockComponent.h" />
+    <ClInclude Include="InteractableBlockType.h" />
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="PauseScene.h" />
     <ClInclude Include="PlayerController.h" />

@@ -9,8 +9,8 @@ public:
 	void Init()override;
 	void Update(float dt) override;
 	
-	// Casse une brick
-	void BreakBrick(GameObject* brick);
+	// Collision avec un block intéragissable
+	void HitInteractableBlock(GameObject* block);
 
 	// Récupère un bonus
 	void PickUp(GameObject* bonus);
