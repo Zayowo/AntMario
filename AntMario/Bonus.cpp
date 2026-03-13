@@ -6,7 +6,7 @@ sf::Color Bonus::getColorForType(BonusType type)
 {
     switch (type)
     {
-    case BonusType ::Coins:
+    case BonusType ::COINS:
         return sf::Color(255, 255, 0);     // Yellow
     case BonusType::Bonus1:
         return sf::Color(100, 200, 255);  // Bleu clair

@@ -24,9 +24,10 @@ void Oppenent::update(float oppenentX, float oppenentY)
     switch (type)
     {
     case OppenenType::oppenent1: // FACILE - SUIVI SIMPLE
-    {
+    
         float speed = 0.5f;
         x -= speed; // Se déplace uniquement vers la gauche
         break;
     }
+    
 }

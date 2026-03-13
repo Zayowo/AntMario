@@ -21,11 +21,6 @@ void PlayerController::Init()
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
 	collider->RegisterCallback("Bonus", [this](GameObject* coins) { PickUp(coins); });
 
-
-	// Ajout des collisions entre les oppenents et le joueur
-	collider->RegisterCallback("opponent1", [this](GameObject* other) { BreakBrick(other); });
-	collider->RegisterCallback("opponent2", [this](GameObject* other) { BreakBrick(other); });
-	collider->RegisterCallback("opponent3", [this](GameObject* other) { BreakBrick(other); });
 }
 
 void PlayerController::Update(float dt)
@@ -53,7 +48,7 @@ void PlayerController::Update(float dt)
 		if (velocityComponent->IsGrounded())
 		{
 			isDoubleJump = false;
-			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.f);
+			//Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.f);
 			velocityComponent->SetY(-840.f);
 		}
 
@@ -61,7 +56,7 @@ void PlayerController::Update(float dt)
 		{
 
 			isDoubleJump = true;
-			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.25f);
+			//Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.25f);
 			velocityComponent->SetY(-840.f);
 
 		}
