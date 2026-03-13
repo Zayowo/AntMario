@@ -48,4 +48,10 @@ bool Condition::collitionWithBigBonus(PlayerContext& p)
 	return false;
 }
 
+bool Condition::collisionWithPlayer(TurtleContext& t)
+{
+	t.turtle->GetComponent<SquareCollider>();
+	return false;
+}
+
 

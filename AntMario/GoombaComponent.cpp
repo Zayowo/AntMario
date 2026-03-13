@@ -12,8 +12,7 @@ void GoombaComponent::Init() {
 
 void GoombaComponent::Update(float dt)
 {
-	VelocityComponent* velocity = owner->GetComponent<VelocityComponent>();
-	velocity->SetX(-1.f);
+	EnemyComponent::Move();
 }
 
 

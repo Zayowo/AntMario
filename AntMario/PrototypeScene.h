@@ -19,6 +19,9 @@
 #include "FireState.h"
 #include "Condition.h"
 #include "PiranhaComponent.h"
+#include "TurtleContext.h"
+#include "InitialTurtle.h"
+#include "ShellTurtle.h"
 
 using json = nlohmann::json;
 
@@ -135,7 +138,24 @@ public:
 		piranha->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
 		piranha->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
 
-		GameObject* turtle = CreateGameObject("Turtle", { 700, 720 })
+		
+		GameObject* turtle = CreateGameObject("Turtle", { 700, 720 });
+		turtle->AddComponent<EnemyComponent>();
+		turtle->AddComponent<SquareCollider>();
+		FSMComponent<TurtleContext>* fsmTurtle = turtle->AddComponent<FSMComponent<TurtleContext>>();
+		TurtleContext ctxTurtle = fsmTurtle->GetContext();
+		ctxTurtle.player = player;
+		ctxTurtle.turtle = turtle;
+		//State turtle
+		InitialTurtle* initTurtle = fsmTurtle->CreateState<InitialTurtle>();
+		ShellTurtle* shellTurtle = fsmTurtle->CreateState<ShellTurtle>();
+
+		//initTurtle->AddTransition(shellTurtle);
+
+		fsmTurtle->Init(initTurtle);
+
+
+
 	};
 
 	void Update(float dt) override

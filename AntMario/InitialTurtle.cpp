@@ -1,15 +1,10 @@
 #include "InitialTurtle.h"
+#include "EnemyComponent.h"
+#include <VelocityComponent.h>
 
-void InitialTurtle::Enter(PlayerContext&)
+
+void InitialTurtle::Execute(TurtleContext& t, float dt)
 {
+	t.turtle->GetComponent<EnemyComponent>()->Move();
 }
 
-void InitialTurtle::Execute(PlayerContext&, float dt)
-{
-	VelocityComponent* velocity = owner->GetComponent<VelocityComponent>();
-	velocity->SetX(-1.f);
-}
-
-void InitialTurtle::Exit(PlayerContext&)
-{
-}

@@ -4,6 +4,7 @@ class TurtleContext
 {
 
 public:
-	GameObject* Turtle;
+	GameObject* turtle;
+	GameObject* player;
 };
 
