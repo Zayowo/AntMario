@@ -14,6 +14,8 @@
 #include "BonusComponent.h"
 #include "InteractableBlockComponent.h"
 #include "GameController.h"
+#include "Oppenent.h"
+#include "Bonus.h"
 
 using json = nlohmann::json;
 
@@ -47,6 +49,27 @@ public:
 		player->AddComponent<PlayerController>();
 		player->AddComponent<VelocityComponent>(220.f);
 		player->AddComponent<SquareCollider>(sf::Vector2f(50.f, 135.f));
+
+		GameObject* opponent1 = CreateGameObject("opponent1", { 200, 700 });
+		opponent1->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
+		opponent1->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		opponent1->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		opponent1->AddComponent<VelocityComponent>(260.f);
+		opponent1->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
+
+		GameObject* opponent2 = CreateGameObject("opponent2", { 250, 700 });
+		opponent2->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
+		opponent2->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		opponent2->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		opponent2->AddComponent<VelocityComponent>(260.f);
+		opponent2->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
+
+		GameObject* opponent3 = CreateGameObject("opponent3", { 300, 700 });
+		opponent3->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
+		opponent3->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		opponent3->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		opponent3->AddComponent<VelocityComponent>(260.f);
+		opponent3->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
 
 
 		for (const auto& tile : data["tiles"])
@@ -167,6 +190,41 @@ public:
 			sceneModule->PushScene("PauseScene");
 
 		Scene::Update(dt);
+
+		// déplacement des opponents vers la gauche seulement
+		auto _opponent1 = GetGameObjectsByName("opponent1");
+		if (_opponent1.size() == 0);
+		else if (auto opponent1 = _opponent1[0])
+		{
+			VelocityComponent* vel = opponent1->GetComponent<VelocityComponent>();
+			vel->SetX(-1.f); // Direction seulement vers la gauche
+		}
+
+		auto _opponent2 = GetGameObjectsByName("opponent2");
+		if (_opponent2.size() == 0);
+		else if (auto opponent2 = _opponent2[0])
+		{
+			VelocityComponent* vel = opponent2->GetComponent<VelocityComponent>();
+			vel->SetX(-1.f); // Direction seulement vers la gauche
+		}
+
+		auto _opponent3 = GetGameObjectsByName("opponent3");
+		if (_opponent3.size() == 0);
+		else if (auto opponent3 = _opponent3[0])
+		{
+			static float timer = 0.f;
+			static bool goingDown = true;
+
+			timer += dt;
+
+			if (timer >= 3.f) // Change de direction toutes les 3 secondes
+			{
+				goingDown = !goingDown;
+				timer = 0.f;
+			}
+			opponent3->GetComponent <VelocityComponent>()->SetY(goingDown ? 1.f : -1.f);
+		}
+
 
 	}
 

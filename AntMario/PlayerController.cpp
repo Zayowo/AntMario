@@ -48,7 +48,7 @@ void PlayerController::Update(float dt)
 		if (velocityComponent->IsGrounded())
 		{
 			isDoubleJump = false;
-			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.f);
+			//Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.f);
 			velocityComponent->SetY(-840.f);
 		}
 
@@ -56,7 +56,7 @@ void PlayerController::Update(float dt)
 		{
 
 			isDoubleJump = true;
-			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.25f);
+			//Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.25f);
 			velocityComponent->SetY(-840.f);
 
 		}
