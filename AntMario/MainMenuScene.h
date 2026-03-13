@@ -12,6 +12,7 @@ public:
 	{
 
 		GameObject* playButton = CreateGameObject("Button", { 600, 300 });
+		playButton->SetIsAlwaysLoaded(true);
 		playButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Play", []() {
 
 			Engine::GetModule<SceneModule>()->SetScene("PrototypeScene");
@@ -19,6 +20,7 @@ public:
 		});
 
 		GameObject* editorButton = CreateGameObject("Button", { 600, 400 });
+		editorButton->SetIsAlwaysLoaded(true);
 		editorButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Settings", []() {
 
 			// À ajouter!
@@ -26,6 +28,7 @@ public:
 		});
 
 		GameObject* quitButton = CreateGameObject("Button", { 600, 500 });
+		quitButton->SetIsAlwaysLoaded(true);
 		quitButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Quit", []() {
 
 			Engine::GetInstance()->Stop();
