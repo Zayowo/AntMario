@@ -14,6 +14,8 @@
 #include "BonusComponent.h"
 #include "InteractableBlockComponent.h"
 #include "GameController.h"
+#include "Oppenent.h"
+#include "Bonus.h"
 
 using json = nlohmann::json;
 
@@ -48,6 +50,33 @@ public:
 		player->AddComponent<VelocityComponent>(220.f);
 		player->AddComponent<SquareCollider>(sf::Vector2f(50.f, 135.f));
 
+		GameObject* opponent1 = CreateGameObject("opponent1", { 200, 700 });
+		opponent1->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
+		opponent1->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		opponent1->AddComponent<FixedCameraComponent>(sf::Vector2f(1200.f, 800.f), 600.f, 3000.f);
+		opponent1->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		opponent1->AddComponent<VelocityComponent>(260.f);
+		opponent1->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
+
+		GameObject* opponent2 = CreateGameObject("opponent2", { 250, 700 });
+		opponent2->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
+		opponent2->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		opponent2->AddComponent<FixedCameraComponent>(sf::Vector2f(1200.f, 800.f), 600.f, 3000.f);
+		opponent2->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		opponent2->AddComponent<VelocityComponent>(260.f);
+		opponent2->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
+
+		GameObject* opponent3 = CreateGameObject("opponent3", { 300, 700 });
+		opponent3->GetTransform().scale = sf::Vector2f(0.85f, 0.85f);
+		opponent3->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		opponent3->AddComponent<FixedCameraComponent>(sf::Vector2f(1200.f, 800.f), 600.f, 3000.f);
+		opponent3->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		opponent3->AddComponent<VelocityComponent>(260.f);
+		opponent3->AddComponent<SquareCollider>(sf::Vector2f(70.f, 140.f));
+
+		std::ifstream file("Assets/Level/AntLevel_5.json");
+		json data;
+		file >> data;
 
 		for (const auto& tile : data["tiles"])
 		{
@@ -165,6 +194,46 @@ public:
 
 		if (inputModule->Is(sf::Keyboard::Key::Escape, InputState::PRESSED))
 			sceneModule->PushScene("PauseScene");
+
+		if (inputModule->Is(sf::Keyboard::Key::PageUp, InputState::PRESSED))
+			timeModule->GetSpeed() *= 2.f;
+
+		if (inputModule->Is(sf::Keyboard::Key::PageDown, InputState::PRESSED))
+			timeModule->GetSpeed() /= 2.f;
+
+		std::cout << timeModule->GetSpeed() << std::endl;
+
+
+		// déplacement des opponents vers la gauche seulement
+		GameObject* opponent1 = GetGameObjectsByName("opponent1")[0];
+		if (opponent1) 
+		{
+			VelocityComponent* vel = opponent1->GetComponent<VelocityComponent>();
+			vel->SetX(-1.f); // Direction seulement vers la gauche
+		}
+
+		GameObject* opponent2 = GetGameObjectsByName("opponent2")[0];
+		if (opponent2)
+		{
+			VelocityComponent* vel = opponent2->GetComponent<VelocityComponent>();
+			vel->SetX(-1.f); // Direction seulement vers la gauche
+		}
+
+		GameObject* opponent3 = GetGameObjectsByName("opponent3")[0];
+		if (opponent3)
+		{
+			static float timer = 0.f;
+			static bool goingDown = true;
+
+			timer += dt;
+
+			if (timer >= 3.f) // Change de direction toutes les 3 secondes
+			{
+				goingDown = !goingDown;
+				timer = 0.f;
+			}
+			opponent3->GetComponent <VelocityComponent>()->SetY(goingDown ? 1.f : -1.f);
+		}
 
 		Scene::Update(dt);
 
