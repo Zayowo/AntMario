@@ -27,6 +27,9 @@ public:
 	// Récupère le transform du game object
 	Transform& GetTransform();
 	
+	// Applique si le game object est tout le temps chargé ou non
+	void SetIsAlwaysLoaded(bool isAlwaysLoaded);
+
 	// Récupère un component de type
 	template<typename ComponentType>
 	ComponentType* GetComponent();
@@ -39,7 +42,7 @@ protected:
 	std::string name;
 	Scene* scene;
 	Transform transform;
-	bool isActive = false;
+	bool isAlwaysLoaded = false;
 	std::vector<Component*> components;
 
 };

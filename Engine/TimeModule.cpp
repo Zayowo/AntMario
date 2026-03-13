@@ -12,6 +12,7 @@ void TimeModule::Update()
 {
 
 	dt = deltaClock.restart().asSeconds();
+	std::cout << 1.f / dt << std::endl;
 
 }
 

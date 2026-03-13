@@ -15,6 +15,7 @@ void VelocityComponent::Init()
 
 	collider->RegisterCallback("Terrain", [this](GameObject* other) { ResolveCollisions(other); });
     collider->RegisterCallback("Block", [this](GameObject* other) { ResolveCollisions(other); });
+    collider->RegisterCallback("Goomba", [this](GameObject* other) { ResolveCollisions(other); });
 
 }
 
@@ -91,6 +92,9 @@ void VelocityComponent::RegisterHit(std::string name, VelocityHitType hitType, s
 
 void VelocityComponent::ResolveCollisions(GameObject* other) {
 
+    if (other == owner)
+        return;
+    
     if (!other) return;
 
     auto collider = owner->GetComponent<SquareCollider>();
@@ -137,12 +141,14 @@ void VelocityComponent::ResolveCollisions(GameObject* other) {
         if (playerBounds.position.y < otherBounds.position.y)
         {
 
-            transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y));
             if (velocity.y > 0)
             {
                 velocity.y = 0.f;
                 isGrounded = true;
+                transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y)) + 0.1f;
             }
+            else
+                transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y));
 
             SendHit(other, VelocityHitType::TOP);
 

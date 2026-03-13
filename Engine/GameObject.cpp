@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "Component.h"
+#include "Utils.h"
 
 GameObject::GameObject(std::string name, Scene* scene) :
 	name(name),
@@ -8,8 +9,6 @@ GameObject::GameObject(std::string name, Scene* scene) :
 
 void GameObject::Init()
 {
-
-	isActive = true;
 
 	for (Component* component : components)
 		component->Init();
@@ -20,6 +19,9 @@ void GameObject::Init()
 void GameObject::Update(float dt)
 {
 
+	if (!isAlwaysLoaded && !IsLoaded(this))
+		return;
+
 	for (Component* component : components)
 		component->Update(dt);
 
@@ -27,6 +29,9 @@ void GameObject::Update(float dt)
 
 void GameObject::Render(sf::RenderWindow* window)
 {
+
+	if (!isAlwaysLoaded && !IsLoaded(this))
+		return;
 
 	for (Component* component : components)
 		component->Render(window);
@@ -59,5 +64,12 @@ Transform& GameObject::GetTransform()
 {
 
 	return transform;
+
+}
+
+void GameObject::SetIsAlwaysLoaded(bool isAlwaysLoaded)
+{
+
+	this->isAlwaysLoaded = isAlwaysLoaded;
 
 }

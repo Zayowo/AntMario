@@ -38,7 +38,8 @@ void SpriteRenderer::Update(float dt)
 void SpriteRenderer::Render(sf::RenderWindow* window)
 {
 
-	window->draw(*sprite);
+	if (abs(owner->GetTransform().pos.x - window->getView().getCenter().x) < 750.f)
+		window->draw(*sprite);
 
 }
 

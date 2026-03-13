@@ -24,6 +24,7 @@ void PlayerController::Init()
 	if (!velocityComponent) std::cerr << "PlayerController: No VelocityComponent detected!" << std::endl;
 
 	velocityComponent->RegisterHit("Block", VelocityHitType::BOTTOM, [this](GameObject* block) { HitInteractableBlock(block); });
+	velocityComponent->RegisterHit("Goomba", VelocityHitType::TOP, [this](GameObject* goomba) { StepOnGoomba(goomba);  });
 
 
 	// Gestion du collider
@@ -58,7 +59,7 @@ void PlayerController::Update(float dt)
 		if (velocityComponent->IsGrounded())
 		{
 			isDoubleJump = false;
-			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.f);
+			//Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.f);
 			velocityComponent->SetY(-840.f);
 		}
 
@@ -66,7 +67,7 @@ void PlayerController::Update(float dt)
 		{
 
 			isDoubleJump = true;
-			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.25f);
+			//Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.25f);
 			velocityComponent->SetY(-840.f);
 
 		}
@@ -129,5 +130,14 @@ void PlayerController::PickUp(GameObject* bonus)
 	}
 
 	bonus->GetScene()->DeleteGameObject(bonus);
+
+}
+
+void PlayerController::StepOnGoomba(GameObject* goomba)
+{
+
+	goomba->GetScene()->DeleteGameObject(goomba);
+	VelocityComponent* velocityComponent = owner->GetComponent<VelocityComponent>();
+	velocityComponent->SetY(-450.f);
 
 }

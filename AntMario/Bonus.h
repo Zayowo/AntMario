@@ -2,15 +2,8 @@
 #include <Component.h>
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "BonusType.h"
 
-enum class BonusType
-{
-	Coins, //Pièces à collectionner
-	Bonus1, //Bonus qui rend le joueur invincible sur un coup
-	Bonus2, //Bonus qui rend le joueur grand  
-	Bonus3 //Bonus permettant au joueur de lancer des projectiles
-
-};
 
 class Bonus : public Component
 {

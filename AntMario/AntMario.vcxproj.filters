@@ -31,6 +31,12 @@
     <Filter Include="Fichiers d%27en-tête\Models">
       <UniqueIdentifier>{6aba04fb-a5e5-462c-93bd-00b274833d0f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\Components\Enemy">
+      <UniqueIdentifier>{470a248c-4aaf-492f-badf-e61c5acf9923}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Components\Enemy">
+      <UniqueIdentifier>{1e886684-0268-4f39-996a-3708234fe077}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -41,9 +47,6 @@
     </ClCompile>
     <ClCompile Include="LittleState.cpp">
       <Filter>Fichiers sources\PlayerState</Filter>
-    </ClCompile>
-    <ClCompile Include="GoombaComponent.cpp">
-      <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="Condition.cpp">
       <Filter>Fichiers sources</Filter>
@@ -75,8 +78,23 @@
     <ClCompile Include="GameController.cpp">
       <Filter>Fichiers sources\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Oppenent.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
     <ClCompile Include="InteractableBlockComponent.cpp">
       <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="GoombaComponent.cpp">
+      <Filter>Fichiers sources\Components\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PiranhaComponent.cpp">
+      <Filter>Fichiers sources\Components\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyComponent.cpp">
+      <Filter>Fichiers sources\Components\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="TurtleComponent.cpp">
+      <Filter>Fichiers sources\Components\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,9 +112,6 @@
     </ClCompile>
     <ClInclude Include="LittleState.h">
       <Filter>Fichiers d%27en-tête\PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="GoombaComponent.h">
-      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Condition.h">
       <Filter>Fichiers d%27en-tête</Filter>
@@ -119,11 +134,26 @@
     <ClInclude Include="GameController.h">
       <Filter>Fichiers d%27en-tête\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Oppenent.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
     <ClInclude Include="InteractableBlockComponent.h">
       <Filter>Fichiers d%27en-tête\Components</Filter>
     </ClInclude>
     <ClInclude Include="InteractableBlockType.h">
       <Filter>Fichiers d%27en-tête\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyComponent.h">
+      <Filter>Fichiers d%27en-tête\Components\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="TurtleComponent.h">
+      <Filter>Fichiers d%27en-tête\Components\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PiranhaComponent.h">
+      <Filter>Fichiers d%27en-tête\Components\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GoombaComponent.h">
+      <Filter>Fichiers d%27en-tête\Components\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

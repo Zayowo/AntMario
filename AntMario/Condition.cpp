@@ -1,11 +1,16 @@
 #include "Condition.h"
 #include "SquareCollider.h"
+#include <Scene.h>
 
 
 bool Condition::collisionWithEnemy(PlayerContext& p)
 {
+
 	SquareCollider* colideP = p.player->GetComponent<SquareCollider>();
-	for (GameObject* enemy : p.enemies) {
+
+	std::vector<GameObject*> goombas = p.player->GetScene()->GetGameObjectsByName("Goomba");
+	
+	for (GameObject* enemy : goombas) {
 		if (colideP->IsColliding(enemy) && p.invulnerability <= 0) {
 			p.invulnerability = 1.5f;
 			return true;
@@ -17,29 +22,30 @@ bool Condition::collisionWithEnemy(PlayerContext& p)
 
 bool Condition::collitionWithFireBonus(PlayerContext& p)
 {
-	for (int i = 0; i < p.bonuses.size(); i++) {
-		Bonus* temp = p.bonuses[i]->GetComponent<Bonus>();
-		if (temp->getType() == BonusType::Bonus3) {
-			p.bonuses.erase(p.bonuses.begin() + i);
+	SquareCollider* playerCollider = p.player->GetComponent<SquareCollider>();
+	Scene* scene = p.player->GetScene();
+	std::vector<GameObject*> allBonus= scene->GetGameObjectsByName("Bonus3");
+	for (GameObject* fireBonus : allBonus) {
+		if (playerCollider->IsColliding(fireBonus)) {
 			return true;
 		}
 	}
 
 	return false;
+		
 }
 
 bool Condition::collitionWithBigBonus(PlayerContext& p)
 {
-	
-	
-	for (int i = 0; i < p.bonuses.size(); i++) {
-		Bonus* temp = p.bonuses[i]->GetComponent<Bonus>();
-		if (temp->getType() == BonusType::Bonus2) {
-			std::cout << "vrai ?" << std::endl;
-			p.bonuses.erase(p.bonuses.begin() + i);
+	SquareCollider* playerCollider = p.player->GetComponent<SquareCollider>();
+	Scene* scene = p.player->GetScene();
+	std::vector<GameObject*> allBonus = scene->GetGameObjectsByName("Bonus2");
+	for (GameObject* bigBonus : allBonus) {
+		if (playerCollider->IsColliding(bigBonus)) {
 			return true;
 		}
 	}
-
 	return false;
 }
+
+
