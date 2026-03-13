@@ -37,6 +37,8 @@ void SquareCollider::Update(float dt)
 	if (!scene)
 		return;
 
+	sf::RenderWindow* window = Engine::GetModule<WindowModule>()->GetRenderWindow();
+
 	for (auto [name, callbacks] : collisionCallbackMap)
 	{
 
@@ -44,6 +46,10 @@ void SquareCollider::Update(float dt)
 
 		for (GameObject* gameObject : gameObjects)
 		{
+
+
+			if (abs(owner->GetTransform().pos.x - window->getView().getCenter().x) > 750.f)
+				continue;
 
 			if (IsColliding(gameObject))
 			{

@@ -137,12 +137,14 @@ void VelocityComponent::ResolveCollisions(GameObject* other) {
         if (playerBounds.position.y < otherBounds.position.y)
         {
 
-            transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y));
             if (velocity.y > 0)
             {
                 velocity.y = 0.f;
                 isGrounded = true;
+                transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y)) + 0.1f;
             }
+            else
+                transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y));
 
             SendHit(other, VelocityHitType::TOP);
 
