@@ -7,6 +7,7 @@ Un engine custom C++ avec la librarie SFML, basé sur un Entity Component System
 - Gauche : Q
 - Saut : Espace
 - Sprint : (Maintenir)Shift 
+- Menu pause: Échap
 
 ## But du jeu
 
