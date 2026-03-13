@@ -165,6 +165,7 @@ public:
 		player->AddComponent<PlayerController>();
 		player->AddComponent<VelocityComponent>(200.f);
 		player->AddComponent<SquareCollider>(sf::Vector2f(50.f, 135.f));
+		player->SetIsAlwaysLoaded(true);
 
 		GameObject* gameController = CreateGameObject("GameController", { 0.f, 0.f });
 		gameController->AddComponent<GameController>();
