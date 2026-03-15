@@ -36,6 +36,7 @@ private:
 	sf::Text* coinsText;
 	sf::Text* livesText;
 	sf::Text* timerText;
+	sf::Text* fpsText;
 	sf::RectangleShape energyBarBackground;
 	sf::RectangleShape energyBar;
 

@@ -1,5 +1,6 @@
 #include "GameController.h"
 #include <ResourceModule.h>
+#include <TimeModule.h>
 #include <iomanip>
 #include <sstream>
 
@@ -22,6 +23,9 @@ void GameController::Init()
 	timerText = new sf::Text(font, "", 24);
 	//timerText->setFillColor(sf::Color::White);
 	//timerText->setPosition(sf::Vector2f(UI_OFFSET_X, UI_OFFSET_Y + ELEMENT_SPACING * 2));
+
+	fpsText = new sf::Text(font, "", 24);
+	fpsText->setPosition(sf::Vector2f(UI_OFFSET_X, UI_OFFSET_Y + ELEMENT_SPACING * 2));
 
 	// Barre d'énergie - fond
 	energyBarBackground.setSize(sf::Vector2f(ENERGY_BAR_WIDTH, ENERGY_BAR_HEIGHT));
@@ -46,6 +50,8 @@ void GameController::Update(float dt)
 
 	// Mise à jour du chronomètre
 	timerText->setString(std::to_string(totalTime));
+
+	fpsText->setString("FPS " + std::to_string((int)(1.0f / Engine::GetModule<TimeModule>()->GetDeltaTime())));
 
 	// Mise à jour de la barre d'énergie
 	float energyPercent = (energy / maxEnergy);
@@ -79,6 +85,7 @@ void GameController::Render(sf::RenderWindow* window)
 	//window->draw(*timerText);
 	window->draw(energyBarBackground);
 	window->draw(energyBar);
+	window->draw(*fpsText);
 
 	// Restaurer la vue précédente
 	window->setView(currentView);

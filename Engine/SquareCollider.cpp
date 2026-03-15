@@ -37,10 +37,10 @@ void SquareCollider::Update(float dt)
 	if (!scene)
 		return;
 
-	for (auto [name, callbacks] : collisionCallbackMap)
+	for (auto& [name, callbacks] : collisionCallbackMap)
 	{
 
-		std::vector<GameObject*> gameObjects = scene->GetGameObjectsByName(name);
+		const std::vector<GameObject*>& gameObjects = scene->GetGameObjectsByName(name);
 
 		for (GameObject* gameObject : gameObjects)
 		{
@@ -48,7 +48,7 @@ void SquareCollider::Update(float dt)
 			if (IsColliding(gameObject))
 			{
 
-				for (std::function<void(GameObject*)> callback : callbacks)
+				for (const std::function<void(GameObject*)>& callback : callbacks)
 					callback(gameObject);
 
 			}
