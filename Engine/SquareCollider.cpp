@@ -29,13 +29,11 @@ void SquareCollider::Update(float dt)
 {
 
 	// Nan mais, logique.
-	if (collisionCallbackMap.empty())
-		return;
+	if (collisionCallbackMap.empty()) return;
 
 	Scene* scene = owner->GetScene();
 	
-	if (!scene)
-		return;
+	if (!scene) return;
 
 	for (auto& [name, callbacks] : collisionCallbackMap)
 	{
