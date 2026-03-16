@@ -1,6 +1,8 @@
 #pragma once
 #include <Component.h>
 #include "GameController.h"
+#include "FSMComponent.h"
+#include "PlayerContext.h"
 
 class PlayerController : public Component
 {
@@ -27,5 +29,6 @@ private:
 	GameController* gameController;
 	VelocityComponent* velocityComponent;
 	SquareCollider* collider;
+	FSMComponent<PlayerContext>* fsm;
 
 };

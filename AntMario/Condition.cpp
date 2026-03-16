@@ -48,4 +48,15 @@ bool Condition::collitionWithBigBonus(PlayerContext& p)
 	return false;
 }
 
+bool Condition::HasPickedFireFlower(PlayerContext& ctx)
+{
 
+	if (ctx.hasPickedFireFlower)
+	{
+		ctx.hasPickedFireFlower = false;
+		return true;
+	}
+
+	return false;
+
+}

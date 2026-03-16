@@ -6,6 +6,7 @@
 #include <VelocityComponent.h>
 #include <SquareCollider.h>
 #include <ButtonRenderer.h>
+#include <FSMComponent.h>
 #include <Json.h>
 #include <iostream>
 #include <fstream>
@@ -19,6 +20,7 @@
 #include "Bonus.h"
 #include "GoombaComponent.h"
 #include "PiranhaComponent.h"
+#include "PlayerContext.h"
 
 using json = nlohmann::json;
 
@@ -100,7 +102,7 @@ public:
 						block->GetTransform().origin = { 0.f, 0.f };
 						block->AddComponent<SquareCollider>(sf::Vector2f(gridSize, gridSize));
 						block->AddComponent<SpriteRenderer>("Assets/Environment/LuckyBlock.png");
-						block->AddComponent<InteractableBlockComponent>(InteractableBlockType::COINS);
+						block->AddComponent<InteractableBlockComponent>(InteractableBlockType::FIRE_FLOWER);
 					}
 				}
 			}
@@ -165,7 +167,10 @@ public:
 		player->AddComponent<PlayerController>();
 		player->AddComponent<VelocityComponent>(200.f);
 		player->AddComponent<SquareCollider>(sf::Vector2f(50.f, 135.f));
+		player->AddComponent<FSMComponent<PlayerContext>>();
 		player->SetIsAlwaysLoaded(true);
+
+
 
 		GameObject* gameController = CreateGameObject("GameController", { 0.f, 0.f });
 		gameController->AddComponent<GameController>();
