@@ -35,6 +35,13 @@ void Scene::Update(float dt)
 				gameObjects.pop_back();
 			}
 
+			std::vector<GameObject*>& gameObjectsName = gameObjectsByName[gameObject->GetName()];
+			auto it_name = std::find(gameObjectsName.begin(), gameObjectsName.end(), gameObject);
+			if (it_name != gameObjectsName.end()) {
+				std::iter_swap(it_name, gameObjectsName.end() - 1);
+				gameObjectsName.pop_back();
+			}
+
 			gameObject->Destroy();
 			delete gameObject;
 
@@ -68,6 +75,7 @@ GameObject* Scene::CreateGameObject(std::string name, sf::Vector2f pos)
 	GameObject* gameObject = new GameObject(name, this);
 	gameObject->GetTransform().pos = pos;
 	gameObjectsToCreate.emplace_back(gameObject);
+	gameObjectsByName[name].emplace_back(gameObject);
 	return gameObject;
 
 }
@@ -84,12 +92,15 @@ void Scene::DeleteGameObject(GameObject* gameObject)
 
 std::vector<GameObject*> Scene::GetGameObjectsByName(std::string name)
 {
-	std::vector<GameObject*> gameObjectsByName;
+
+	/*std::vector<GameObject*> gameObjectsByName;
 
 	for (GameObject* gameObject : gameObjects)
 		if (gameObject->GetName() == name)
 			gameObjectsByName.push_back(gameObject);
 
-	return gameObjectsByName;
+	return gameObjectsByName;*/
+
+	return gameObjectsByName[name];
 
 }

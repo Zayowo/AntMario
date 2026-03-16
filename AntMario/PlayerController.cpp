@@ -44,7 +44,6 @@ void PlayerController::Init()
 void PlayerController::Update(float dt)
 {
 
-	InputModule* inputModule = Engine::GetModule<InputModule>();
 	Transform& transform = owner->GetTransform();
 
 	float velocityX = 0.f;
