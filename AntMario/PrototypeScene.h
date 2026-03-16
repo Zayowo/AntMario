@@ -19,6 +19,7 @@
 #include "Bonus.h"
 #include "GoombaComponent.h"
 #include "PiranhaComponent.h"
+#include "TurtleComponent.h"
 
 using json = nlohmann::json;
 
@@ -140,6 +141,21 @@ public:
 						goomba->AddComponent<SpriteRenderer>("Assets/Goomba.png");
 						goomba->AddComponent<VelocityComponent>(90.f);
 						goomba->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
+					}
+				}
+			}
+			else if (tileType == "TURTLE") {
+				for (int i = 0; i < (int)width; i++) {
+					for (int j = 0; j < (int)height; j++) {
+						float finalX = xPos + (i * gridSize) + gridSize * 1.f;
+						float finalY = yPos + (j * gridSize) + gridSize * 1.f;
+
+						GameObject* turtle = CreateGameObject("Turtle", { finalX, finalY });
+						turtle->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+						turtle->AddComponent<TurtleComponent>();
+						turtle->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+						turtle->AddComponent<VelocityComponent>(90.f);
+						turtle->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
 					}
 				}
 			}
