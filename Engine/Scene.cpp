@@ -20,7 +20,6 @@ void Scene::Update(float dt)
 		gameObjectToCreate->Init();
 
 	gameObjectsToCreate.clear();
-	gameObjectsToCreate.shrink_to_fit();
 
 	for (GameObject* gameObject : gameObjects)
 		gameObject->Update(dt);
@@ -66,6 +65,10 @@ void Scene::Destroy()
 
 	for (GameObject* gameObject : gameObjects)
 		gameObject->Destroy();
+
+
+	gameObjects.clear();
+	gameObjects.shrink_to_fit();
 
 }
 

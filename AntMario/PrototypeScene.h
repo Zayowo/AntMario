@@ -158,7 +158,6 @@ public:
 		}
 
 		GameObject* player = CreateGameObject("Player", { 500, 700 });
-		player->GetTransform().scale = sf::Vector2f(0.55f, 0.55f);
 		player->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
 		player->AddComponent<FixedCameraComponent>(sf::Vector2f(1000.f, 666.f), 500.f, levelWidth - 500.f);
 		player->AddComponent<SpriteRenderer>("Assets/Player.png");
