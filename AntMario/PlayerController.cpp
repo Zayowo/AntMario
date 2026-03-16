@@ -28,7 +28,7 @@ void PlayerController::Init()
 
 	velocityComponent->RegisterHit("Block", VelocityHitType::BOTTOM, [this](GameObject* block) { HitInteractableBlock(block); });
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::TOP, [this](GameObject* goomba) { StepOnGoomba(goomba);  });
-	//velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* turtle) { StepOnGoomba(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* turtle) { StepOnGoomba(turtle);  });
 	velocityComponent->RegisterHit("ReverseWalk", VelocityHitType::BOTTOM, [this](GameObject* block) { WalkUpsideDown(block); });
 
 
@@ -162,7 +162,7 @@ void PlayerController::StepOnGoomba(GameObject* goomba)
 
 }
 
-/*
+
 void PlayerController::StepOnTurtle(GameObject* turtle)
 {
 	sf::Vector2f pos = turtle->GetTransform().pos + sf::Vector2f(0.f, -20.f);
@@ -176,7 +176,7 @@ void PlayerController::StepOnTurtle(GameObject* turtle)
 	velocityComponent->SetY(-400.f);
 
 }
-*/
+
 
 void PlayerController::WalkUpsideDown(GameObject* block)
 {
