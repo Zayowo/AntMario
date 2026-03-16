@@ -12,7 +12,6 @@ public:
     // Modifie une tuile spécifique dans le VertexArray
     void SetTile(unsigned int x, unsigned int y, sf::Vector2i uvPos);
 
-
 private:
     sf::VertexArray m_vertices;
     sf::Texture* m_tileset;

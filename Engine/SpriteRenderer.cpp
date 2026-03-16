@@ -17,12 +17,14 @@ void SpriteRenderer::Update(float dt)
 {
 
 	Transform& transform = owner->GetTransform();
+	sf::FloatRect bounds = sprite->getLocalBounds();
+	
 	sprite->setPosition(transform.pos);
 	sprite->setRotation(sf::degrees(transform.rot));
 	sprite->setScale(transform.scale);
 	sprite->setOrigin(sf::Vector2f(
-		sprite->getLocalBounds().size.x * transform.origin.x,
-		sprite->getLocalBounds().size.y * transform.origin.y
+		bounds.size.x * transform.origin.x,
+		bounds.size.y * transform.origin.y
 	));
 	
 	if (_animationRule.has_value())
@@ -38,8 +40,7 @@ void SpriteRenderer::Update(float dt)
 void SpriteRenderer::Render(sf::RenderWindow* window)
 {
 
-	if (abs(owner->GetTransform().pos.x - window->getView().getCenter().x) < 750.f)
-		window->draw(*sprite);
+	window->draw(*sprite);
 
 }
 

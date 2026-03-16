@@ -29,7 +29,7 @@ public:
 	PrototypeScene()
 	{
 
-		std::ifstream file("Assets/Level/AntLevel_10.json");
+		std::ifstream file("Assets/Level/AntLevel_11.json");
 		json data;
 		file >> data;
 
