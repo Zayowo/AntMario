@@ -52,11 +52,10 @@ void TilemapRenderer::SetTile(unsigned int x, unsigned int y, sf::Vector2i uvPos
     tri[5].position = p3; tri[5].texCoords = t3;
 }
 
+
 void TilemapRenderer::Render(sf::RenderWindow* window)
 {
     sf::RenderStates states;
-    // On applique la transformation du GameObject parent si nécessaire
-    // states.transform *= owner->GetTransform().getTransform(); 
     states.texture = m_tileset;
     window->draw(m_vertices, states);
 }

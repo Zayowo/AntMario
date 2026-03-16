@@ -21,6 +21,7 @@
 #include "GoombaComponent.h"
 #include "PiranhaComponent.h"
 #include "PlayerContext.h"
+#include "TurtleComponent.h"
 
 using json = nlohmann::json;
 
@@ -31,7 +32,7 @@ public:
 	PrototypeScene()
 	{
 
-		std::ifstream file("Assets/Level/AntLevel_10.json");
+		std::ifstream file("Assets/Level/AntLevel_11.json");
 		json data;
 		file >> data;
 
@@ -145,6 +146,21 @@ public:
 					}
 				}
 			}
+			else if (tileType == "TURTLE") {
+				for (int i = 0; i < (int)width; i++) {
+					for (int j = 0; j < (int)height; j++) {
+						float finalX = xPos + (i * gridSize) + gridSize * 1.f;
+						float finalY = yPos + (j * gridSize) + gridSize * 1.f;
+
+						GameObject* turtle = CreateGameObject("Turtle", { finalX, finalY });
+						turtle->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+						turtle->AddComponent<TurtleComponent>();
+						turtle->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+						turtle->AddComponent<VelocityComponent>(90.f);
+						turtle->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
+					}
+				}
+			}
 		}
 
 		// 3. PHASE PHYSIQUE
@@ -160,7 +176,6 @@ public:
 		}
 
 		GameObject* player = CreateGameObject("Player", { 500, 700 });
-		player->GetTransform().scale = sf::Vector2f(0.55f, 0.55f);
 		player->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
 		player->AddComponent<FixedCameraComponent>(sf::Vector2f(1000.f, 666.f), 500.f, levelWidth - 500.f);
 		player->AddComponent<SpriteRenderer>("Assets/Player.png");

@@ -20,6 +20,8 @@ public:
 	// Écrase un goomba
 	void StepOnGoomba(GameObject* goomba);
 
+	void StepOnTurtle(GameObject* turtle);
+
 	// Marche à l'envers sur un block "ReverseWalk"
 	void WalkUpsideDown(GameObject* block);
 
