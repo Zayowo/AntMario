@@ -51,9 +51,27 @@ bool Condition::collitionWithBigBonus(PlayerContext& p)
 bool Condition::HasPickedFireFlower(PlayerContext& ctx)
 {
 
-	if (ctx.hasPickedFireFlower)
+	bool hasPickedFireFlower = ctx.hasPickedFireFlower;
+	ctx.hasPickedFireFlower = false;
+
+	if (hasPickedFireFlower)
 	{
-		ctx.hasPickedFireFlower = false;
+		return true;
+	}
+
+	return false;
+
+}
+
+bool Condition::IsHitByEnemy(PlayerContext& ctx)
+{
+
+	bool isHitByEnemy = ctx.isHitByEnemy;
+	ctx.isHitByEnemy = false;
+
+	if (isHitByEnemy && ctx.invulnerability <= 0.f)
+	{
+		ctx.invulnerability = 1.5f;
 		return true;
 	}
 

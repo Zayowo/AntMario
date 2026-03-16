@@ -25,6 +25,9 @@ public:
 	// Marche à l'envers sur un block "ReverseWalk"
 	void WalkUpsideDown(GameObject* block);
 
+	// Quand il se fait tabasser par un ennemi, t'as capté
+	void HitByEnemy(GameObject* enemy);
+
 private:
 	bool isDoubleJump = false;
 	InputModule* inputModule;

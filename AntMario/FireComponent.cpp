@@ -23,7 +23,7 @@ void FireComponent::Update(float dt)
 	sf::Vector2f windowSize = { 1200, 800 };
 	float distance = (center - owner->GetTransform().pos).length();
 
-	if (distance > 400.f)
+	if (distance > 750.f)
 	{
 		ActualScene->DeleteGameObject(owner);
 		return;

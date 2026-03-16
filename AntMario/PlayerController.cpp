@@ -2,6 +2,7 @@
 #include <Scene.h>
 #include <GameObject.h>
 #include <InputModule.h>
+#include <SceneModule.h>
 #include <ResourceModule.h>
 #include <TimeModule.h>
 #include <VelocityComponent.h>
@@ -36,6 +37,16 @@ void PlayerController::Init()
 
 	littleState->AddTransition(Condition::HasPickedFireFlower, fireState);
 	bigState->AddTransition(Condition::HasPickedFireFlower, fireState);
+	littleState->AddTransition([this](PlayerContext& ctx)
+		{
+
+			if (Condition::IsHitByEnemy(ctx))
+				Engine::GetModule<SceneModule>()->SetScene("MainMenuScene");
+			return false;
+
+		}, nullptr);
+	bigState->AddTransition(Condition::IsHitByEnemy, littleState);
+	fireState->AddTransition(Condition::IsHitByEnemy, littleState);
 
 	fsm->Init(littleState);
 
@@ -44,8 +55,17 @@ void PlayerController::Init()
 	if (!velocityComponent) std::cerr << "PlayerController: No VelocityComponent detected!" << std::endl;
 
 	velocityComponent->RegisterHit("Block", VelocityHitType::BOTTOM, [this](GameObject* block) { HitInteractableBlock(block); });
+
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::TOP, [this](GameObject* goomba) { StepOnGoomba(goomba);  });
+	velocityComponent->RegisterHit("Goomba", VelocityHitType::LEFT, [this](GameObject* goomba) { HitByEnemy(goomba);  });
+	velocityComponent->RegisterHit("Goomba", VelocityHitType::RIGHT, [this](GameObject* goomba) { HitByEnemy(goomba);  });
+	velocityComponent->RegisterHit("Goomba", VelocityHitType::BOTTOM, [this](GameObject* goomba) { HitByEnemy(goomba);  });
+
 	velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* turtle) { StepOnGoomba(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* turtle) { HitByEnemy(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* turtle) { HitByEnemy(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::BOTTOM, [this](GameObject* turtle) { HitByEnemy(turtle);  });
+
 	velocityComponent->RegisterHit("ReverseWalk", VelocityHitType::BOTTOM, [this](GameObject* block) { WalkUpsideDown(block); });
 
 
@@ -227,5 +247,13 @@ void PlayerController::WalkUpsideDown(GameObject* block)
 	float dt = Engine::GetModule<TimeModule>()->GetDeltaTime();
 	gameController->SetEnergy(gameController->GetEnergy() - 5 * dt, 100.f);
 	velocityComponent->SetY(-150.f);
+
+}
+
+void PlayerController::HitByEnemy(GameObject* enemy)
+{
+
+	fsm->GetContext().isHitByEnemy = true;
+	LogPrint("Je me suis fait tapé");
 
 }

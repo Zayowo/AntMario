@@ -8,5 +8,6 @@ public:
 	static bool collitionWithBigBonus(PlayerContext& p);
 
 	static bool HasPickedFireFlower(PlayerContext& ctx);
+	static bool IsHitByEnemy(PlayerContext& ctx);
 };
 

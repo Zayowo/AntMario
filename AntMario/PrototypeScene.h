@@ -181,7 +181,7 @@ public:
 		player->AddComponent<SpriteRenderer>("Assets/Player.png");
 		player->AddComponent<PlayerController>();
 		player->AddComponent<VelocityComponent>(200.f);
-		player->AddComponent<SquareCollider>(sf::Vector2f(50.f, 135.f));
+		player->AddComponent<SquareCollider>(sf::Vector2f(30.f, 80.f));
 		player->AddComponent<FSMComponent<PlayerContext>>();
 		player->SetIsAlwaysLoaded(true);
 
