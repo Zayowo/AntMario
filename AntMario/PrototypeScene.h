@@ -249,6 +249,7 @@ public:
 		GameObject* gameController = CreateGameObject("GameController", { 0.f, 0.f });
 		gameController->AddComponent<GameController>();
 		gameController->SetIsAlwaysLoaded(true);
+
 		
 		//GameObject* piranha = CreateGameObject("Piranha", { 600, 650 });
 		//piranha->GetTransform().origin = sf::Vector2f(0.5f, 1.f);

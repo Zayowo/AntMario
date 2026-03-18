@@ -23,6 +23,7 @@ private:
 	float* energy;
 	
 	// Éléments de l'UI
+	sf::Sprite* overlay;
 	sf::Sprite* coinsIcon;
 	sf::Sprite* livesIcon;
 	sf::Sprite* energyIcon;

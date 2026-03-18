@@ -25,6 +25,10 @@ void GameController::Init()
 	ResourceModule* resourceModule = Engine::GetModule<ResourceModule>();
 	sf::Font& font = resourceModule->GetFont("Assets/UI/Font.ttf");
 
+	overlay = new sf::Sprite(resourceModule->GetTexture("Assets/EffectOnScreen.png"));
+	overlay->setPosition(sf::Vector2f(37.f, -50.f));
+	overlay->setRotation(sf::degrees(5.f));
+
 	coinsIcon = new sf::Sprite(resourceModule->GetTexture("Assets/UI/T_UI_Coins.png"));
 	coinsText = new sf::Text(font, "x0", 24);
 	coinsIcon->setPosition(sf::Vector2f(60.f, 20.f));
@@ -61,6 +65,7 @@ void GameController::Render(sf::RenderWindow* window)
 
 	window->setView(newView);
 
+	window->draw(*overlay);
 	window->draw(*coinsIcon);
 	window->draw(*coinsText);
 	window->draw(*livesIcon);
