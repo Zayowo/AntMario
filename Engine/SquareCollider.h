@@ -21,6 +21,8 @@ public:
 	// Récupère les bounds de la collision
 	sf::FloatRect GetBounds();
 
+	void SetSize(sf::Vector2f s);
+
 private:
 	sf::RectangleShape* shape;
 	std::unordered_map<std::string, std::vector<std::function<void(GameObject*)>>> collisionCallbackMap;

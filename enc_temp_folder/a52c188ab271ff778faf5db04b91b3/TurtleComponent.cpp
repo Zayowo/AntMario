@@ -14,9 +14,9 @@ void TurtleComponent::Init()
 	FSMComponent<TurtleContext>* fsmTurtle = owner->GetComponent<FSMComponent<TurtleContext>>();
 
 	InitialTurtle* initTurtle = fsmTurtle->CreateState<InitialTurtle>();
-	ShellTurtle* shellTurtle = fsmTurtle->CreateState<ShellTurtle>();
+	//ShellTurtle* shellTurtle = fsmTurtle->CreateState<ShellTurtle>();
 
-	initTurtle->AddTransition(Condition::IsHitByPlayer, shellTurtle);
+	initTurtle->AddTransition(Condition::IsHitByPlayer, initTurtle);
 
 	fsmTurtle->Init(initTurtle);
 

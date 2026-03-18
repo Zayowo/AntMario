@@ -61,7 +61,7 @@ void PlayerController::Init()
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::RIGHT, [this](GameObject* goomba) { HitByEnemy(goomba);  });
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::BOTTOM, [this](GameObject* goomba) { HitByEnemy(goomba);  });
 
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* turtle) { StepOnGoomba(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* turtle) { StepOnTurtle(turtle);  });
 	velocityComponent->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* turtle) { HitByEnemy(turtle);  });
 	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* turtle) { HitByEnemy(turtle);  });
 	velocityComponent->RegisterHit("Turtle", VelocityHitType::BOTTOM, [this](GameObject* turtle) { HitByEnemy(turtle);  });
@@ -222,13 +222,9 @@ void PlayerController::StepOnGoomba(GameObject* goomba)
 
 void PlayerController::StepOnTurtle(GameObject* turtle)
 {
-	sf::Vector2f pos = turtle->GetTransform().pos + sf::Vector2f(0.f, -20.f);
-	GameObject* orb = turtle->GetScene()->CreateGameObject("Shell", pos);
-	orb->AddComponent<SpriteRenderer>("Assets/Shell.png");
-	orb->AddComponent<SquareCollider>(sf::Vector2f(20.f, 20.f));
-	orb->AddComponent<BonusComponent>(BonusType::BLOOD_ORB);
+	FSMComponent<TurtleContext>* fsm = turtle->GetComponent<FSMComponent<TurtleContext>>();
 
-	turtle->GetScene()->DeleteGameObject(turtle);
+	fsm->GetContext().isHitByPlayer = true;
 
 	velocityComponent->SetY(-400.f);
 

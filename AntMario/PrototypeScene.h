@@ -208,12 +208,7 @@ public:
 		ctxTurtle.player = player;
 		ctxTurtle.turtle = turtle;
 		//State turtle
-		InitialTurtle* initTurtle = fsmTurtle->CreateState<InitialTurtle>();
-		ShellTurtle* shellTurtle = fsmTurtle->CreateState<ShellTurtle>();
-
-		//initTurtle->AddTransition(shellTurtle);
-
-		fsmTurtle->Init(initTurtle);
+		
 
 
 
