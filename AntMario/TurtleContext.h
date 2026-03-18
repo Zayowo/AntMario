@@ -6,5 +6,7 @@ class TurtleContext
 public:
 	GameObject* turtle;
 	GameObject* player;
+
+	bool isHitByPlayer = false;
 };
 

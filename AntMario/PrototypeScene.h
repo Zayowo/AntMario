@@ -195,10 +195,16 @@ public:
 		gameController->SetIsAlwaysLoaded(true);
 		
 		GameObject* turtle = CreateGameObject("Turtle", { 700, 720 });
-		turtle->AddComponent<EnemyComponent>();
-		turtle->AddComponent<SquareCollider>();
+		turtle->GetTransform().origin = sf::Vector2f(0.5f, 1.f);	
+		turtle->AddComponent<TurtleComponent>();
+		turtle->AddComponent<VelocityComponent>(90.f);
+		turtle->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		turtle->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
+
+		
+
 		FSMComponent<TurtleContext>* fsmTurtle = turtle->AddComponent<FSMComponent<TurtleContext>>();
-		TurtleContext ctxTurtle = fsmTurtle->GetContext();
+		TurtleContext& ctxTurtle = fsmTurtle->GetContext();
 		ctxTurtle.player = player;
 		ctxTurtle.turtle = turtle;
 		//State turtle

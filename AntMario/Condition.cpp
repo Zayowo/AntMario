@@ -78,3 +78,18 @@ bool Condition::IsHitByEnemy(PlayerContext& ctx)
 	return false;
 
 }
+
+bool Condition::IsHitByPlayer(TurtleContext& ctx)
+{
+
+	bool isHitByPlayer = ctx.isHitByPlayer;
+	ctx.isHitByPlayer = false;
+
+	if (isHitByPlayer)
+	{
+		return true;
+	}
+
+	return false;
+
+}

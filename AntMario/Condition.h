@@ -12,5 +12,8 @@ public:
 
 	static bool HasPickedFireFlower(PlayerContext& ctx);
 	static bool IsHitByEnemy(PlayerContext& ctx);
+
+	//turtle 
+	static bool IsHitByPlayer(TurtleContext& ctx);
 };
 

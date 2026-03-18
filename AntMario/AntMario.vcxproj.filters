@@ -170,6 +170,9 @@
     <ClInclude Include="ShellTurtle.h">
       <Filter>Fichiers d%27en-tête\Components\Enemy\Turtle</Filter>
     </ClInclude>
+	<ClInclude Include="TurtleComponent.h">
+		<Filter>Fichiers d%27en-tête\Components\Enemy\Turtle</Filter>
+	</ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerContext.h">

@@ -3,6 +3,7 @@
 #include "TurtleContext.h"
 class ShellTurtle : public State<TurtleContext>
 {
+	void Enter(TurtleContext&) override;
 	void Execute(TurtleContext& t, float dt) override;
 };
 
