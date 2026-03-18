@@ -11,14 +11,28 @@
 
 void FireState::Enter(PlayerContext& ctx)
 {
-	//changement de sprite ?
-	ctx.player->GetTransform().scale = sf::Vector2f(1.f, 1.f);
+
+	ctx.player->GetComponent<SquareCollider>()->SetSize(sf::Vector2f(40.f, 115.f));
+	ctx.isWalking = false;
 	ctx.isInFireFlower = true;
 
 }
 
 
 void FireState::Execute(PlayerContext& ctx, float dt) {
+
+	const float velocityX = ctx.player->GetComponent<VelocityComponent>()->GetVelocity().x;
+	if (velocityX != 0.f && !ctx.isWalking)
+	{
+		ctx.isWalking = true;
+		ctx.player->GetComponent<SpriteRenderer>()->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 256), sf::Vector2i(128, 128), 4));
+	}
+	else if (velocityX == 0.f && ctx.isWalking)
+	{
+		ctx.isWalking = false;
+		ctx.player->GetComponent<SpriteRenderer>()->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 256), sf::Vector2i(128, 128), 1));
+	}
+
 	// create fireball
 	Scene* current = ctx.player->GetScene();
 	float direction = 0;

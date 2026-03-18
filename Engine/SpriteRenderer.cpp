@@ -2,6 +2,7 @@
 #include "SpriteRenderer.h"
 #include "Engine.h"
 #include "ResourceModule.h"
+#include "Utils.h"
 
 SpriteRenderer::SpriteRenderer(std::string path) :
 	path(path)
@@ -31,7 +32,12 @@ void SpriteRenderer::Update(float dt)
 	{
 		SpriteAnimationRule& rule = _animationRule.value();
 		animationTime += dt;
-		sprite->setTextureRect({ { rule.pos.x + rule.size.x, rule.pos.y }, rule.size });
+
+		float totalDuration = rule.frames * 0.1f;
+		float currentTimeInLoop = fmod(animationTime, totalDuration);
+		int frame = int(currentTimeInLoop / 0.1f);
+
+		sprite->setTextureRect({ { rule.pos.x + (rule.size.x * frame), rule.pos.y }, rule.size });
 
 	}
 

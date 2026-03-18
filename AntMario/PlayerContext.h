@@ -7,6 +7,7 @@ class PlayerContext
 public:
 	GameObject* player;
 	float invulnerability = 0.f;
+	bool isWalking = false;
 	bool isInMushroom = false;
 	bool isInFireFlower = false;
 	bool hasPickedMushroom = false;

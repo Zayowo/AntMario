@@ -12,6 +12,9 @@ public:
 	void Update(float dt) override;
 	void Render(sf::RenderWindow* window) override;
 
+	// Applique une nouvelle dimension au collider
+	void SetSize(sf::Vector2f size);
+
 	// Vérifie si le collider est en collision avec un autre collider d'un game object
 	bool IsColliding(GameObject* gameObject);
 
@@ -20,6 +23,7 @@ public:
 
 	// Récupère les bounds de la collision
 	sf::FloatRect GetBounds();
+
 
 private:
 	sf::RectangleShape* shape;

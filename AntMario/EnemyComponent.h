@@ -9,5 +9,8 @@ protected:
 	virtual void Destroy() override {};
 
 	void TouchByBall(GameObject* other);
+
+public:
+	void Kill();
 };
 

@@ -75,6 +75,13 @@ void SquareCollider::Render(sf::RenderWindow* window)
 
 }
 
+void SquareCollider::SetSize(sf::Vector2f size)
+{
+
+	shape->setSize(size);
+
+}
+
 bool SquareCollider::IsColliding(GameObject* gameObject)
 {
 

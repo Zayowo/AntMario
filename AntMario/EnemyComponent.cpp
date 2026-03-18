@@ -1,6 +1,9 @@
-#include "EnemyComponent.h"
-#include <SquareCollider.h>
 #include <Scene.h>
+#include <ResourceModule.h>
+#include <SpriteRenderer.h>
+#include <SquareCollider.h>
+#include "EnemyComponent.h"
+#include "BonusComponent.h"
 
 void EnemyComponent::Init()
 {
@@ -11,4 +14,20 @@ void EnemyComponent::Init()
 
 void EnemyComponent::TouchByBall(GameObject* other) {
 	owner->GetScene()->DeleteGameObject(owner);
+}
+
+void EnemyComponent::Kill()
+{
+
+	Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/EnemyKill.wav", 0.75f, 1.f);
+	sf::Vector2f pos = owner->GetTransform().pos + sf::Vector2f(0.f, -20.f);
+	GameObject* orb = owner->GetScene()->CreateGameObject("BloodOrb", pos);
+
+	orb->AddComponent<SpriteRenderer>("Assets/BloodOrb.png");
+	orb->AddComponent<SquareCollider>(sf::Vector2f(20.f, 20.f));
+	orb->AddComponent<BonusComponent>(BonusType::BLOOD_ORB);
+
+
+	owner->GetScene()->DeleteGameObject(owner);
+
 }

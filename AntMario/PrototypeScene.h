@@ -231,14 +231,15 @@ public:
 
 		GameObject* player = CreateGameObject("Player", { 500, 700 });
 		player->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		player->GetTransform().scale = sf::Vector2f(0.65f, 0.65f);
 		player->AddComponent<FixedCameraComponent>(sf::Vector2f(1000.f, 666.f), 500.f, levelWidth - 500.f);
-		player->AddComponent<SpriteRenderer>("Assets/Player.png");
+		auto playerSprite = player->AddComponent<SpriteRenderer>("Assets/PlayerSpriteSheet.png");
 		player->AddComponent<PlayerController>();
 		player->AddComponent<VelocityComponent>(200.f);
 		player->AddComponent<SquareCollider>(sf::Vector2f(30.f, 80.f));
 		player->AddComponent<FSMComponent<PlayerContext>>();
 		player->SetIsAlwaysLoaded(true);
-
+		playerSprite->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 0), sf::Vector2i(128, 128), 1));
 
 
 		GameObject* gameController = CreateGameObject("GameController", { 0.f, 0.f });
