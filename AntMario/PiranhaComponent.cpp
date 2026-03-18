@@ -8,7 +8,7 @@ void PiranhaComponent::Init() {
 	// position au sol + offset ?
 	owner->GetTransform().origin = { 0.f, 0.f };
 	yOrigin = owner->GetTransform().pos.y;
-
+	SquareCollider* colider = owner->GetComponent<SquareCollider>();
 }
 
 void PiranhaComponent::Update(float dt)

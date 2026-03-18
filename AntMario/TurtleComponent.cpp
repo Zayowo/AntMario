@@ -20,7 +20,6 @@ void TurtleComponent::StepByPlayer(GameObject* other)
 {
 	VelocityComponent* otherVelocityComponent = other->GetComponent<VelocityComponent>();
 	otherVelocityComponent->SetY(-350.f);
-	owner->GetScene()->CreateGameObject(owner);
 	owner->GetScene()->DeleteGameObject(owner);
 }
 

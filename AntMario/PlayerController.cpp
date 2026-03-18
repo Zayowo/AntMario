@@ -66,6 +66,11 @@ void PlayerController::Init()
 	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* turtle) { HitByEnemy(turtle);  });
 	velocityComponent->RegisterHit("Turtle", VelocityHitType::BOTTOM, [this](GameObject* turtle) { HitByEnemy(turtle);  });
 
+	velocityComponent->RegisterHit("Piranha", VelocityHitType::TOP, [this](GameObject* piranha) { HitByEnemy(piranha);  });
+	velocityComponent->RegisterHit("Piranha", VelocityHitType::LEFT, [this](GameObject* piranha) { HitByEnemy(piranha);  });
+	velocityComponent->RegisterHit("Piranha", VelocityHitType::RIGHT, [this](GameObject* piranha) { HitByEnemy(piranha);  });
+	velocityComponent->RegisterHit("Piranha", VelocityHitType::BOTTOM, [this](GameObject* piranha) { HitByEnemy(piranha);  });
+
 	velocityComponent->RegisterHit("ReverseWalk", VelocityHitType::BOTTOM, [this](GameObject* block) { WalkUpsideDown(block); });
 
 
@@ -232,6 +237,19 @@ void PlayerController::StepOnTurtle(GameObject* turtle)
 
 	velocityComponent->SetY(-400.f);
 
+}
+
+void PlayerController::EliminationPiranha(GameObject* piranha)
+{
+	sf::Vector2f pos = piranha->GetTransform().pos + sf::Vector2f(0.f, -20.f);
+	GameObject* orb = piranha->GetScene()->CreateGameObject("BloodOrb", pos);
+	orb->AddComponent<SpriteRenderer>("Assets/BloodOrb.png");
+	orb->AddComponent<SquareCollider>(sf::Vector2f(20.f, 20.f));
+	orb->AddComponent<BonusComponent>(BonusType::BLOOD_ORB);
+
+	piranha->GetScene()->DeleteGameObject(piranha);
+
+	velocityComponent->SetY(-400.f);
 }
 
 

@@ -12,6 +12,8 @@ public:
 	void Init();
 	void Update(float dt) override;
 
+	
+
 	// Applique une vélocité
 	void SetVelocity(sf::Vector2f velocity);
 
@@ -25,6 +27,11 @@ public:
 
 	// Récupère la vélocité actuelle
 	sf::Vector2f GetVelocity();
+
+	// Set le movement de gravité
+	void SetGravity(bool);
+
+	
 
 	// Récupère le isGrounded
 	bool IsGrounded();
@@ -43,5 +50,10 @@ private:
 
 	// Envoie les callbacks enregistrés dans le hitCallbackMap en fonction du type de collision
 	void SendHit(GameObject* other, VelocityHitType hitType);
+
+	//fonction intermediraire pour le deplacement avec gravité
+	void MoveGravity(float dt);
+
+	bool hasGravity = true;
 
 };

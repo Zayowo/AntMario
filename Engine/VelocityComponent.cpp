@@ -16,6 +16,7 @@ void VelocityComponent::Init()
 	collider->RegisterCallback("Terrain", [this](GameObject* other) { ResolveCollisions(other); });
     collider->RegisterCallback("Block", [this](GameObject* other) { ResolveCollisions(other); });
     collider->RegisterCallback("Goomba", [this](GameObject* other) { ResolveCollisions(other); });
+    collider->RegisterCallback("Piranha", [this](GameObject* other) { ResolveCollisions(other); });
     collider->RegisterCallback("Turtle", [this](GameObject* other) { ResolveCollisions(other); });
     collider->RegisterCallback("ReverseWalk", [this](GameObject* other) { ResolveCollisions(other); });
 
@@ -23,17 +24,22 @@ void VelocityComponent::Init()
 
 void VelocityComponent::Update(float dt)
 {
+    if (hasGravity) {
+        MoveGravity(dt);
+    }
+}
+
+void VelocityComponent::MoveGravity(float dt) {
 
     // C'est moche, mais c'est comme ça j'imagine...
     if (velocity.y < 0.f || velocity.y > 6.5f)
         isGrounded = false;
 
-	velocity.y += 1950.f * dt;
+    velocity.y += 1950.f * dt;
 
-	Transform& transform = owner->GetTransform();
-	transform.pos.x += velocity.x * speed * dt;
+    Transform& transform = owner->GetTransform();
+    transform.pos.x += velocity.x * speed * dt;
     transform.pos.y += velocity.y * dt;
-
 }
 
 void VelocityComponent::SetVelocity(sf::Vector2f velocity)
@@ -76,6 +82,11 @@ sf::Vector2f VelocityComponent::GetVelocity()
 
     return velocity;
 
+}
+
+void VelocityComponent::SetGravity(bool g)
+{
+    hasGravity = g;
 }
 
 bool VelocityComponent::IsGrounded()

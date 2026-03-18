@@ -161,6 +161,21 @@ public:
 					}
 				}
 			}
+			else if (tileType == "PIRANHA") {
+				for (int i = 0; i < (int)width; i++) {
+					for (int j = 0; j < (int)height; j++) {
+						float finalX = xPos + (i * gridSize) + gridSize * 1.f;
+						float finalY = yPos + (j * gridSize) + gridSize * 1.f;
+
+						GameObject* piranha = CreateGameObject("Piranha", { finalX, finalY });
+						piranha->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+						piranha->AddComponent<PiranhaComponent>();
+						piranha->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+						piranha->AddComponent<VelocityComponent>(90.f);
+						piranha->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
+					}
+				}
+			}
 		}
 
 		// 3. PHASE PHYSIQUE
@@ -191,6 +206,14 @@ public:
 		gameController->AddComponent<GameController>();
 		gameController->SetIsAlwaysLoaded(true);
 		
+		
+		GameObject* piranha = CreateGameObject("Piranha", { 600, 650 });
+		piranha->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		piranha->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		piranha->AddComponent<SquareCollider>(sf::Vector2f(30.f, 80.f));
+		VelocityComponent* vPiranha = piranha->AddComponent<VelocityComponent>(90.f);
+		vPiranha->SetGravity(false);
+		piranha->AddComponent<PiranhaComponent>();
 	};
 
 	void Update(float dt) override
