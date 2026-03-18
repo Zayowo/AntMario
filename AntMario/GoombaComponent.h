@@ -11,6 +11,7 @@ public:
 	void Update(float dt) override;
 	void StepByPlayer(GameObject* other);
 	void ChangeDirection(float direction);
+	void Destroy(GameObject* other);
 
 private:
 	VelocityComponent* velocityComponent;

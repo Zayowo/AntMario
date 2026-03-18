@@ -2,6 +2,8 @@
 #include "SpriteRenderer.h"
 #include "SquareCollider.h"
 #include "VelocityComponent.h"
+#include "Condition.h"
+#include <Scene.h>
 
 void ShellTurtle::Enter(TurtleContext& ctxT)
 {
@@ -12,5 +14,32 @@ void ShellTurtle::Enter(TurtleContext& ctxT)
 
 void ShellTurtle::Execute(TurtleContext& t, float dt)
 {
-	//if jump ? direction depends on direction of maincharacter
+	VelocityComponent* velocity = t.turtle->GetComponent<VelocityComponent>();
+	if (IsHitByPlayer(t) && !isMoving) {
+		float dir = t.player->GetTransform().scale.x;
+		velocity->SetX(dir);
+		isMoving = true;
+	}
+
+	if (velocity->GetVelocity().x == 0 && isMoving == true)
+	{
+
+		t.turtle->GetScene()->DeleteGameObject(t.turtle);
+
+	}
+}
+
+bool ShellTurtle::IsHitByPlayer(TurtleContext& ctx)
+{
+
+	bool isHitByPlayer = ctx.isHitByPlayer;
+	ctx.isHitByPlayer = false;
+
+	if (isHitByPlayer)
+	{
+		return true;
+	}
+
+	return false;
+
 }
