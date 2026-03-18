@@ -16,6 +16,7 @@
 #include "BigState.h"
 #include "FireState.h"
 #include "Condition.h"
+#include "InitialTurtle.h"
 
 void PlayerController::Init()
 {
@@ -62,9 +63,9 @@ void PlayerController::Init()
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::BOTTOM, [this](GameObject* goomba) { HitByEnemy(goomba);  });
 
 	velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* turtle) { StepOnTurtle(turtle);  });
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* turtle) { HitByEnemy(turtle);  });
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* turtle) { HitByEnemy(turtle);  });
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::BOTTOM, [this](GameObject* turtle) { HitByEnemy(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* turtle) { if (dynamic_cast<InitialTurtle*>(fsm->GetState())) HitByEnemy(turtle); });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* turtle) { if (dynamic_cast<InitialTurtle*>(fsm->GetState())) HitByEnemy(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::BOTTOM, [this](GameObject* turtle) { if (dynamic_cast<InitialTurtle*>(fsm->GetState())) HitByEnemy(turtle);  });
 
 	velocityComponent->RegisterHit("ReverseWalk", VelocityHitType::BOTTOM, [this](GameObject* block) { WalkUpsideDown(block); });
 

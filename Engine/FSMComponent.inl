@@ -43,3 +43,9 @@ ContextType& FSMComponent<ContextType>::GetContext()
     return context;
 
 }
+
+
+template<typename ContextType>
+State<ContextType>* FSMComponent<ContextType>::GetState() {
+    return current;
+}
