@@ -25,6 +25,7 @@ public:
 
 private:
 	std::vector<GameObject*> gameObjects;
+	std::unordered_map<std::string, std::vector<GameObject*>> gameObjectsByName;
 	std::vector<GameObject*> gameObjectsToCreate;
 	std::vector<GameObject*> gameObjectsToDelete;
 

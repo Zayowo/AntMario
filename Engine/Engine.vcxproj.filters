@@ -1,45 +1,75 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Fichiers sources">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Fichiers de ressources">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Models">
-      <UniqueIdentifier>{5b83b9fb-ef55-4154-ad0b-fcbf3ff1c226}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Modules">
-      <UniqueIdentifier>{2ea94985-e362-4ed8-9e9b-3c2311070929}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Components">
-      <UniqueIdentifier>{13cf0f8f-2a6f-48bc-8d06-92af475bb9a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Modules">
-      <UniqueIdentifier>{63b86970-50ea-4a6e-857a-f721ffb4943f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\Components">
-      <UniqueIdentifier>{52899063-1387-4e3a-bd5e-e3a14b24214f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\State">
-      <UniqueIdentifier>{58fd7519-0fd6-4ff7-8b0b-b9e8c2464ecf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers sources\State">
-      <UniqueIdentifier>{9866de7a-d9d2-43ed-91d7-953bde5d6d1d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\Utils">
-      <UniqueIdentifier>{cfebcbce-2d49-49f1-bfb1-c9c3a5f22563}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Module.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="VelocityComponent.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TilemapRenderer.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextRenderer.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SquareCollider.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="FSMConponent.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonRenderer.cpp">
+      <Filter>Fichiers sources\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowModule.cpp">
+      <Filter>Fichiers sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeModule.cpp">
+      <Filter>Fichiers sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneModule.cpp">
+      <Filter>Fichiers sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceModule.cpp">
+      <Filter>Fichiers sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleManager.cpp">
+      <Filter>Fichiers sources\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="InputModule.cpp">
+      <Filter>Fichiers sources\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Component.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
     <ClInclude Include="Engine.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Module.h">
@@ -51,13 +81,46 @@
     <ClInclude Include="Scene.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
+    <ClInclude Include="State.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="resource.h">
+      <Filter>Fichiers de ressources</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonRenderer.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="FSMComponent.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SquareCollider.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TilemapRenderer.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TextRenderer.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="VelocityComponent.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="InputInfo.h">
+      <Filter>Fichiers d%27en-tête\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteAnimationRule.h">
+      <Filter>Fichiers d%27en-tête\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="VelocityHitType.h">
+      <Filter>Fichiers d%27en-tête\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
       <Filter>Fichiers d%27en-tête\Models</Filter>
     </ClInclude>
     <ClInclude Include="SceneModule.h">
@@ -75,115 +138,55 @@
     <ClInclude Include="TimeModule.h">
       <Filter>Fichiers d%27en-tête\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteRenderer.h">
-      <Filter>Fichiers d%27en-tête\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Fichiers de ressources</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteAnimationRule.h">
-      <Filter>Fichiers d%27en-tête\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Fichiers d%27en-tête\Models</Filter>
-    </ClInclude>
-    <ClInclude Include="TextRenderer.h">
-      <Filter>Fichiers d%27en-tête\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="VelocityComponent.h">
-      <Filter>Fichiers d%27en-tête\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="SquareCollider.h">
-      <Filter>Fichiers d%27en-tête\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="ButtonRenderer.h">
-      <Filter>Fichiers d%27en-tête\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="FSMComponent.h">
-      <Filter>Fichiers d%27en-tête\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Fichiers d%27en-tête\State</Filter>
-    </ClInclude>
     <ClInclude Include="Json.h">
-      <Filter>Fichiers d%27en-tête\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="VelocityHitType.h">
-      <Filter>Fichiers d%27en-tête\Models</Filter>
+      <Filter>Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Engine.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleManager.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Module.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceModule.cpp">
-      <Filter>Fichiers sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneModule.cpp">
-      <Filter>Fichiers sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeModule.cpp">
-      <Filter>Fichiers sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowModule.cpp">
-      <Filter>Fichiers sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="InputModule.cpp">
-      <Filter>Fichiers sources\Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Fichiers sources\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TextRenderer.cpp">
-      <Filter>Fichiers sources\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="VelocityComponent.cpp">
-      <Filter>Fichiers sources\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="SquareCollider.cpp">
-      <Filter>Fichiers sources\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="ButtonRenderer.cpp">
-      <Filter>Fichiers sources\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="FSMConponent.cpp">
-      <Filter>Fichiers sources\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Fichiers sources\State</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ModuleManager.inl">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </None>
     <None Include="GameObject.inl">
       <Filter>Fichiers d%27en-tête</Filter>
     </None>
-    <None Include="SceneModule.inl">
-      <Filter>Fichiers d%27en-tête\Modules</Filter>
+    <None Include="ModuleManager.inl">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </None>
+    <None Include="State.inl">
+      <Filter>Fichiers d%27en-tête</Filter>
     </None>
     <None Include="FSMComponent.inl">
       <Filter>Fichiers d%27en-tête\Components</Filter>
     </None>
-    <None Include="State.inl">
-      <Filter>Fichiers d%27en-tête\State</Filter>
+    <None Include="SceneModule.inl">
+      <Filter>Fichiers d%27en-tête\Modules</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Fichiers d%27en-tête">
+      <UniqueIdentifier>{e6da54db-588e-4f09-9d2c-b39947450184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{514d4bd9-0fe8-4a28-ae5a-851e4fe8bc2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers de ressources">
+      <UniqueIdentifier>{b999e9a0-6317-4179-b750-6bbfd695478e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Components">
+      <UniqueIdentifier>{9a516dc9-7eee-4359-a1e4-010c0b8875bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Components">
+      <UniqueIdentifier>{254cb460-124d-44fa-903a-09f414145710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{b607996d-3df1-4435-a5dd-88e955b99a59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Models">
+      <UniqueIdentifier>{0194b59f-3a61-4bad-9d1f-658ef6ebe6fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Modules">
+      <UniqueIdentifier>{f76a5c95-5656-4d70-9be1-ed6f0099bc2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Modules">
+      <UniqueIdentifier>{36997533-b44e-4c61-826f-29d56d790ce3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Engine.rc">

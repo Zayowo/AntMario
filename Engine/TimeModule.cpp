@@ -12,6 +12,8 @@ void TimeModule::Update()
 {
 
 	dt = deltaClock.restart().asSeconds();
+	if (dt > 1.f / 60.f)
+		dt = 1.f / 60.f;
 
 }
 

@@ -48,10 +48,33 @@ bool Condition::collitionWithBigBonus(PlayerContext& p)
 	return false;
 }
 
-bool Condition::collisionWithPlayer(TurtleContext& t)
+bool Condition::HasPickedFireFlower(PlayerContext& ctx)
 {
-	t.turtle->GetComponent<SquareCollider>();
+
+	bool hasPickedFireFlower = ctx.hasPickedFireFlower;
+	ctx.hasPickedFireFlower = false;
+
+	if (hasPickedFireFlower)
+	{
+		return true;
+	}
+
 	return false;
+
 }
 
+bool Condition::IsHitByEnemy(PlayerContext& ctx)
+{
 
+	bool isHitByEnemy = ctx.isHitByEnemy;
+	ctx.isHitByEnemy = false;
+
+	if (isHitByEnemy && ctx.invulnerability <= 0.f)
+	{
+		ctx.invulnerability = 1.5f;
+		return true;
+	}
+
+	return false;
+
+}

@@ -20,20 +20,23 @@ ButtonRenderer::ButtonRenderer(std::string unhoveredPath, std::string hoveredPat
 
 void ButtonRenderer::Update(float dt)
 {
+	WindowModule* windowModule = Engine::GetModule<WindowModule>();
+	sf::RenderWindow* window = windowModule->GetRenderWindow();
+
+	sf::View currentView = window->getView();
+	window->setView(window->getDefaultView());
 
 	Transform& transform = owner->GetTransform();
-	sprite->setPosition(transform.GetViewRelativePos());
+	sprite->setPosition(transform.pos);
 	sprite->setRotation(sf::degrees(transform.rot));
 	sprite->setScale(transform.scale);
 
-	text->setPosition(transform.GetViewRelativePos() - sf::Vector2f(0.f, 1.5f));
+	text->setPosition(transform.pos - sf::Vector2f(0.f, 1.5f));
 	text->setRotation(sf::degrees(transform.rot));
 	text->setScale(transform.scale);
 	text->setOrigin(text->getLocalBounds().size * 0.5f);
 
 	// Vérifie si le bouton est survolé
-	WindowModule* windowModule = Engine::GetModule<WindowModule>();
-	sf::RenderWindow* window = windowModule->GetRenderWindow();
 	sf::Vector2f mousePos = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
 
 	if (sprite->getGlobalBounds().contains(mousePos))
@@ -61,12 +64,19 @@ void ButtonRenderer::Update(float dt)
 	if (sprite->getGlobalBounds().contains(mousePos) && inputModule->Is(sf::Mouse::Button::Left, InputState::RELEASED))
 		callback();
 
+	window->setView(currentView);
+
 }
 
 void ButtonRenderer::Render(sf::RenderWindow* window)
 {
 
+	sf::View currentView = window->getView();
+	window->setView(window->getDefaultView());
+
 	window->draw(*sprite);
 	window->draw(*text);
+
+	window->setView(currentView);
 
 }

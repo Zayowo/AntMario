@@ -13,16 +13,22 @@ void VelocityComponent::Init()
 	if (!collider)
 		return;
 
-	collider->RegisterCallback("Collider", [this](GameObject* other) { ResolveCollisions(other); });
-    collider->RegisterCallback("Brick", [this](GameObject* other) { ResolveCollisions(other); });
+	collider->RegisterCallback("Terrain", [this](GameObject* other) { ResolveCollisions(other); });
+    collider->RegisterCallback("Block", [this](GameObject* other) { ResolveCollisions(other); });
     collider->RegisterCallback("Goomba", [this](GameObject* other) { ResolveCollisions(other); });
+    collider->RegisterCallback("Turtle", [this](GameObject* other) { ResolveCollisions(other); });
+    collider->RegisterCallback("ReverseWalk", [this](GameObject* other) { ResolveCollisions(other); });
 
 }
 
 void VelocityComponent::Update(float dt)
 {
 
-	velocity.y += 1600.f * dt;
+    // C'est moche, mais c'est comme ça j'imagine...
+    if (velocity.y < 0.f || velocity.y > 6.5f)
+        isGrounded = false;
+
+	velocity.y += 1950.f * dt;
 
 	Transform& transform = owner->GetTransform();
 	transform.pos.x += velocity.x * speed * dt;
@@ -51,16 +57,31 @@ void VelocityComponent::SetY(float y)
 
 }
 
-//void VelocityComponent::SetTrajector(std::function<void> tj)
-//{
-//    trajector = tj;
-//
-//}
+void VelocityComponent::AddX(float x)
+{
+
+    velocity.x += x;
+
+}
+
+void VelocityComponent::AddY(float y)
+{
+
+    velocity.y += y;
+
+}
 
 sf::Vector2f VelocityComponent::GetVelocity()
 {
 
     return velocity;
+
+}
+
+bool VelocityComponent::IsGrounded()
+{
+
+    return isGrounded;
 
 }
 
@@ -103,14 +124,14 @@ void VelocityComponent::ResolveCollisions(GameObject* other) {
         if (playerBounds.position.x < otherBounds.position.x)
         {
 
-            transform.pos.x = otherBounds.position.x - (playerBounds.size.x * (1.0f - transform.origin.x)) - 0.01f;
+            transform.pos.x = otherBounds.position.x - (playerBounds.size.x * (1.0f - transform.origin.x));
             SendHit(other, VelocityHitType::LEFT);
 
         }
         else
         {
 
-            transform.pos.x = otherBounds.position.x + otherBounds.size.x + (playerBounds.size.x * transform.origin.x) + 0.01f;
+            transform.pos.x = otherBounds.position.x + otherBounds.size.x + (playerBounds.size.x * transform.origin.x);
             SendHit(other, VelocityHitType::RIGHT);
 
         }
@@ -122,17 +143,27 @@ void VelocityComponent::ResolveCollisions(GameObject* other) {
         if (playerBounds.position.y < otherBounds.position.y)
         {
 
-            transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y)) - 0.01f;
-            if (velocity.y > 0) velocity.y = 0.f;
+            if (velocity.y > 0)
+            {
+                velocity.y = 0.f;
+                isGrounded = true;
+                transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y)) + 0.1f;
+            }
+            else
+                transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y));
+
             SendHit(other, VelocityHitType::TOP);
 
         }
         else
         {
 
-            transform.pos.y = otherBounds.position.y + otherBounds.size.y + (playerBounds.size.y * transform.origin.y) + 0.01f;
+            transform.pos.y = otherBounds.position.y + otherBounds.size.y + (playerBounds.size.y * transform.origin.y);
+            float _velocityY = velocity.y;
             if (velocity.y < 0) velocity.y = 0.01f;
-            SendHit(other, VelocityHitType::BOTTOM);
+            
+            if (_velocityY < 0.f)
+                SendHit(other, VelocityHitType::BOTTOM);
 
         }
 

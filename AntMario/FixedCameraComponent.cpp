@@ -9,16 +9,19 @@ FixedCameraComponent::FixedCameraComponent(sf::Vector2f size, float minX, float 
 void FixedCameraComponent::Update(float dt)
 {
 
-	Transform& transform = owner->GetTransform();
-	float viewX = transform.pos.x;
+    Transform& transform = owner->GetTransform();
+    float smoothSpeed = 3.5f;
 
-	if (viewX < minX)
-		viewX = minX;
+    float targetX = transform.pos.x;
+    float targetY = transform.pos.y + 120.f;
 
-	if (viewX > maxX)
-		viewX = maxX;
+    float newX = view.getCenter().x + (targetX - view.getCenter().x) * smoothSpeed * dt;
+    newX = std::clamp(newX, minX, maxX);
 
-	view.setCenter(sf::Vector2f(viewX, 400));
+    float newY = view.getCenter().y + (targetY - view.getCenter().y) * smoothSpeed * dt;
+    newY = std::clamp(newY, 350.f, 450.f);
+
+    view.setCenter(sf::Vector2f(newX, newY));
 
 }
 

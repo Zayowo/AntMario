@@ -16,14 +16,17 @@ void FireComponent::Update(float dt)
 {
 	// s'il sort de la fenetre -> delete
 
+	sf::Vector2f center = Engine::GetModule<WindowModule>()->GetRenderWindow()->getView().getCenter();
 	VelocityComponent* vector = owner->GetComponent<VelocityComponent>();
 	Scene* ActualScene = owner->GetScene();
 
 	sf::Vector2f windowSize = { 1200, 800 };
-	sf::Vector2f position = owner->GetTransform().pos;
-	if (position.x <= 0 || position.x >= 1200 ||
-		position.y <= 0 || position.y >= 800) {
+	float distance = (center - owner->GetTransform().pos).length();
+
+	if (distance > 750.f)
+	{
 		ActualScene->DeleteGameObject(owner);
+		return;
 	}
 
 	if (vector->GetVelocity().y == 0)

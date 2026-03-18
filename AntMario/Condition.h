@@ -10,8 +10,7 @@ public:
 	static bool collitionWithFireBonus(PlayerContext& p);
 	static bool collitionWithBigBonus(PlayerContext& p);
 
-	//turtle
-	static bool collisionWithPlayer(TurtleContext& t);
-
+	static bool HasPickedFireFlower(PlayerContext& ctx);
+	static bool IsHitByEnemy(PlayerContext& ctx);
 };
 
