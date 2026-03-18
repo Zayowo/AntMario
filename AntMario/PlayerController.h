@@ -32,6 +32,8 @@ public:
 
 private:
 	bool isDoubleJump = false;
+	int* coins;
+	float* energy;
 	InputModule* inputModule;
 	GameController* gameController;
 	VelocityComponent* velocityComponent;

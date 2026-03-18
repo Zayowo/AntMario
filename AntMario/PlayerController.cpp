@@ -27,6 +27,8 @@ void PlayerController::Init()
 
 	// À éviter, mais c'est temporaire...
 	gameController = owner->GetScene()->GetGameObjectsByName("GameController")[0]->GetComponent<GameController>();
+	coins = gameController->GetCoins();
+	energy = gameController->GetEnergy();
 
 
 	// Initialisation des stats du FSM du joueur
@@ -109,12 +111,12 @@ void PlayerController::Update(float dt)
 
 		else if (
 			!isDoubleJump &&
-			gameController->GetEnergy() >= 2.5f
+			*energy >= 0.05f
 		)
 		{
 
 			isDoubleJump = true;
-			gameController->SetEnergy(gameController->GetEnergy() - 2.5f, 100.f);
+			*energy -= 0.05f;
 			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.25f);
 			velocityComponent->SetY(-840.f);
 
@@ -141,8 +143,7 @@ void PlayerController::HitInteractableBlock(GameObject* block)
 	switch (blockComponent->GetType())
 	{
 	case (InteractableBlockType::COINS):
-
-		gameController->SetCoins(gameController->GetCoins() + 1);
+		(*coins)++;
 		Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Coin.wav", 0.75f, 1.f);
 		blockComponent->SetUsed(true);
 		LogPrint("Player hit a coins block!");
@@ -180,13 +181,13 @@ void PlayerController::PickUp(GameObject* bonus)
 	switch (bonusComponent->GetType())
 	{
 	case (BonusType::COINS):
-		gameController->SetCoins(gameController->GetCoins() + 1);
+		(*coins)++;
 		Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Coin.wav", 0.75f, 1.f);
 		LogPrint("Player picked up coins!");
 		break;
 
 	case (BonusType::BLOOD_ORB):
-		gameController->SetEnergy(gameController->GetEnergy() + 5.f, 100.f);
+		*energy += 0.15f;
 		LogPrint("Player picked up a blood orb!");
 		break;
 
@@ -211,16 +212,19 @@ void PlayerController::PickUp(GameObject* bonus)
 void PlayerController::WalkUpsideDown(GameObject* block)
 {
 
-	if (gameController->GetEnergy() <= 0.f)
+	if (*energy <= 0.f)
 		return;
 
 	if (isDoubleJump)
 		return;
 
 	float dt = Engine::GetModule<TimeModule>()->GetDeltaTime();
-	gameController->SetEnergy(gameController->GetEnergy() - 5 * dt, 100.f);
+	*energy -= 0.05f * dt;
 	velocityComponent->SetY(0.f);
 	owner->GetTransform().pos.y = block->GetTransform().pos.y + 90.f;
+
+	if (*energy <= 0.f)
+		*energy = 0.f;
 
 }
 
