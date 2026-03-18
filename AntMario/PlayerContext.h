@@ -7,7 +7,6 @@ class PlayerContext
 public:
 	GameObject* player;
 	float invulnerability = 0.f;
-	bool isInFireFlower = false;
 	bool hasPickedFireFlower = false;
 	bool isHitByEnemy = false;
 };

@@ -13,8 +13,6 @@ void FireState::Enter(PlayerContext& p)
 {
 	//changement de sprite ?
 	p.player->GetTransform().scale = sf::Vector2f(1.f, 1.f);
-	p.isInFireFlower = true;
-
 }
 
 
@@ -48,12 +46,5 @@ void FireState::Execute(PlayerContext& p, float dt) {
 
 
 	//current->CreateGameObject("fireBall", sf::Vector2f(playerPos.x * direction, playerPos.y));
-
-}
-
-void FireState::Exit(PlayerContext& ctx)
-{
-
-	ctx.isInFireFlower = false;
 
 }
