@@ -17,6 +17,7 @@
 #include "FireState.h"
 #include "Condition.h"
 #include "EnemyComponent.h"
+#include "InitialTurtle.h"
 
 void PlayerController::Init()
 {
@@ -65,10 +66,10 @@ void PlayerController::Init()
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::RIGHT, [this](GameObject* goomba) { HitByEnemy(goomba);  });
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::BOTTOM, [this](GameObject* goomba) { HitByEnemy(goomba);  });
 
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* turtle) { BouncePlayer(); KillEnemy(turtle); });
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* turtle) { HitByEnemy(turtle);  });
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* turtle) { HitByEnemy(turtle);  });
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::BOTTOM, [this](GameObject* turtle) { HitByEnemy(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* turtle) { StepOnTurtle(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* turtle) { if (dynamic_cast<InitialTurtle*>(fsm->GetState())) HitByEnemy(turtle); });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* turtle) { if (dynamic_cast<InitialTurtle*>(fsm->GetState())) HitByEnemy(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::BOTTOM, [this](GameObject* turtle) { if (dynamic_cast<InitialTurtle*>(fsm->GetState())) HitByEnemy(turtle);  });
 
 	velocityComponent->RegisterHit("Piranha", VelocityHitType::TOP, [this](GameObject* piranha) { HitByEnemy(piranha); });
 	velocityComponent->RegisterHit("Piranha", VelocityHitType::LEFT, [this](GameObject* piranha) { HitByEnemy(piranha);  });
@@ -244,6 +245,17 @@ void PlayerController::WalkUpsideDown(GameObject* block)
 
 void PlayerController::BouncePlayer()
 {
+	sf::Vector2f pos = turtle->GetTransform().pos + sf::Vector2f(0.f, -20.f);
+	GameObject* orb = turtle->GetScene()->CreateGameObject("Shell", pos);
+	orb->AddComponent<SpriteRenderer>("Assets/Shell.png");
+	orb->AddComponent<SquareCollider>(sf::Vector2f(20.f, 20.f));
+	orb->AddComponent<BonusComponent>(BonusType::BLOOD_ORB);
+
+	turtle->GetScene()->DeleteGameObject(turtle);
+	orb->AddComponent<SquareCollider>(sf::Vector2f(20.f, 20.f));
+	orb->AddComponent<BonusComponent>(BonusType::BLOOD_ORB);
+
+	turtle->GetScene()->DeleteGameObject(turtle);
 
 	if (inputModule->Is(sf::Keyboard::Key::Space, InputState::HELD))
 		velocityComponent->SetY(-800.f);

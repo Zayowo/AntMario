@@ -16,6 +16,8 @@ public:
 
     ContextType& GetContext();
 
+    State* GetState();
+
 private:
     std::vector<State*> states;
     ContextType context;

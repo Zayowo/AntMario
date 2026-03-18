@@ -1,6 +1,7 @@
 #pragma once
 #include "EnemyComponent.h"
 
+//need FSMComponent<PiranhaContext>
 class TurtleComponent : public EnemyComponent
 {
 	void Init() override;

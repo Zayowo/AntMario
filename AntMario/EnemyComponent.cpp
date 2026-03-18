@@ -2,6 +2,8 @@
 #include <ResourceModule.h>
 #include <SpriteRenderer.h>
 #include <SquareCollider.h>
+#include <Scene.h>
+#include <VelocityComponent.h>
 #include "EnemyComponent.h"
 #include "BonusComponent.h"
 
@@ -12,8 +14,16 @@ void EnemyComponent::Init()
 		TouchByBall(o); });
 }
 
+
 void EnemyComponent::TouchByBall(GameObject* other) {
 	owner->GetScene()->DeleteGameObject(owner);
+}
+
+void EnemyComponent::Move()
+{
+	VelocityComponent* velocity = owner->GetComponent<VelocityComponent>();
+	velocity->SetX(-1.f);
+}
 }
 
 void EnemyComponent::Kill()

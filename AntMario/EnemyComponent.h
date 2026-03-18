@@ -11,6 +11,7 @@ protected:
 	void TouchByBall(GameObject* other);
 
 public:
+	void Move();
 	void Kill();
 };
 
