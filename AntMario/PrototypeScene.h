@@ -25,6 +25,7 @@
 #include "TurtleContext.h"
 #include "InitialTurtle.h"
 #include "ShellTurtle.h"
+#include "Condition.h"
 
 using json = nlohmann::json;
 
@@ -210,6 +211,12 @@ public:
 		//State turtle
 		
 
+		InitialTurtle* initTurtle = fsmTurtle->CreateState<InitialTurtle>();
+		ShellTurtle* shellTurtle = fsmTurtle->CreateState<ShellTurtle>();
+
+		initTurtle->AddTransition(Condition::IsHitByPlayer, shellTurtle);
+
+		fsmTurtle->Init(initTurtle);
 
 
 	};

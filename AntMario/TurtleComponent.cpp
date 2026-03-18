@@ -4,21 +4,21 @@
 #include <Scene.h>
 #include "FSMComponent.h"
 #include "TurtleContext.h"
-#include "InitialTurtle.h"
-#include "ShellTurtle.h"
-#include "Condition.h"
+//#include "InitialTurtle.h"
+//#include "ShellTurtle.h"
+//#include "Condition.h"
 
 void TurtleComponent::Init()
 {
 	EnemyComponent::Init();
-	FSMComponent<TurtleContext>* fsmTurtle = owner->GetComponent<FSMComponent<TurtleContext>>();
+	/*FSMComponent<TurtleContext>* fsmTurtle = owner->GetComponent<FSMComponent<TurtleContext>>();
 
 	InitialTurtle* initTurtle = fsmTurtle->CreateState<InitialTurtle>();
 	ShellTurtle* shellTurtle = fsmTurtle->CreateState<ShellTurtle>();
 
 	initTurtle->AddTransition(Condition::IsHitByPlayer, shellTurtle);
 
-	fsmTurtle->Init(initTurtle);
+	fsmTurtle->Init(initTurtle);*/
 
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
 
@@ -44,4 +44,5 @@ void TurtleComponent::StepByPlayer(GameObject* other)
 
 void TurtleComponent::Destroy()
 {
+	
 }
