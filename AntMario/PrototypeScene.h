@@ -58,6 +58,18 @@ public:
 		tilemapObject->SetIsAlwaysLoaded(true);
 		TilemapRenderer* tilemap = tilemapObject->AddComponent<TilemapRenderer>("Assets/Environment/Tileset.png", sf::Vector2u(gridSize, gridSize), 500, 50);
 
+
+		GameObject* player = CreateGameObject("Player", { 500, 700 });
+		player->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		player->AddComponent<FixedCameraComponent>(sf::Vector2f(1000.f, 666.f), 500.f, levelWidth - 500.f);
+		player->AddComponent<SpriteRenderer>("Assets/Player.png");
+		player->AddComponent<PlayerController>();
+		player->AddComponent<VelocityComponent>(200.f);
+		player->AddComponent<SquareCollider>(sf::Vector2f(30.f, 80.f));
+		player->AddComponent<FSMComponent<PlayerContext>>();
+		player->SetIsAlwaysLoaded(true);
+
+
 		for (const auto& tile : data["tiles"]) {
 			std::string tileType = tile["type"];
 			float xPos = tile["x"].get<float>() * gridSize;
@@ -162,6 +174,7 @@ public:
 						turtle->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
 						turtle->AddComponent<VelocityComponent>(90.f);
 						turtle->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
+						AddTurtleSFMComponent(player, turtle);
 					}
 				}
 			}
@@ -179,15 +192,7 @@ public:
 			terrainPhysic->AddComponent<SquareCollider>(sf::Vector2f(cw, ch));
 		}
 
-		GameObject* player = CreateGameObject("Player", { 500, 700 });
-		player->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
-		player->AddComponent<FixedCameraComponent>(sf::Vector2f(1000.f, 666.f), 500.f, levelWidth - 500.f);
-		player->AddComponent<SpriteRenderer>("Assets/Player.png");
-		player->AddComponent<PlayerController>();
-		player->AddComponent<VelocityComponent>(200.f);
-		player->AddComponent<SquareCollider>(sf::Vector2f(30.f, 80.f));
-		player->AddComponent<FSMComponent<PlayerContext>>();
-		player->SetIsAlwaysLoaded(true);
+		
 
 
 
@@ -201,23 +206,7 @@ public:
 		turtle->AddComponent<VelocityComponent>(90.f);
 		turtle->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
 		turtle->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
-
-		
-
-		FSMComponent<TurtleContext>* fsmTurtle = turtle->AddComponent<FSMComponent<TurtleContext>>();
-		TurtleContext& ctxTurtle = fsmTurtle->GetContext();
-		ctxTurtle.player = player;
-		ctxTurtle.turtle = turtle;
-		//State turtle
-		
-
-		InitialTurtle* initTurtle = fsmTurtle->CreateState<InitialTurtle>();
-		ShellTurtle* shellTurtle = fsmTurtle->CreateState<ShellTurtle>();
-
-		initTurtle->AddTransition(Condition::IsHitByPlayer, shellTurtle);
-
-		fsmTurtle->Init(initTurtle);
-
+		AddTurtleSFMComponent(player, turtle);
 
 	};
 
@@ -232,6 +221,23 @@ public:
 
 		Scene::Update(dt);
 
+	}
+
+	//fonction intermediaire pour que ce ne soit pas long
+	void AddTurtleSFMComponent(GameObject* player, GameObject* turtle) {
+		FSMComponent<TurtleContext>* fsmTurtle = turtle->AddComponent<FSMComponent<TurtleContext>>();
+		TurtleContext& ctxTurtle = fsmTurtle->GetContext();
+		ctxTurtle.player = player;
+		ctxTurtle.turtle = turtle;
+		
+		//State turtle
+		InitialTurtle* initTurtle = fsmTurtle->CreateState<InitialTurtle>();
+		ShellTurtle* shellTurtle = fsmTurtle->CreateState<ShellTurtle>();
+
+		//transition
+		initTurtle->AddTransition(Condition::IsHitByPlayer, shellTurtle);
+
+		fsmTurtle->Init(initTurtle);
 	}
 
 };

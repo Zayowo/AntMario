@@ -17,15 +17,13 @@ void ShellTurtle::Execute(TurtleContext& t, float dt)
 	VelocityComponent* velocity = t.turtle->GetComponent<VelocityComponent>();
 	if (IsHitByPlayer(t) && !isMoving) {
 		float dir = t.player->GetTransform().scale.x;
-		velocity->SetX(dir);
+		velocity->SetX(dir * 3);
 		isMoving = true;
 	}
 
 	if (velocity->GetVelocity().x == 0 && isMoving == true)
 	{
-
 		t.turtle->GetScene()->DeleteGameObject(t.turtle);
-
 	}
 }
 
