@@ -6,8 +6,7 @@ enum class BonusType
 
 	COINS,
 	BLOOD_ORB,
-	Bonus1,
-	Bonus2,
-	Bonus3
+	MUSHROOM,
+	FIRE_FLOWER
 
 };

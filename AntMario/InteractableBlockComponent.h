@@ -17,6 +17,8 @@ public:
 	// Vérifie si le bloc est déjà utilisé
 	bool IsUsed();
 
+	void SpawnContent();
+
 private:
 	InteractableBlockType type;
 	bool isUsed = false;

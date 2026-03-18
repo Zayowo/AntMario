@@ -2,15 +2,21 @@
 #include <Scene.h>
 #include <GameObject.h>
 #include <InputModule.h>
+#include <SceneModule.h>
 #include <ResourceModule.h>
 #include <TimeModule.h>
 #include <VelocityComponent.h>
 #include <SpriteRenderer.h>
 #include <SquareCollider.h>
+#include <Utils.h>
 #include "PlayerController.h"
 #include "BonusComponent.h"
 #include "InteractableBlockComponent.h"
-#include "Utils.h"
+#include "LittleState.h"
+#include "BigState.h"
+#include "FireState.h"
+#include "Condition.h"
+#include "EnemyComponent.h"
 
 void PlayerController::Init()
 {
@@ -18,26 +24,59 @@ void PlayerController::Init()
 	inputModule = Engine::GetModule<InputModule>();
 	if (!inputModule) std::cerr << "PlayerController: No InputModule detected!" << std::endl;
 
+
 	// À éviter, mais c'est temporaire...
 	gameController = owner->GetScene()->GetGameObjectsByName("GameController")[0]->GetComponent<GameController>();
 
+
+	// Initialisation des stats du FSM du joueur
+	fsm = owner->GetComponent<FSMComponent<PlayerContext>>();
+	fsm->GetContext().player = owner;
+	auto littleState = fsm->CreateState<LittleState>();
+	auto bigState = fsm->CreateState<BigState>();
+	auto fireState = fsm->CreateState<FireState>();
+
+	littleState->AddTransition(Condition::HasPickedFireFlower, fireState);
+	bigState->AddTransition(Condition::HasPickedFireFlower, fireState);
+	littleState->AddTransition([this](PlayerContext& ctx)
+		{
+
+			if (Condition::IsHitByEnemy(ctx))
+				Engine::GetModule<SceneModule>()->SetScene("MainMenuScene");
+			return false;
+
+		}, nullptr);
+	bigState->AddTransition(Condition::IsHitByEnemy, littleState);
+	fireState->AddTransition(Condition::IsHitByEnemy, littleState);
+
+	fsm->Init(littleState);
 
 	// Gestion du velocity
 	velocityComponent = owner->GetComponent<VelocityComponent>();
 	if (!velocityComponent) std::cerr << "PlayerController: No VelocityComponent detected!" << std::endl;
 
 	velocityComponent->RegisterHit("Block", VelocityHitType::BOTTOM, [this](GameObject* block) { HitInteractableBlock(block); });
-	velocityComponent->RegisterHit("Goomba", VelocityHitType::TOP, [this](GameObject* goomba) { StepOnGoomba(goomba);  });
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* turtle) { StepOnGoomba(turtle);  });
-	velocityComponent->RegisterHit("ReverseWalk", VelocityHitType::BOTTOM, [this](GameObject* block) { WalkUpsideDown(block); });
+
+	velocityComponent->RegisterHit("Goomba", VelocityHitType::TOP, [this](GameObject* enemy) { BouncePlayer(); KillEnemy(enemy); });
+	velocityComponent->RegisterHit("Goomba", VelocityHitType::LEFT, [this](GameObject* goomba) { HitByEnemy(goomba);  });
+	velocityComponent->RegisterHit("Goomba", VelocityHitType::RIGHT, [this](GameObject* goomba) { HitByEnemy(goomba);  });
+	velocityComponent->RegisterHit("Goomba", VelocityHitType::BOTTOM, [this](GameObject* goomba) { HitByEnemy(goomba);  });
+
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* enemy) { BouncePlayer(); KillEnemy(enemy); });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* turtle) { HitByEnemy(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* turtle) { HitByEnemy(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::BOTTOM, [this](GameObject* turtle) { HitByEnemy(turtle);  });
 
 
 	// Gestion du collider
 	collider = owner->GetComponent<SquareCollider>();
 	if (!collider) std::cerr << "PlayerController: No SquareCollider detected!" << std::endl;
 
-	collider->RegisterCallback("Bonus", [this](GameObject* coins) { PickUp(coins); });
+	collider->RegisterCallback("Bonus", [this](GameObject* bonus) { PickUp(bonus); });
 	collider->RegisterCallback("BloodOrb", [this](GameObject* orb) { PickUp(orb); });
+	collider->RegisterCallback("ReverseWalk", [this](GameObject* block) { WalkUpsideDown(block); });
+
+
 
 }
 
@@ -109,6 +148,15 @@ void PlayerController::HitInteractableBlock(GameObject* block)
 		LogPrint("Player hit a coins block!");
 		break;
 
+	case (InteractableBlockType::MUSHROOM):
+		blockComponent->SetUsed(true);
+		LogPrint("Player hit a mushroom block!");
+		break;
+	case (InteractableBlockType::FIRE_FLOWER):
+		blockComponent->SetUsed(true);
+		LogPrint("Player hit a fire block!");
+		break;
+
 	case (InteractableBlockType::BRICK):
 		Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Brick.wav", 0.75f, 1.f);
 		block->GetScene()->DeleteGameObject(block);
@@ -141,42 +189,24 @@ void PlayerController::PickUp(GameObject* bonus)
 		gameController->SetEnergy(gameController->GetEnergy() + 5.f, 100.f);
 		LogPrint("Player picked up a blood orb!");
 		break;
+
+	case (BonusType::FIRE_FLOWER):
+	{
+		auto& ctx = fsm->GetContext();
+		if (!ctx.isInFireFlower)
+			fsm->GetContext().hasPickedFireFlower = true;
+		LogPrint("Player picked up a FireFlower!");
+		break;
+	}
+
+	default:
+		break;
+
 	}
 
 	bonus->GetScene()->DeleteGameObject(bonus);
 
 }
-
-void PlayerController::StepOnGoomba(GameObject* goomba)
-{
-
-	sf::Vector2f pos = goomba->GetTransform().pos + sf::Vector2f(0.f, -20.f);
-	GameObject* orb = goomba->GetScene()->CreateGameObject("BloodOrb", pos);
-	orb->AddComponent<SpriteRenderer>("Assets/BloodOrb.png");
-	orb->AddComponent<SquareCollider>(sf::Vector2f(20.f, 20.f));
-	orb->AddComponent<BonusComponent>(BonusType::BLOOD_ORB);
-
-	goomba->GetScene()->DeleteGameObject(goomba);
-
-	velocityComponent->SetY(-400.f);
-
-}
-
-
-void PlayerController::StepOnTurtle(GameObject* turtle)
-{
-	sf::Vector2f pos = turtle->GetTransform().pos + sf::Vector2f(0.f, -20.f);
-	GameObject* orb = turtle->GetScene()->CreateGameObject("BloodOrb", pos);
-	orb->AddComponent<SpriteRenderer>("Assets/BloodOrb.png");
-	orb->AddComponent<SquareCollider>(sf::Vector2f(20.f, 20.f));
-	orb->AddComponent<BonusComponent>(BonusType::BLOOD_ORB);
-
-	turtle->GetScene()->DeleteGameObject(turtle);
-
-	velocityComponent->SetY(-400.f);
-
-}
-
 
 void PlayerController::WalkUpsideDown(GameObject* block)
 {
@@ -189,6 +219,41 @@ void PlayerController::WalkUpsideDown(GameObject* block)
 
 	float dt = Engine::GetModule<TimeModule>()->GetDeltaTime();
 	gameController->SetEnergy(gameController->GetEnergy() - 5 * dt, 100.f);
-	velocityComponent->SetY(-10.f);
+	velocityComponent->SetY(0.f);
+	owner->GetTransform().pos.y = block->GetTransform().pos.y + 90.f;
+
+}
+
+void PlayerController::BouncePlayer()
+{
+	sf::Vector2f pos = turtle->GetTransform().pos + sf::Vector2f(0.f, -20.f);
+	GameObject* orb = turtle->GetScene()->CreateGameObject("BloodOrb", pos);
+	orb->AddComponent<SpriteRenderer>("Assets/BloodOrb.png");
+	orb->AddComponent<SquareCollider>(sf::Vector2f(20.f, 20.f));
+	orb->AddComponent<BonusComponent>(BonusType::BLOOD_ORB);
+
+	turtle->GetScene()->DeleteGameObject(turtle);
+
+	if (inputModule->Is(sf::Keyboard::Key::Space, InputState::HELD))
+		velocityComponent->SetY(-800.f);
+	else
+		velocityComponent->SetY(-400.f);
+
+}
+
+void PlayerController::KillEnemy(GameObject* enemy)
+{
+
+	auto enemyComponent = enemy->GetComponent<EnemyComponent>();
+	if (enemyComponent)
+		enemyComponent->Kill();
+
+}
+
+void PlayerController::HitByEnemy(GameObject* enemy)
+{
+
+	fsm->GetContext().isHitByEnemy = true;
+	LogPrint("Je me suis fait tapé");
 
 }
