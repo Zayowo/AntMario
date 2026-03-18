@@ -48,6 +48,21 @@ bool Condition::collitionWithBigBonus(PlayerContext& p)
 	return false;
 }
 
+bool Condition::HasPickedMushroom(PlayerContext& ctx)
+{
+
+	bool hasPickedMushroom = ctx.hasPickedMushroom;
+	ctx.hasPickedMushroom = false;
+
+	if (hasPickedMushroom)
+	{
+		return true;
+	}
+
+	return false;
+
+}
+
 bool Condition::HasPickedFireFlower(PlayerContext& ctx)
 {
 

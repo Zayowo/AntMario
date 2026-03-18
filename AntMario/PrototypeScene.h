@@ -32,7 +32,7 @@ public:
 	PrototypeScene()
 	{
 
-		std::ifstream file("Assets/Level/AntLevel_11.json");
+		std::ifstream file("Assets/Level/AntLevel_12.json");
 		json data;
 		file >> data;
 
@@ -96,7 +96,32 @@ public:
 					}
 				}
 			}
+
 			else if (tileType == "BLOCK_COINS") {
+				for (int i = 0; i < (int)width; i++) {
+					for (int j = 0; j < (int)height; j++) {
+						GameObject* block = CreateGameObject("Block", { xPos + i * gridSize, yPos + j * gridSize });
+						block->GetTransform().origin = { 0.f, 0.f };
+						block->AddComponent<SquareCollider>(sf::Vector2f(gridSize, gridSize));
+						block->AddComponent<SpriteRenderer>("Assets/Environment/LuckyBlock.png");
+						block->AddComponent<InteractableBlockComponent>(InteractableBlockType::COINS);
+					}
+				}
+			}
+
+			else if (tileType == "BLOCK_MUSHROOM") {
+				for (int i = 0; i < (int)width; i++) {
+					for (int j = 0; j < (int)height; j++) {
+						GameObject* block = CreateGameObject("Block", { xPos + i * gridSize, yPos + j * gridSize });
+						block->GetTransform().origin = { 0.f, 0.f };
+						block->AddComponent<SquareCollider>(sf::Vector2f(gridSize, gridSize));
+						block->AddComponent<SpriteRenderer>("Assets/Environment/LuckyBlock.png");
+						block->AddComponent<InteractableBlockComponent>(InteractableBlockType::MUSHROOM);
+					}
+				}
+			}
+
+			else if (tileType == "BLOCK_FIREFLOWER") {
 				for (int i = 0; i < (int)width; i++) {
 					for (int j = 0; j < (int)height; j++) {
 						GameObject* block = CreateGameObject("Block", { xPos + i * gridSize, yPos + j * gridSize });
@@ -107,6 +132,7 @@ public:
 					}
 				}
 			}
+
 			else if (tileType == "REVERSE_WALK") {
 				for (int i = 0; i < (int)width; i++) {
 					for (int j = 0; j < (int)height; j++) {
@@ -114,6 +140,17 @@ public:
 						block->GetTransform().origin = { 0.f, 0.f };
 						block->AddComponent<SquareCollider>(sf::Vector2f(gridSize, gridSize));
 						block->AddComponent<SpriteRenderer>("Assets/Environment/ReverseWalk.png");
+					}
+				}
+			}
+
+			else if (tileType == "LAVA") {
+				for (int i = 0; i < (int)width; i++) {
+					for (int j = 0; j < (int)height; j++) {
+						GameObject* block = CreateGameObject("Lava", { xPos + i * gridSize, yPos + j * gridSize });
+						block->GetTransform().origin = { 0.f, 0.f };
+						block->AddComponent<SquareCollider>(sf::Vector2f(gridSize, gridSize));
+						block->AddComponent<SpriteRenderer>("Assets/Environment/Lava.png");
 					}
 				}
 			}
@@ -131,6 +168,7 @@ public:
 					}
 				}
 			}
+
 			else if (tileType == "GOOMBA") {
 				for (int i = 0; i < (int)width; i++) {
 					for (int j = 0; j < (int)height; j++) {
@@ -146,6 +184,7 @@ public:
 					}
 				}
 			}
+
 			else if (tileType == "TURTLE") {
 				for (int i = 0; i < (int)width; i++) {
 					for (int j = 0; j < (int)height; j++) {

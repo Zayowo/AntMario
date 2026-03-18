@@ -1,19 +1,27 @@
 #include "BigState.h"
 #include <SquareCollider.h>
 
-void BigState::Enter(PlayerContext& ctxP)
+void BigState::Enter(PlayerContext& ctx)
 {
-	ctxP.player->GetTransform().scale = sf::Vector2f(1.f, 1.f);
+
+	ctx.player->GetTransform().scale = sf::Vector2f(1.f, 1.f);
+	ctx.isInMushroom = true;
+
 }
 
-void BigState::Execute(PlayerContext& ctxP, float dt)
+void BigState::Execute(PlayerContext& ctx, float dt)
 {
-	if (ctxP.invulnerability > 0) {
-		ctxP.invulnerability -= dt;
+
+	if (ctx.invulnerability > 0) {
+		ctx.invulnerability -= dt;
 	}
 
+
 }
 
-void BigState::Exit(PlayerContext& ctxP)
+void BigState::Exit(PlayerContext& ctx)
 {
+
+	ctx.isInMushroom = false;
+
 }

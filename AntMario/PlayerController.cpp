@@ -38,8 +38,8 @@ void PlayerController::Init()
 	auto bigState = fsm->CreateState<BigState>();
 	auto fireState = fsm->CreateState<FireState>();
 
+	littleState->AddTransition(Condition::HasPickedMushroom, bigState);
 	littleState->AddTransition(Condition::HasPickedFireFlower, fireState);
-	bigState->AddTransition(Condition::HasPickedFireFlower, fireState);
 	littleState->AddTransition([this](PlayerContext& ctx)
 		{
 
@@ -48,6 +48,7 @@ void PlayerController::Init()
 			return false;
 
 		}, nullptr);
+	bigState->AddTransition(Condition::HasPickedFireFlower, fireState);
 	bigState->AddTransition(Condition::IsHitByEnemy, littleState);
 	fireState->AddTransition(Condition::IsHitByEnemy, littleState);
 
@@ -77,7 +78,6 @@ void PlayerController::Init()
 	collider->RegisterCallback("Bonus", [this](GameObject* bonus) { PickUp(bonus); });
 	collider->RegisterCallback("BloodOrb", [this](GameObject* orb) { PickUp(orb); });
 	collider->RegisterCallback("ReverseWalk", [this](GameObject* block) { WalkUpsideDown(block); });
-
 
 
 }
@@ -190,6 +190,15 @@ void PlayerController::PickUp(GameObject* bonus)
 		*energy += 0.15f;
 		LogPrint("Player picked up a blood orb!");
 		break;
+
+	case (BonusType::MUSHROOM):
+	{
+		auto& ctx = fsm->GetContext();
+		if (!ctx.hasPickedMushroom)
+			fsm->GetContext().hasPickedMushroom = true;
+		LogPrint("Player picked up a Mushroom!");
+		break;
+	}
 
 	case (BonusType::FIRE_FLOWER):
 	{

@@ -48,7 +48,7 @@ void InteractableBlockComponent::SpawnContent() {
 	case InteractableBlockType::FIRE_FLOWER:
 		bonusObject = owner->GetScene()->CreateGameObject("Bonus", { transform.pos.x , transform.pos.y - 48 });
 		bonusObject->GetTransform().origin = sf::Vector2f(0.f, 0.f);
-		bonusObject->AddComponent<SpriteRenderer>("Assets/fireball.png");
+		bonusObject->AddComponent<SpriteRenderer>("Assets/FireFlower.png");
 		bonusObject->AddComponent<BonusComponent>(BonusType::FIRE_FLOWER);
 		bonusObject->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
 
@@ -56,7 +56,7 @@ void InteractableBlockComponent::SpawnContent() {
 	case InteractableBlockType::MUSHROOM:
 		bonusObject = owner->GetScene()->CreateGameObject("Bonus", { transform.pos.x , transform.pos.y - 48 });
 		bonusObject->GetTransform().origin = sf::Vector2f(0.f, 0.f);
-		bonusObject->AddComponent<SpriteRenderer>("Assets/fireball.png");
+		bonusObject->AddComponent<SpriteRenderer>("Assets/Mushroom.png");
 		bonusObject->AddComponent<BonusComponent>(BonusType::MUSHROOM);
 		bonusObject->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
 		break;

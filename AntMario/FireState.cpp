@@ -9,25 +9,25 @@
 #include "FireComponent.h"
 
 
-void FireState::Enter(PlayerContext& p)
+void FireState::Enter(PlayerContext& ctx)
 {
 	//changement de sprite ?
-	p.player->GetTransform().scale = sf::Vector2f(1.f, 1.f);
-	p.isInFireFlower = true;
+	ctx.player->GetTransform().scale = sf::Vector2f(1.f, 1.f);
+	ctx.isInFireFlower = true;
 
 }
 
 
-void FireState::Execute(PlayerContext& p, float dt) {
+void FireState::Execute(PlayerContext& ctx, float dt) {
 	// create fireball
-	Scene* current = p.player->GetScene();
+	Scene* current = ctx.player->GetScene();
 	float direction = 0;
-	if (p.player->GetTransform().scale.x <= 0)
+	if (ctx.player->GetTransform().scale.x <= 0)
 		direction = -1;
 	else
 		direction = 1;
 
-	sf::Vector2f playerPos = p.player->GetTransform().pos;
+	sf::Vector2f playerPos = ctx.player->GetTransform().pos;
 
 	InputModule* inputM = Engine::GetModule<InputModule>();
 
