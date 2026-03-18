@@ -166,8 +166,8 @@ void PlayerController::StepOnGoomba(GameObject* goomba)
 void PlayerController::StepOnTurtle(GameObject* turtle)
 {
 	sf::Vector2f pos = turtle->GetTransform().pos + sf::Vector2f(0.f, -20.f);
-	GameObject* orb = turtle->GetScene()->CreateGameObject("Shell", pos);
-	orb->AddComponent<SpriteRenderer>("Assets/Shell.png");
+	GameObject* orb = turtle->GetScene()->CreateGameObject("BloodOrb", pos);
+	orb->AddComponent<SpriteRenderer>("Assets/BloodOrb.png");
 	orb->AddComponent<SquareCollider>(sf::Vector2f(20.f, 20.f));
 	orb->AddComponent<BonusComponent>(BonusType::BLOOD_ORB);
 
