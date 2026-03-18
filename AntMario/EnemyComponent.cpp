@@ -24,7 +24,6 @@ void EnemyComponent::Move()
 	VelocityComponent* velocity = owner->GetComponent<VelocityComponent>();
 	velocity->SetX(-1.f);
 }
-}
 
 void EnemyComponent::Kill()
 {

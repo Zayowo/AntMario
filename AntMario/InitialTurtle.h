@@ -5,6 +5,7 @@
 //need EnemyComponent
 class InitialTurtle : public State<TurtleContext>
 {
-	void Execute(TurtleContext&, float dt) override;
+	void Enter(TurtleContext& ctx) override;
+	void Execute(TurtleContext& ctx, float dt) override;
 };
 

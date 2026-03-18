@@ -26,6 +26,9 @@ public:
 	// Tente d'éliminer un enemy (si c'est un game object valide!)
 	static void KillEnemy(GameObject* enemy);
 
+	// Quand on saute sur un "Koopa"
+	static void StepOnTurtle(GameObject* turtle);
+
 	// Quand il se fait tabasser par un ennemi, t'as capté
 	void HitByEnemy(GameObject* enemy);
 

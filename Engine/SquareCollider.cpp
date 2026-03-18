@@ -114,7 +114,3 @@ sf::FloatRect SquareCollider::GetBounds()
 	return shape->getGlobalBounds();
 
 }
-
-void SquareCollider::SetSize(sf::Vector2f s) {
-	shape->setSize(s);
-}

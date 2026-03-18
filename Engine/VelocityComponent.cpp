@@ -18,7 +18,6 @@ void VelocityComponent::Init()
     collider->RegisterCallback("Goomba", [this](GameObject* other) { ResolveCollisions(other); });
     collider->RegisterCallback("Piranha", [this](GameObject* other) { ResolveCollisions(other); });
     collider->RegisterCallback("Turtle", [this](GameObject* other) { ResolveCollisions(other); });
-    collider->RegisterCallback("ReverseWalk", [this](GameObject* other) { ResolveCollisions(other); });
 
 }
 

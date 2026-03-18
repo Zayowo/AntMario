@@ -58,17 +58,17 @@ public:
 		tilemapObject->SetIsAlwaysLoaded(true);
 		TilemapRenderer* tilemap = tilemapObject->AddComponent<TilemapRenderer>("Assets/Environment/Tileset.png", sf::Vector2u(gridSize, gridSize), 500, 50);
 
-
 		GameObject* player = CreateGameObject("Player", { 500, 700 });
 		player->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		player->GetTransform().scale = sf::Vector2f(0.65f, 0.65f);
 		player->AddComponent<FixedCameraComponent>(sf::Vector2f(1000.f, 666.f), 500.f, levelWidth - 500.f);
-		player->AddComponent<SpriteRenderer>("Assets/Player.png");
+		auto playerSprite = player->AddComponent<SpriteRenderer>("Assets/PlayerSpriteSheet.png");
 		player->AddComponent<PlayerController>();
 		player->AddComponent<VelocityComponent>(200.f);
 		player->AddComponent<SquareCollider>(sf::Vector2f(30.f, 80.f));
 		player->AddComponent<FSMComponent<PlayerContext>>();
 		player->SetIsAlwaysLoaded(true);
-
+		playerSprite->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 0), sf::Vector2i(128, 128), 1));
 
 		for (const auto& tile : data["tiles"]) {
 			std::string tileType = tile["type"];
@@ -210,7 +210,7 @@ public:
 						GameObject* turtle = CreateGameObject("Turtle", { finalX, finalY });
 						turtle->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
 						turtle->AddComponent<TurtleComponent>();
-						turtle->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+						turtle->AddComponent<SpriteRenderer>("Assets/TurtleSpriteSheet.png");
 						turtle->AddComponent<VelocityComponent>(90.f);
 						turtle->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
 						AddTurtleSFMComponent(player, turtle);
@@ -246,39 +246,18 @@ public:
 			terrainPhysic->AddComponent<SquareCollider>(sf::Vector2f(cw, ch));
 		}
 
-		GameObject* player = CreateGameObject("Player", { 500, 700 });
-		player->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
-		player->GetTransform().scale = sf::Vector2f(0.65f, 0.65f);
-		player->AddComponent<FixedCameraComponent>(sf::Vector2f(1000.f, 666.f), 500.f, levelWidth - 500.f);
-		auto playerSprite = player->AddComponent<SpriteRenderer>("Assets/PlayerSpriteSheet.png");
-		player->AddComponent<PlayerController>();
-		player->AddComponent<VelocityComponent>(200.f);
-		player->AddComponent<SquareCollider>(sf::Vector2f(30.f, 80.f));
-		player->AddComponent<FSMComponent<PlayerContext>>();
-		player->SetIsAlwaysLoaded(true);
-		playerSprite->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 0), sf::Vector2i(128, 128), 1));
-
-
 		GameObject* gameController = CreateGameObject("GameController", { 0.f, 0.f });
 		gameController->AddComponent<GameController>();
 		gameController->SetIsAlwaysLoaded(true);
 		
-		GameObject* turtle = CreateGameObject("Turtle", { 700, 720 });
-		turtle->GetTransform().origin = sf::Vector2f(0.5f, 1.f);	
-		turtle->AddComponent<TurtleComponent>();
-		turtle->AddComponent<VelocityComponent>(90.f);
-		turtle->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
-		turtle->AddComponent<SquareCollider>(sf::Vector2f(40.f, 60.f));
-		AddTurtleSFMComponent(player, turtle);
+		//GameObject* piranha = CreateGameObject("Piranha", { 600, 650 });
+		//piranha->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
+		//piranha->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
+		//piranha->AddComponent<SquareCollider>(sf::Vector2f(30.f, 80.f));
+		//VelocityComponent* vPiranha = piranha->AddComponent<VelocityComponent>(90.f);
+		//vPiranha->SetGravity(false);
+		//piranha->AddComponent<PiranhaComponent>();
 
-		
-		GameObject* piranha = CreateGameObject("Piranha", { 600, 650 });
-		piranha->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
-		piranha->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
-		piranha->AddComponent<SquareCollider>(sf::Vector2f(30.f, 80.f));
-		VelocityComponent* vPiranha = piranha->AddComponent<VelocityComponent>(90.f);
-		vPiranha->SetGravity(false);
-		piranha->AddComponent<PiranhaComponent>();
 	};
 
 	void Update(float dt) override
