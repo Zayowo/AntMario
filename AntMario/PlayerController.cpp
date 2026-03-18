@@ -16,7 +16,6 @@
 #include "BigState.h"
 #include "FireState.h"
 #include "Condition.h"
-#include "EnemyComponent.h"
 
 void PlayerController::Init()
 {
@@ -60,15 +59,22 @@ void PlayerController::Init()
 
 	velocityComponent->RegisterHit("Block", VelocityHitType::BOTTOM, [this](GameObject* block) { HitInteractableBlock(block); });
 
-	velocityComponent->RegisterHit("Goomba", VelocityHitType::TOP, [this](GameObject* enemy) { BouncePlayer(); KillEnemy(enemy); });
+	velocityComponent->RegisterHit("Goomba", VelocityHitType::TOP, [this](GameObject* goomba) { StepOnGoomba(goomba);  });
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::LEFT, [this](GameObject* goomba) { HitByEnemy(goomba);  });
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::RIGHT, [this](GameObject* goomba) { HitByEnemy(goomba);  });
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::BOTTOM, [this](GameObject* goomba) { HitByEnemy(goomba);  });
 
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* enemy) { BouncePlayer(); KillEnemy(enemy); });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* turtle) { StepOnGoomba(turtle);  });
 	velocityComponent->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* turtle) { HitByEnemy(turtle);  });
 	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* turtle) { HitByEnemy(turtle);  });
 	velocityComponent->RegisterHit("Turtle", VelocityHitType::BOTTOM, [this](GameObject* turtle) { HitByEnemy(turtle);  });
+
+	velocityComponent->RegisterHit("Piranha", VelocityHitType::TOP, [this](GameObject* piranha) { HitByEnemy(piranha);  });
+	velocityComponent->RegisterHit("Piranha", VelocityHitType::LEFT, [this](GameObject* piranha) { HitByEnemy(piranha);  });
+	velocityComponent->RegisterHit("Piranha", VelocityHitType::RIGHT, [this](GameObject* piranha) { HitByEnemy(piranha);  });
+	velocityComponent->RegisterHit("Piranha", VelocityHitType::BOTTOM, [this](GameObject* piranha) { HitByEnemy(piranha);  });
+
+	velocityComponent->RegisterHit("ReverseWalk", VelocityHitType::BOTTOM, [this](GameObject* block) { WalkUpsideDown(block); });
 
 
 	// Gestion du collider
@@ -77,7 +83,6 @@ void PlayerController::Init()
 
 	collider->RegisterCallback("Bonus", [this](GameObject* bonus) { PickUp(bonus); });
 	collider->RegisterCallback("BloodOrb", [this](GameObject* orb) { PickUp(orb); });
-	collider->RegisterCallback("ReverseWalk", [this](GameObject* block) { WalkUpsideDown(block); });
 
 
 }
@@ -201,13 +206,9 @@ void PlayerController::PickUp(GameObject* bonus)
 	}
 
 	case (BonusType::FIRE_FLOWER):
-	{
-		auto& ctx = fsm->GetContext();
-		if (!ctx.isInFireFlower)
-			fsm->GetContext().hasPickedFireFlower = true;
+		fsm->GetContext().hasPickedFireFlower = true;
 		LogPrint("Player picked up a FireFlower!");
 		break;
-	}
 
 	default:
 		break;
@@ -218,14 +219,13 @@ void PlayerController::PickUp(GameObject* bonus)
 
 }
 
-void PlayerController::WalkUpsideDown(GameObject* block)
+void PlayerController::StepOnGoomba(GameObject* goomba)
 {
 
 	if (*energy <= 0.f)
 		return;
 
-	if (isDoubleJump)
-		return;
+	goomba->GetScene()->DeleteGameObject(goomba);
 
 	float dt = Engine::GetModule<TimeModule>()->GetDeltaTime();
 	*energy -= 0.05f * dt;
@@ -237,14 +237,32 @@ void PlayerController::WalkUpsideDown(GameObject* block)
 
 }
 
-void PlayerController::BouncePlayer()
+
+void PlayerController::StepOnTurtle(GameObject* turtle)
 {
+	sf::Vector2f pos = turtle->GetTransform().pos + sf::Vector2f(0.f, -20.f);
+	GameObject* orb = turtle->GetScene()->CreateGameObject("BloodOrb", pos);
+	orb->AddComponent<SpriteRenderer>("Assets/BloodOrb.png");
+	orb->AddComponent<SquareCollider>(sf::Vector2f(20.f, 20.f));
+	orb->AddComponent<BonusComponent>(BonusType::BLOOD_ORB);
 
-	if (inputModule->Is(sf::Keyboard::Key::Space, InputState::HELD))
-		velocityComponent->SetY(-800.f);
-	else
-		velocityComponent->SetY(-400.f);
+	turtle->GetScene()->DeleteGameObject(turtle);
 
+	velocityComponent->SetY(-400.f);
+
+}
+
+void PlayerController::EliminationPiranha(GameObject* piranha)
+{
+	sf::Vector2f pos = piranha->GetTransform().pos + sf::Vector2f(0.f, -20.f);
+	GameObject* orb = piranha->GetScene()->CreateGameObject("BloodOrb", pos);
+	orb->AddComponent<SpriteRenderer>("Assets/BloodOrb.png");
+	orb->AddComponent<SquareCollider>(sf::Vector2f(20.f, 20.f));
+	orb->AddComponent<BonusComponent>(BonusType::BLOOD_ORB);
+
+	piranha->GetScene()->DeleteGameObject(piranha);
+
+	velocityComponent->SetY(-400.f);
 }
 
 void PlayerController::KillEnemy(GameObject* enemy)

@@ -50,10 +50,3 @@ void FireState::Execute(PlayerContext& ctx, float dt) {
 	//current->CreateGameObject("fireBall", sf::Vector2f(playerPos.x * direction, playerPos.y));
 
 }
-
-void FireState::Exit(PlayerContext& ctx)
-{
-
-	ctx.isInFireFlower = false;
-
-}
