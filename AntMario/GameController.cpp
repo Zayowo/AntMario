@@ -47,7 +47,7 @@ void GameController::Update(float dt)
 		*energy = 1.f;
 
 	coinsText->setString("x" + std::to_string(*coins));
-	livesText->setString("x" + std::to_string(5));
+	livesText->setString(std::string("x") + std::to_string(GameStateManager::GetLives()));
 	energyBar.setSize(sf::Vector2f(175.f * (*energy), 20.f));
 
 }

@@ -32,6 +32,9 @@ public:
 	// Quand il se fait tabasser par un ennemi, t'as capté
 	void HitByEnemy(GameObject* enemy);
 
+	// Quand le joueur tombe du monde (y >= 950)
+	void LoseLifeAndShowScene();
+
 
 private:
 	bool isDoubleJump = false;

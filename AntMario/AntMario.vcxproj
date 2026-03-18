@@ -143,6 +143,7 @@
     <ClCompile Include="Condition.cpp" />
     <ClCompile Include="FireComponent.cpp" />
     <ClCompile Include="FireState.cpp" />
+    <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="GoombaComponent.cpp" />
     <ClCompile Include="GameController.cpp" />
     <ClCompile Include="InteractableBlockComponent.cpp" />
@@ -173,10 +174,13 @@
     <ClInclude Include="FireComponent.h" />
     <ClInclude Include="FireState.h" />
     <ClInclude Include="GameController.h" />
+    <ClInclude Include="GameOverScene.h" />
+    <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="GoombaComponent.h" />
     <ClInclude Include="InteractableBlockComponent.h" />
     <ClInclude Include="InteractableBlockType.h" />
     <ClInclude Include="InitialTurtle.h" />
+    <ClInclude Include="LifeLostScene.h" />
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="Oppenent.h" />
     <ClInclude Include="PauseScene.h" />

@@ -3,6 +3,7 @@
 #include <SceneModule.h>
 #include <Scene.h>
 #include <ButtonRenderer.h>
+#include "GameStateManager.h"
 
 class MainMenuScene : public Scene
 {
@@ -10,6 +11,9 @@ class MainMenuScene : public Scene
 public:
 	MainMenuScene()
 	{
+
+		// Réinitialiser l'état du jeu quand on revient au menu principal
+		GameStateManager::ResetGame();
 
 		GameObject* playButton = CreateGameObject("Button", { 600, 300 });
 		playButton->SetIsAlwaysLoaded(true);

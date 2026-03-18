@@ -18,6 +18,7 @@
 #include "Condition.h"
 #include "EnemyComponent.h"
 #include "InitialTurtle.h"
+#include "GameStateManager.h"
 
 void PlayerController::Init()
 {
@@ -45,7 +46,17 @@ void PlayerController::Init()
 		{
 
 			if (Condition::IsHitByEnemy(ctx))
-				Engine::GetModule<SceneModule>()->SetScene("MainMenuScene");
+			{
+				GameStateManager::LoseLife();
+				if (GameStateManager::GetLives() > 0)
+				{
+					Engine::GetModule<SceneModule>()->PushScene("LifeLostScene");
+				}
+				else
+				{
+					Engine::GetModule<SceneModule>()->SetScene("GameOverScene");
+				}
+			}
 			return false;
 
 		}, nullptr);
@@ -127,6 +138,12 @@ void PlayerController::Update(float dt)
 			velocityComponent->SetY(-840.f);
 
 		}
+	}
+
+	// Vérifier si le joueur est tombé (chute du monde)
+	if (transform.pos.y >= 950.f)
+	{
+		LoseLifeAndShowScene();
 	}
 
 	velocityComponent->SetX(velocityX);
@@ -280,5 +297,20 @@ void PlayerController::HitByEnemy(GameObject* enemy)
 
 	fsm->GetContext().isHitByEnemy = true;
 	LogPrint("Je me suis fait tapé");
+
+}
+
+void PlayerController::LoseLifeAndShowScene()
+{
+
+	GameStateManager::LoseLife();
+	if (GameStateManager::GetLives() > 0)
+	{
+		Engine::GetModule<SceneModule>()->PushScene("LifeLostScene");
+	}
+	else
+	{
+		Engine::GetModule<SceneModule>()->SetScene("GameOverScene");
+	}
 
 }

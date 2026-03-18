@@ -1,6 +1,7 @@
 #pragma once
 #include <Component.h>
 #include <SFML/Graphics.hpp>
+#include "GameStateManager.h"
 
 class GameController : public Component
 {

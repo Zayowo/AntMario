@@ -5,6 +5,8 @@
 #include "MainMenuScene.h"
 #include "PrototypeScene.h"
 #include "PauseScene.h"
+#include "GameOverScene.h"
+#include "LifeLostScene.h"
 
 int main()
 {
@@ -28,6 +30,8 @@ int main()
 	sceneModule->RegisterScene<MainMenuScene>("MainMenuScene");
 	sceneModule->RegisterScene<PrototypeScene>("PrototypeScene");
 	sceneModule->RegisterScene<PauseScene>("PauseScene");
+	sceneModule->RegisterScene<GameOverScene>("GameOverScene");
+	sceneModule->RegisterScene<LifeLostScene>("LifeLostScene");
 	sceneModule->PushScene("MainMenuScene");
 
 	// Load les sons
