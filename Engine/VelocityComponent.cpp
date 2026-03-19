@@ -150,8 +150,8 @@ void VelocityComponent::ResolveCollisions(GameObject* other, bool isFixPosition)
         }
 
         // Ne reset velocity.x que pour les Blocks (le joueur marche dessus)
-        // Pour tout le reste (Terrain, Ennemis), on reset velocity.x
-        if (other->GetName() != "Block")
+        // Pour tout le reste (Terrain), on reset velocity.x seulement si isFixPosition est true
+        if (other->GetName() != "Block" && isFixPosition)
             velocity.x = 0.f;
     }
     else

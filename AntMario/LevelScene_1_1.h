@@ -54,6 +54,7 @@ public:
 		sky1->SetIsAlwaysLoaded(true);
 		sky1->AddComponent<BackgroundElement>("Assets/Environment/Background.png", 1.f, sf::Vector2f(-300.f, 0.f));
 
+
 		GameObject* tilemapObject = CreateGameObject("LevelTilemap", { 0.f, 0.f });
 		tilemapObject->GetTransform().origin = { 0.f, 0.f };
 		tilemapObject->SetIsAlwaysLoaded(true);
@@ -259,15 +260,6 @@ public:
 		GameObject* gameController = CreateGameObject("GameController", { 0.f, 0.f });
 		gameController->AddComponent<GameController>();
 		gameController->SetIsAlwaysLoaded(true);
-
-
-		//GameObject* piranha = CreateGameObject("Piranha", { 600, 650 });
-		//piranha->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
-		//piranha->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");
-		//piranha->AddComponent<SquareCollider>(sf::Vector2f(30.f, 80.f));
-		//VelocityComponent* vPiranha = piranha->AddComponent<VelocityComponent>(90.f);
-		//vPiranha->SetGravity(false);
-		//piranha->AddComponent<PiranhaComponent>();
 
 	};
 

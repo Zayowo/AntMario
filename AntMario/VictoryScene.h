@@ -20,25 +20,20 @@ public:
 		titleText->SetIsAlwaysLoaded(true);
 		titleText->AddComponent<TextRenderer>("Assets/UI/Font.ttf", "You Won!");
 
-		GameObject* coinsText = CreateGameObject("CoinsText", { 600, 350 });
-		coinsText->GetTransform().origin = sf::Vector2f(0.5f, 0.5f);
-		coinsText->SetIsAlwaysLoaded(true);
-		coinsText->AddComponent<TextRenderer>("Assets/UI/Font.ttf", "Coins collected: " + std::to_string(GameStateManager::coins));
-
 		GameObject* nextLevelButton = CreateGameObject("NextLevelButton", { 600, 450 });
 		nextLevelButton->GetTransform().origin = sf::Vector2f(0.5f, 0.5f);
 		nextLevelButton->SetIsAlwaysLoaded(true);
-		nextLevelButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Next Level", []() {
+		nextLevelButton->AddComponent<ButtonRenderer>("Assets/UI/Restart_Unhovered.png", "Assets/UI/Restart_Hovered.png", "", []() {
 
 			// TODO: Changer vers le niveau suivant
 			Engine::GetModule<SceneModule>()->SetScene("LevelScene_1_1");
 
 		});
 
-		GameObject* backToMenuButton = CreateGameObject("BackToMenuButton", { 600, 550 });
+		GameObject* backToMenuButton = CreateGameObject("BackToMenuButton", { 600, 600 });
 		backToMenuButton->GetTransform().origin = sf::Vector2f(0.5f, 0.5f);
 		backToMenuButton->SetIsAlwaysLoaded(true);
-		backToMenuButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Back To Menu", []() {
+		backToMenuButton->AddComponent<ButtonRenderer>("Assets/UI/MainMenu_Unhovered.png", "Assets/UI/MainMenu_Hovered.png", "", []() {
 
 			Engine::GetModule<SceneModule>()->SetScene("MainMenuScene");
 

@@ -40,32 +40,28 @@ bool InteractableBlockComponent::IsUsed()
 }
 
 void InteractableBlockComponent::SpawnContent() {
+
 	Transform& transform = owner->GetTransform();
 	
-	GameObject* bonusObject;
+	GameObject* bonusObject = owner->GetScene()->CreateGameObject("Bonus", { transform.pos.x , transform.pos.y - 48 });
+	bonusObject->GetTransform().origin = sf::Vector2f(0.f, 0.f);
+	bonusObject->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
 	
 	switch (type) {
 	case InteractableBlockType::FIRE_FLOWER:
-		bonusObject = owner->GetScene()->CreateGameObject("Bonus", { transform.pos.x , transform.pos.y - 48 });
-		bonusObject->GetTransform().origin = sf::Vector2f(0.f, 0.f);
-		bonusObject->AddComponent<SpriteRenderer>("Assets/FireFlower.png");
+		bonusObject->AddComponent<SpriteRenderer>("Assets/PowerUpSpriteSheet.png");
+		bonusObject->GetComponent<SpriteRenderer>()->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 0), sf::Vector2i(40, 40), 3));
 		bonusObject->AddComponent<BonusComponent>(BonusType::FIRE_FLOWER);
-		bonusObject->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
 
 		break;
 	case InteractableBlockType::MUSHROOM:
-		bonusObject = owner->GetScene()->CreateGameObject("Bonus", { transform.pos.x , transform.pos.y - 48 });
-		bonusObject->GetTransform().origin = sf::Vector2f(0.f, 0.f);
-		bonusObject->AddComponent<SpriteRenderer>("Assets/Mushroom.png");
+		bonusObject->AddComponent<SpriteRenderer>("Assets/PowerUpSpriteSheet.png");
+		bonusObject->GetComponent<SpriteRenderer>()->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 0), sf::Vector2i(40, 40), 3));
 		bonusObject->AddComponent<BonusComponent>(BonusType::MUSHROOM);
-		bonusObject->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
 		break;
 	case InteractableBlockType::COINS:
-		bonusObject = owner->GetScene()->CreateGameObject("Bonus", { transform.pos.x , transform.pos.y - 48 });
-		bonusObject->GetTransform().origin = sf::Vector2f(0.f, 0.f);
 		bonusObject->AddComponent<SpriteRenderer>("Assets/Environment/Coins.png");
 		bonusObject->AddComponent<BonusComponent>(BonusType::COINS);
-		bonusObject->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
 		break;
 	default:
 		std::cout << "Not a bonus" << std::endl;

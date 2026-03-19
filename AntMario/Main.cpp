@@ -33,6 +33,7 @@ int main()
 	sceneModule->RegisterScene<PauseScene>("PauseScene");
 	sceneModule->RegisterScene<GameOverScene>("GameOverScene");
 	sceneModule->RegisterScene<LifeLostScene>("LifeLostScene");
+	sceneModule->RegisterScene<VictoryScene>("VictoryScene");
 	sceneModule->PushScene("MainMenuScene");
 
 	// Load les sons

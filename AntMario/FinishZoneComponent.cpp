@@ -8,7 +8,6 @@
 void FinishZoneComponent::Init()
 {
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
-
 	if (!collider)
 	{
 		std::cerr << "FinishZoneComponent: No SquareCollider detected!" << std::endl;
@@ -16,16 +15,8 @@ void FinishZoneComponent::Init()
 	}
 
 	collider->RegisterCallback("Player", [this](GameObject* player) {
-		
-		if (!hasTriggered)
-		{
-			hasTriggered = true;
+
 			Engine::GetModule<SceneModule>()->SetScene("VictoryScene");
-		}
 
 	});
-}
-
-void FinishZoneComponent::Update(float dt)
-{
 }
