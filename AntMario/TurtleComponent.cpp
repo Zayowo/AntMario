@@ -48,8 +48,3 @@ void TurtleComponent::StepByPlayer(GameObject* other)
 void TurtleComponent::ChangeDirection(float dir) {
 	owner->GetTransform().scale.x = dir;
 }
-
-void TurtleComponent::Destroy()
-{
-	
-}

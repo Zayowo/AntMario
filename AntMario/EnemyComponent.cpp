@@ -15,13 +15,6 @@ void EnemyComponent::Init()
 
 }
 
-
-void EnemyComponent::Move()
-{
-	VelocityComponent* velocity = owner->GetComponent<VelocityComponent>();
-	velocity->SetX(-1.f);
-}
-
 void EnemyComponent::Kill()
 {
 
@@ -32,7 +25,6 @@ void EnemyComponent::Kill()
 	orb->AddComponent<SpriteRenderer>("Assets/BloodOrb.png");
 	orb->AddComponent<SquareCollider>(sf::Vector2f(20.f, 20.f));
 	orb->AddComponent<BonusComponent>(BonusType::BLOOD_ORB);
-
 
 	owner->GetScene()->DeleteGameObject(owner);
 

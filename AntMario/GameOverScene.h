@@ -24,7 +24,7 @@ public:
 		tryAgainButton->SetIsAlwaysLoaded(true);
 		tryAgainButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Try Again", []() {
 
-			Engine::GetModule<SceneModule>()->SetScene("PrototypeScene");
+			Engine::GetModule<SceneModule>()->SetScene("LevelScene_1_1");
 
 		});
 

@@ -19,7 +19,7 @@ public:
 		playButton->SetIsAlwaysLoaded(true);
 		playButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Play", []() {
 
-			Engine::GetModule<SceneModule>()->SetScene("PrototypeScene");
+			Engine::GetModule<SceneModule>()->SetScene("LevelScene_1_1");
 
 		});
 

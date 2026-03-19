@@ -3,6 +3,7 @@
 #include <Scene.h>
 
 void PiranhaComponent::Init() {
+
 	//recupere les initialisation en commun
 	EnemyComponent::Init();
 	// position au sol + offset ?

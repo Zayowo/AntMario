@@ -29,7 +29,7 @@ public:
 		continueButton->SetIsAlwaysLoaded(true);
 		continueButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Continue", []() {
 
-			Engine::GetModule<SceneModule>()->SetScene("PrototypeScene");
+			Engine::GetModule<SceneModule>()->SetScene("LevelScene_1_1");
 
 		});
 

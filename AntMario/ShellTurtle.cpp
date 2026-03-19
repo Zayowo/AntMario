@@ -13,7 +13,7 @@ void ShellTurtle::Enter(TurtleContext& ctx)
 
 	ctx.turtle->GetComponent<SquareCollider>()->SetSize(sf::Vector2f(40.f, 40.f));
 	ctx.turtle->GetComponent<VelocityComponent>()->SetX(0.f);
-	ctx.turtle->GetComponent<SpriteRenderer>()->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 60), sf::Vector2i(64, 64), 7));
+	ctx.turtle->GetComponent<SpriteRenderer>()->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 30), sf::Vector2i(32, 32), 7));
 
 	VelocityComponent* velocity = ctx.turtle->GetComponent<VelocityComponent>();
 
