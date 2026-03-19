@@ -21,7 +21,12 @@ ButtonRenderer::ButtonRenderer(std::string unhoveredPath, std::string hoveredPat
 void ButtonRenderer::Update(float dt)
 {
 	WindowModule* windowModule = Engine::GetModule<WindowModule>();
+	if (!windowModule)
+		return;
+
 	sf::RenderWindow* window = windowModule->GetRenderWindow();
+	if (!window)
+		return;
 
 	sf::View currentView = window->getView();
 	window->setView(window->getDefaultView());

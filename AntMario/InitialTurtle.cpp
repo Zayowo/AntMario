@@ -1,12 +1,14 @@
 #include <SpriteRenderer.h>
 #include <VelocityComponent.h>
 #include "InitialTurtle.h"
+#include "GoombaComponent.h"
 
 void InitialTurtle::Enter(TurtleContext& ctx)
 {
-
-	ctx.turtle->GetComponent<SpriteRenderer>()->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 0), sf::Vector2i(135, 60), 3));
-
+	VelocityComponent* velocity = ctx.turtle->GetComponent<VelocityComponent>();
+	ctx.turtle->GetComponent<SpriteRenderer>()->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 0), sf::Vector2i(67, 30), 3));
+	velocity->RegisterHit("Goomba", VelocityHitType::LEFT, [this](GameObject* other) { ChangeDirection(other, -1); });
+	velocity->RegisterHit("Goomba", VelocityHitType::RIGHT, [this](GameObject* other) { ChangeDirection(other, 1); });
 }
 
 void InitialTurtle::Execute(TurtleContext& ctx, float dt)
@@ -26,3 +28,9 @@ void InitialTurtle::Execute(TurtleContext& ctx, float dt)
 
 }
 
+
+void InitialTurtle::ChangeDirection(GameObject* other, float dir)
+{
+	
+	other->GetComponent<GoombaComponent>()->ChangeDirection(dir);
+}

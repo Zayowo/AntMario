@@ -20,7 +20,10 @@ void TurtleComponent::Init()
 
 	fsmTurtle->Init(initTurtle);*/
 
-	SquareCollider* collider = owner->GetComponent<SquareCollider>();
+	VelocityComponent* velocity = owner->GetComponent<VelocityComponent>();
+
+	velocity->RegisterHit("Block", VelocityHitType::LEFT, [this](GameObject* other) { ChangeDirection(-1); });
+	velocity->RegisterHit("Block", VelocityHitType::RIGHT, [this](GameObject* other) { ChangeDirection(1); });
 
 }
 
@@ -42,7 +45,6 @@ void TurtleComponent::StepByPlayer(GameObject* other)
 
 }
 
-void TurtleComponent::Destroy()
-{
-	
+void TurtleComponent::ChangeDirection(float dir) {
+	owner->GetTransform().scale.x = dir;
 }

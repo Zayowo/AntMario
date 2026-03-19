@@ -63,9 +63,6 @@
     <ClCompile Include="FireState.cpp">
       <Filter>Fichiers sources\PlayerState</Filter>
     </ClCompile>
-    <ClCompile Include="FireComponent.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="BackgroundElement.cpp">
       <Filter>Fichiers sources\Components</Filter>
     </ClCompile>
@@ -108,14 +105,17 @@
     <ClCompile Include="TurtleContext.h">
       <Filter>Fichiers d%27en-tête\Components\Enemy\Turtle</Filter>
     </ClCompile>
-    <ClCompile Include="TurtleComponent.cpp">
+    <ClCompile Include="GameStateManager.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="TurtleComponent.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\Components\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="GameStateManager.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="TurtleComponent.cpp">
+      <Filter>Fichiers sources\Components\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="FireComponent.cpp">
+      <Filter>Fichiers sources\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -125,9 +125,6 @@
     <ClInclude Include="MainMenuScene.h">
       <Filter>Fichiers d%27en-tête\Scenes</Filter>
     </ClInclude>
-    <ClCompile Include="PlayerContext.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClInclude Include="LittleState.h">
       <Filter>Fichiers d%27en-tête\PlayerState</Filter>
     </ClInclude>
@@ -139,9 +136,6 @@
     </ClInclude>
     <ClInclude Include="FireState.h">
       <Filter>Fichiers d%27en-tête\PlayerState</Filter>
-    </ClInclude>
-    <ClInclude Include="FireComponent.h">
-      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="BonusComponent.h">
       <Filter>Fichiers d%27en-tête\Components</Filter>
@@ -170,7 +164,7 @@
     <ClInclude Include="GoombaComponent.h">
       <Filter>Fichiers d%27en-tête\Components\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="PrototypeScene.h">
+    <ClInclude Include="LevelScene_1_1.h">
       <Filter>Fichiers d%27en-tête\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="InitialTurtle.h">
@@ -187,6 +181,9 @@
     </ClInclude>
     <ClInclude Include="GameStateManager.h">
       <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="FireComponent.h">
+      <Filter>Fichiers d%27en-tête\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

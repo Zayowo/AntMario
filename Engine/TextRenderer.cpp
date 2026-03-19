@@ -18,13 +18,23 @@ void TextRenderer::Update(float dt)
 	text->setPosition(transform.pos);
 	text->setRotation(sf::degrees(transform.rot));
 	text->setScale(transform.scale);
-	text->setOrigin(text->getLocalBounds().size * 0.5f);
+	text->setOrigin(sf::Vector2f(
+		text->getLocalBounds().size.x * transform.origin.x,
+		text->getLocalBounds().size.y * transform.origin.y
+	));
+
+
 
 }
 
 void TextRenderer::Render(sf::RenderWindow* window)
 {
 
+	sf::View currentView = window->getView();
+	window->setView(window->getDefaultView());
+
 	window->draw(*text);
+
+	window->setView(currentView);
 
 }

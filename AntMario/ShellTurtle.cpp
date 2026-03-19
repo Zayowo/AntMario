@@ -4,14 +4,26 @@
 #include "VelocityComponent.h"
 #include "Condition.h"
 #include <Scene.h>
+#include "GoombaComponent.h"
+#include "TurtleComponent.h"
+#include <Utils.h>
 
 void ShellTurtle::Enter(TurtleContext& ctx)
 {
 
 	ctx.turtle->GetComponent<SquareCollider>()->SetSize(sf::Vector2f(40.f, 40.f));
 	ctx.turtle->GetComponent<VelocityComponent>()->SetX(0.f);
-	ctx.turtle->GetComponent<SpriteRenderer>()->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 60), sf::Vector2i(64, 64), 7));
+	ctx.turtle->GetComponent<SpriteRenderer>()->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 30), sf::Vector2i(32, 32), 7));
 
+	VelocityComponent* velocity = ctx.turtle->GetComponent<VelocityComponent>();
+
+	velocity->RegisterHit("Goomba", VelocityHitType::LEFT, [this](GameObject* other) { DestroyGoomba(other); });
+	velocity->RegisterHit("Goomba", VelocityHitType::RIGHT, [this](GameObject* other) { DestroyGoomba(other); });
+
+	velocity->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* other) { DestroyTurtle(other); });
+	velocity->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* other) { DestroyTurtle(other); });
+
+	
 }
 
 void ShellTurtle::Execute(TurtleContext& ctx, float dt)
@@ -19,17 +31,35 @@ void ShellTurtle::Execute(TurtleContext& ctx, float dt)
 
 	Transform& transform = ctx.turtle->GetTransform();
 	VelocityComponent* velocity = ctx.turtle->GetComponent<VelocityComponent>();
+	float playerDir = ctx.player->GetTransform().scale.x;
+	float turtleDir = ctx.turtle->GetTransform().scale.x;
+
+	/*if (IsHitByPlayer(ctx))
+	{
+		std::cout << IsHitByPlayer(ctx) << std::endl;
+		isMoving = !isMoving;
+		ctx.turtle->GetTransform().scale.x = playerDir;
+	}
+
+	if (isMoving)
+		velocity->SetX(turtleDir * 3.f);
+
+	if (isMoving && velocity->GetVelocity().x == 0.f)
+	{
+		ctx.player->GetTransform().scale.x = -turtleDir;
+		velocity->SetX(turtleDir * 3.f);
+	}*/
 
 	if (IsHitByPlayer(ctx) && !isMoving) {
-		float dir = ctx.player->GetTransform().scale.x;
-		velocity->SetX(dir * 3);
+		velocity->SetX(playerDir * 3);
 		isMoving = true;
 	}
 
 	if (velocity->GetVelocity().x == 0 && isMoving == true)
 	{
-		isMoving = false;
-		ctx.turtle->GetScene()->DeleteGameObject(ctx.turtle);
+		LogPrint("Si j'ai touché un ennemi, c'est pas censé le faire!!");
+		velocity->SetX(-turtleDir * 3);
+		// ctx.turtle->GetScene()->DeleteGameObject(ctx.turtle);
 	}
 
 	float velocityX = velocity->GetVelocity().x;
@@ -51,4 +81,20 @@ bool ShellTurtle::IsHitByPlayer(TurtleContext& ctx)
 
 	return false;
 
+}
+
+void ShellTurtle::DestroyGoomba(GameObject* other) {
+	GoombaComponent* GComponent = other->GetComponent<GoombaComponent>();
+	if (GComponent == nullptr)
+		std::cerr << "Error : in ShellTurtle missing GoombaComponent" << std::endl;
+
+	GComponent->Destroy();
+}
+
+void ShellTurtle::DestroyTurtle(GameObject* other) {
+	TurtleComponent* TComponent = other->GetComponent<TurtleComponent>();
+	if (TComponent == nullptr)
+		std::cerr << "Error : in ShellTurtle missing TurtleComponent" << std::endl;
+
+	other->GetScene()->DeleteGameObject(other);
 }

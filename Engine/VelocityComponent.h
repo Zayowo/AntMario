@@ -12,8 +12,6 @@ public:
 	void Init();
 	void Update(float dt) override;
 
-	
-
 	// Applique une vélocité
 	void SetVelocity(sf::Vector2f velocity);
 
@@ -31,8 +29,6 @@ public:
 	// Set le movement de gravité
 	void SetGravity(bool);
 
-	
-
 	// Récupère le isGrounded
 	bool IsGrounded();
 
@@ -46,7 +42,7 @@ private:
 	std::unordered_map<std::string, std::unordered_map<VelocityHitType, std::vector<std::function<void(GameObject*)>>>> hitCallbackMap;
 
 	// Résous les collisions lorsque le game object entre en collisions avec un block (et pas que)
-	void ResolveCollisions(GameObject* other);
+	void ResolveCollisions(GameObject* other, bool isFixPosition);
 
 	// Envoie les callbacks enregistrés dans le hitCallbackMap en fonction du type de collision
 	void SendHit(GameObject* other, VelocityHitType hitType);

@@ -3,7 +3,7 @@
 #include <SceneModule.h>
 #include <ResourceModule.h>
 #include "MainMenuScene.h"
-#include "PrototypeScene.h"
+#include "LevelScene_1_1.h"
 #include "PauseScene.h"
 #include "GameOverScene.h"
 #include "LifeLostScene.h"
@@ -28,7 +28,7 @@ int main()
 	// Ajout des scènes
 	SceneModule* sceneModule = Engine::GetModule<SceneModule>();
 	sceneModule->RegisterScene<MainMenuScene>("MainMenuScene");
-	sceneModule->RegisterScene<PrototypeScene>("PrototypeScene");
+	sceneModule->RegisterScene<LevelScene_1_1>("LevelScene_1_1");
 	sceneModule->RegisterScene<PauseScene>("PauseScene");
 	sceneModule->RegisterScene<GameOverScene>("GameOverScene");
 	sceneModule->RegisterScene<LifeLostScene>("LifeLostScene");

@@ -29,11 +29,11 @@
 
 using json = nlohmann::json;
 
-class PrototypeScene : public Scene
+class LevelScene_1_1 : public Scene
 {
 
 public:
-	PrototypeScene()
+	LevelScene_1_1()
 	{
 
 		std::ifstream file("Assets/Level/AntLevel_12.json");
