@@ -14,8 +14,6 @@ public:
 	MainMenuScene()
 	{
 
-
-
 		// Réinitialiser l'état du jeu quand on revient au menu principal
 		GameStateManager::ResetGame();
 

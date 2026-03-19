@@ -193,11 +193,12 @@ public:
 						float finalY = yPos + (j * gridSize) + gridSize * 0.5f;
 
 						GameObject* goomba = CreateGameObject("Goomba", { finalX, finalY });
+						goomba->GetTransform().scale = sf::Vector2f(0.55f, 0.55f);
 						goomba->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
 						goomba->AddComponent<GoombaComponent>();
-						goomba->AddComponent<SpriteRenderer>("Assets/Goomba.png");
+						goomba->AddComponent<SpriteRenderer>("Assets/GoombaSpriteSheet.png");
 						goomba->AddComponent<VelocityComponent>(90.f);
-						goomba->AddComponent<SquareCollider>(sf::Vector2f(40.f, 40.f));
+						goomba->AddComponent<SquareCollider>(sf::Vector2f(40.f, 105.f));
 					}
 				}
 			}

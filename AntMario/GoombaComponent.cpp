@@ -1,4 +1,5 @@
 #include <Scene.h>
+#include <SpriteRenderer.h>
 #include <SquareCollider.h>
 #include <VelocityComponent.h>
 #include "GoombaComponent.h"
@@ -21,12 +22,20 @@ void GoombaComponent::Init() {
 	velocityComponent->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* other) { ChangeDirection(-1.f); });
 	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* other) { ChangeDirection(1.f); });
 
+	// Ajoute l'animation du "Goomba"
+	SpriteRenderer* sprite = owner->GetComponent<SpriteRenderer>();
+	if (!sprite)
+		return;
+
+	sprite->SetAnimationRule(SpriteAnimationRule(sf::Vector2i(0, 0), sf::Vector2i(128, 128), 4, 0.5f));
+
 }
 
 void GoombaComponent::Update(float dt)
 {
 
 	velocityComponent->SetX(direction);
+	owner->GetTransform().scale = sf::Vector2f(direction * 0.5f, 0.5f);
 
 }
 

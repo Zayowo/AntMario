@@ -14,6 +14,9 @@ public:
 
 		isBreakingUpdate = true;
 
+		// Réinitialiser l'état du jeu quand on arrive au Game Over
+		GameStateManager::ResetGame();
+
 		GameObject* titleText = CreateGameObject("GameOverTitle", { 600, 250 });
 		titleText->GetTransform().origin = sf::Vector2f(0.5f, 0.5f);
 		titleText->SetIsAlwaysLoaded(true);
