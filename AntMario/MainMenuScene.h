@@ -3,7 +3,9 @@
 #include <SceneModule.h>
 #include <Scene.h>
 #include <ButtonRenderer.h>
+#include <SpriteRenderer.h>
 #include "GameStateManager.h"
+#include "BackgroundElement.h"
 
 class MainMenuScene : public Scene
 {
@@ -12,8 +14,15 @@ public:
 	MainMenuScene()
 	{
 
+
+
 		// Réinitialiser l'état du jeu quand on revient au menu principal
 		GameStateManager::ResetGame();
+
+		GameObject* background = CreateGameObject("Menu", { 600, 400 });
+		background->SetIsAlwaysLoaded(true);
+		background->AddComponent<SpriteRenderer>("Assets/MainMenu.png");
+		background->GetTransform().scale = sf::Vector2f(1.f, 1.f);
 
 		GameObject* playButton = CreateGameObject("Button", { 600, 300 });
 		playButton->SetIsAlwaysLoaded(true);
