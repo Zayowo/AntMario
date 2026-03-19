@@ -1,5 +1,6 @@
 #pragma once
 #include <Component.h>
+#include <InputModule.h>
 #include "GameController.h"
 #include "FSMComponent.h"
 #include "PlayerContext.h"

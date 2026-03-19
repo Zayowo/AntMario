@@ -7,6 +7,7 @@
 #include "GoombaComponent.h"
 #include "TurtleComponent.h"
 #include <Utils.h>
+#include "PlayerController.h"
 
 void ShellTurtle::Enter(TurtleContext& ctx)
 {
@@ -23,7 +24,9 @@ void ShellTurtle::Enter(TurtleContext& ctx)
 	velocity->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* other) { DestroyTurtle(other); });
 	velocity->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* other) { DestroyTurtle(other); });
 
-	
+	velocity->RegisterHit("Player", VelocityHitType::LEFT, [this](GameObject* other) { if (isMoving) HitPlayer(other); });
+	velocity->RegisterHit("Player", VelocityHitType::RIGHT, [this](GameObject* other) { if (isMoving) HitPlayer(other); });
+
 }
 
 void ShellTurtle::Execute(TurtleContext& ctx, float dt)
@@ -103,4 +106,15 @@ void ShellTurtle::DestroyTurtle(GameObject* other) {
 
 	if (isMoving)
 		TComponent->Kill();
+}
+
+void ShellTurtle::HitPlayer(GameObject* other) {
+	PlayerController* playerController = other->GetComponent<PlayerController>();
+	if (playerController == nullptr)
+	{
+		std::cerr << "Error : in ShellTurtle missing PlayerController" << std::endl;
+		return;
+	}
+
+	playerController->HitByEnemy(other);
 }

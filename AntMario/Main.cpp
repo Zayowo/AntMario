@@ -7,6 +7,7 @@
 #include "PauseScene.h"
 #include "GameOverScene.h"
 #include "LifeLostScene.h"
+#include "VictoryScene.h"
 
 int main()
 {

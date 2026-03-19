@@ -12,6 +12,8 @@ class ShellTurtle : public State<TurtleContext>
 
 	void DestroyTurtle(GameObject* other);
 
+	void HitPlayer(GameObject* other);
+
 	bool isMoving = false;
 };
 

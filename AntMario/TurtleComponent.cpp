@@ -24,12 +24,6 @@ void TurtleComponent::Init()
 
 	velocity->RegisterHit("Terrain", VelocityHitType::LEFT, [this](GameObject* other) { ChangeDirection(-1); });
 	velocity->RegisterHit("Terrain", VelocityHitType::RIGHT, [this](GameObject* other) { ChangeDirection(1); });
-	
-	velocity->RegisterHit("Goomba", VelocityHitType::LEFT, [this](GameObject* other) { ChangeDirection(-1); });
-	velocity->RegisterHit("Goomba", VelocityHitType::RIGHT, [this](GameObject* other) { ChangeDirection(1); });
-	
-	velocity->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* other) { ChangeDirection(-1); });
-	velocity->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* other) { ChangeDirection(1); });
 
 }
 

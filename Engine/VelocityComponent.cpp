@@ -106,7 +106,7 @@ void VelocityComponent::ResolveCollisions(GameObject* other, bool isFixPosition)
 
     if (other == owner)
         return;
-    
+
     if (!other)
         return;
 
@@ -128,62 +128,62 @@ void VelocityComponent::ResolveCollisions(GameObject* other, bool isFixPosition)
 
     Transform& transform = owner->GetTransform();
 
-    // Déterminer l'axe de collision dominant
-    // Si la largeur de l'intersection est plus petite que sa hauteur, c'est une collision horizontale
-    if (intersection.size.x < intersection.size.y) {
+    // Seuil pour favoriser les collisions verticales quand on est au sol
+    float collisionThreshold = isGrounded ? 0.3f : 1.0f;
 
+    // Déterminer l'axe de collision dominant
+    if (intersection.size.x < intersection.size.y * collisionThreshold) {
+        // Collision LEFT/RIGHT (horizontale)
         if (playerBounds.position.x < otherBounds.position.x)
         {
-
             if (isFixPosition)
                 transform.pos.x = otherBounds.position.x - (playerBounds.size.x * (1.0f - transform.origin.x));
-            
-            SendHit(other, VelocityHitType::LEFT);
 
+            SendHit(other, VelocityHitType::LEFT);
         }
         else
         {
-
             if (isFixPosition)
                 transform.pos.x = otherBounds.position.x + otherBounds.size.x + (playerBounds.size.x * transform.origin.x);
-            
+
             SendHit(other, VelocityHitType::RIGHT);
-
         }
-        velocity.x = 0.f;
 
+        // Ne reset velocity.x que pour les Blocks (le joueur marche dessus)
+        // Pour tout le reste (Terrain, Ennemis), on reset velocity.x
+        if (other->GetName() != "Block")
+            velocity.x = 0.f;
     }
     else
     {
+        // Collision TOP/BOTTOM (verticale)
         if (playerBounds.position.y < otherBounds.position.y)
         {
-
-            if (isFixPosition)
-                if (velocity.y > 0.f)
+            // TOP collision - descending
+            if (velocity.y > 0.f)
+            {
+                if (isFixPosition)
                 {
                     velocity.y = 0.f;
                     isGrounded = true;
-                    transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y)) + 0.1f;
+                    transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y)) + 0.05f;
                 }
-                else
-                    transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y));
-
-            if (velocity.y > 0.f)
                 SendHit(other, VelocityHitType::TOP);
-
+            }
         }
         else
         {
-
-            if (isFixPosition)
-                transform.pos.y = otherBounds.position.y + otherBounds.size.y + (playerBounds.size.y * transform.origin.y);
-
+            // BOTTOM collision - ascending
             if (velocity.y < 0.f)
-                velocity.y = 0.01f;
+            {
+                if (isFixPosition)
+                {
+                    velocity.y = 0.01f;
+                    transform.pos.y = otherBounds.position.y + otherBounds.size.y + (playerBounds.size.y * transform.origin.y);
+                }
                 SendHit(other, VelocityHitType::BOTTOM);
-
+            }
         }
-
     }
 
 }

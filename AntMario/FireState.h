@@ -5,5 +5,6 @@ class FireState : public State<PlayerContext>
 {
 	void Enter(PlayerContext& p) override;
 	void Execute(PlayerContext& p, float dt) override;
+	void Exit(PlayerContext& p) override;
 };
 

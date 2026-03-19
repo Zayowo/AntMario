@@ -136,6 +136,7 @@
     <ClCompile Include="BackgroundElement.cpp" />
     <ClCompile Include="EnemyComponent.cpp" />
     <ClCompile Include="BonusComponent.cpp" />
+    <ClCompile Include="FinishZoneComponent.cpp" />
     <ClCompile Include="FixedCameraComponent.cpp" />
     <ClCompile Include="FixedCameraComponent.h" />
     <ClCompile Include="Bonus.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="BonusType.h" />
     <ClInclude Include="Condition.h" />
     <ClInclude Include="EnemyComponent.h" />
+    <ClInclude Include="FinishZoneComponent.h" />
     <ClInclude Include="FireComponent.h" />
     <ClInclude Include="FireState.h" />
     <ClInclude Include="GameController.h" />
@@ -188,6 +190,7 @@
     <ClInclude Include="LevelScene_1_1.h" />
     <ClInclude Include="ShellTurtle.h" />
     <ClCompile Include="TurtleComponent.h" />
+    <ClInclude Include="VictoryScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LittleState.h" />

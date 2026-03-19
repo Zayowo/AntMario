@@ -23,6 +23,12 @@ public:
 	// Applique une nouvelle texture
 	void SetTexture(std::string path);
 
+	// Get the current color
+	sf::Color GetColor();
+
+	// Set the sprite color (including alpha for transparency)
+	void SetColor(sf::Color color);
+
 private:
 	std::string path;
 	sf::Sprite* sprite = nullptr;

@@ -84,3 +84,13 @@ void SpriteRenderer::SetTexture(std::string path)
 	sprite->setTexture(texture);
 
 }
+
+sf::Color SpriteRenderer::GetColor()
+{
+	return sprite->getColor();
+}
+
+void SpriteRenderer::SetColor(sf::Color color)
+{
+	sprite->setColor(color);
+}

@@ -18,6 +18,7 @@
 #include "GameController.h"
 #include "Oppenent.h"
 #include "Bonus.h"
+#include "FinishZoneComponent.h"
 #include "GoombaComponent.h"
 #include "PiranhaComponent.h"
 #include "PlayerContext.h"
@@ -232,6 +233,14 @@ public:
 					}
 				}
 			}
+			else if (tileType == "FLAG") {
+				GameObject* flag = CreateGameObject("Flag", { xPos, yPos });
+				flag->GetTransform().scale = sf::Vector2f(2.f, 2.f);
+				flag->GetTransform().origin = { 0.5f, 0.5f };
+				flag->AddComponent<SpriteRenderer>("Assets/Flag.png");
+				flag->AddComponent<SquareCollider>(sf::Vector2f(100.f, 300.f));
+				flag->AddComponent<FinishZoneComponent>();
+			}
 		}
 
 		// 3. PHASE PHYSIQUE
@@ -250,7 +259,7 @@ public:
 		gameController->AddComponent<GameController>();
 		gameController->SetIsAlwaysLoaded(true);
 
-		
+
 		//GameObject* piranha = CreateGameObject("Piranha", { 600, 650 });
 		//piranha->GetTransform().origin = sf::Vector2f(0.5f, 1.f);
 		//piranha->AddComponent<SpriteRenderer>("Assets/PlayerSprite.png");

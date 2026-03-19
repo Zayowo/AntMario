@@ -54,12 +54,9 @@ bool Condition::collitionWithBigBonus(PlayerContext& p)
 
 bool Condition::HasPickedMushroom(PlayerContext& ctx)
 {
-
-	bool hasPickedMushroom = ctx.hasPickedMushroom;
-	ctx.hasPickedMushroom = false;
-
-	if (hasPickedMushroom)
+	if (ctx.hasPickedMushroom)
 	{
+		ctx.hasPickedMushroom = false; // Consume only if we return true
 		return true;
 	}
 
@@ -69,12 +66,9 @@ bool Condition::HasPickedMushroom(PlayerContext& ctx)
 
 bool Condition::HasPickedFireFlower(PlayerContext& ctx)
 {
-
-	bool hasPickedFireFlower = ctx.hasPickedFireFlower;
-	ctx.hasPickedFireFlower = false;
-
-	if (hasPickedFireFlower)
+	if (ctx.hasPickedFireFlower)
 	{
+		ctx.hasPickedFireFlower = false; // Consume only if we return true
 		return true;
 	}
 

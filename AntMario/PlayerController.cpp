@@ -63,7 +63,7 @@ void PlayerController::Init()
 		}, nullptr);
 	bigState->AddTransition(Condition::HasPickedFireFlower, fireState);
 	bigState->AddTransition(Condition::IsHitByEnemy, littleState);
-	fireState->AddTransition(Condition::IsHitByEnemy, littleState);
+	fireState->AddTransition(Condition::IsHitByEnemy, bigState); // Go to Big when hit instead of Little
 
 	fsm->Init(littleState);
 
