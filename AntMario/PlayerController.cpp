@@ -108,17 +108,35 @@ void PlayerController::Update(float dt)
 
 	Transform& transform = owner->GetTransform();
 
-	float velocityX = 0.f;
+	float targetVelocityX = 0.f;
+	float currentVelocityX = velocityComponent->GetVelocity().x;
 
 	if (inputModule->Is(sf::Keyboard::Key::Q, InputState::HELD))
-		velocityX += -1.f;
+		targetVelocityX -= 1.f;
 
 	if (inputModule->Is(sf::Keyboard::Key::D, InputState::HELD))
-		velocityX += 1.f;
+		targetVelocityX += 1.f;
 
 	if (inputModule->Is(sf::Keyboard::Key::LShift, InputState::HELD))
-		velocityX *= 1.5f;
+		targetVelocityX *= 1.5f;
 
+	currentVelocityX = std::lerp(currentVelocityX, targetVelocityX, 10.f * dt);
+	
+	if (targetVelocityX == 0.f && abs(currentVelocityX) <= 0.1f)
+		currentVelocityX = 0.f;
+
+	velocityComponent->SetX(currentVelocityX);
+
+	if (targetVelocityX != 0.f)
+		transform.scale.x = abs(transform.scale.x) * (targetVelocityX > 0.f ? 1 : -1);
+
+
+	// 0.15f
+
+	float jumpHold = 0.f;
+
+
+	// Saut
 	if (inputModule->Is(sf::Keyboard::Key::Space, InputState::PRESSED))
 
 	{
@@ -126,8 +144,8 @@ void PlayerController::Update(float dt)
 		if (velocityComponent->IsGrounded())
 		{
 			isDoubleJump = false;
-			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.f);
 			velocityComponent->SetY(-840.f);
+			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.f);
 		}
 
 		else if (
@@ -138,8 +156,8 @@ void PlayerController::Update(float dt)
 
 			isDoubleJump = true;
 			*energy -= 0.05f;
-			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.25f);
 			velocityComponent->SetY(-840.f);
+			Engine::GetModule<ResourceModule>()->PlaySound("Assets/Sounds/Jump.wav", 0.75f, 1.25f);
 
 		}
 	}
@@ -150,9 +168,9 @@ void PlayerController::Update(float dt)
 		LoseLifeAndShowScene();
 	}
 
-	velocityComponent->SetX(velocityX);
-	if (velocityX != 0.f)
-		transform.scale.x = abs(transform.scale.x) * (velocityX > 0.f ? 1 : -1);
+	//velocityComponent->SetX(velocityX);
+	//if (velocityX != 0.f)
+	//	transform.scale.x = abs(transform.scale.x) * (velocityX > 0.f ? 1 : -1);
 
 }
 

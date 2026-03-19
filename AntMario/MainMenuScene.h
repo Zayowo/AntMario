@@ -20,12 +20,10 @@ public:
 		GameStateManager::ResetGame();
 
 		GameObject* background = CreateGameObject("Menu", { 600, 400 });
-		background->SetIsAlwaysLoaded(true);
 		background->AddComponent<SpriteRenderer>("Assets/MainMenu.png");
 		background->GetTransform().scale = sf::Vector2f(1.f, 1.f);
 
 		GameObject* playButton = CreateGameObject("Button", { 600, 300 });
-		playButton->SetIsAlwaysLoaded(true);
 		playButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Play", []() {
 
 			Engine::GetModule<SceneModule>()->SetScene("LevelScene_1_1");
@@ -33,7 +31,6 @@ public:
 		});
 
 		GameObject* editorButton = CreateGameObject("Button", { 600, 400 });
-		editorButton->SetIsAlwaysLoaded(true);
 		editorButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Settings", []() {
 
 			// À ajouter!
@@ -41,7 +38,6 @@ public:
 		});
 
 		GameObject* quitButton = CreateGameObject("Button", { 600, 500 });
-		quitButton->SetIsAlwaysLoaded(true);
 		quitButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Quit", []() {
 
 			Engine::GetInstance()->Stop();
@@ -49,6 +45,31 @@ public:
 		});
 
 	};
+
+	void Update(float dt)
+	{
+
+		sf::RenderWindow* window = Engine::GetModule<WindowModule>()->GetRenderWindow();
+		sf::View view = window->getView();
+		window->setView(window->getDefaultView());
+
+		Scene::Update(dt);
+
+		window->setView(view);
+
+	}
+
+	void Render(sf::RenderWindow* window)
+	{
+
+		sf::View view = window->getView();
+		window->setView(window->getDefaultView());
+
+		Scene::Render(window);
+
+		window->setView(view);
+
+	}
 
 
 };
