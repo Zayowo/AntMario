@@ -25,9 +25,9 @@ public:
 		livesText->SetIsAlwaysLoaded(true);
 		livesText->AddComponent<TextRenderer>("Assets/UI/Font.ttf", "You have " + std::to_string(GameStateManager::GetLives()) + " lives remaining...");
 
-		GameObject* continueButton = CreateGameObject("ContinueButton", { 600, 450 });
+		GameObject* continueButton = CreateGameObject("ContinueButton", { 600, 500 });
 		continueButton->SetIsAlwaysLoaded(true);
-		continueButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Continue", []() {
+		continueButton->AddComponent<ButtonRenderer>("Assets/UI/Continue_Unhovered.png", "Assets/UI/Continue_Hovered.png", "", []() {
 
 			Engine::GetModule<SceneModule>()->SetScene("LevelScene_1_1");
 

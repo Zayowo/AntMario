@@ -25,16 +25,16 @@ public:
 		GameObject* tryAgainButton = CreateGameObject("TryAgainButton", { 600, 400 });
 		tryAgainButton->GetTransform().origin = sf::Vector2f(0.5f, 0.5f);
 		tryAgainButton->SetIsAlwaysLoaded(true);
-		tryAgainButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Try Again", []() {
+		tryAgainButton->AddComponent<ButtonRenderer>("Assets/UI/Restart_Unhovered.png", "Assets/UI/Restart_Hovered.png", "", []() {
 
 			Engine::GetModule<SceneModule>()->SetScene("LevelScene_1_1");
 
 		});
 
-		GameObject* backToMenuButton = CreateGameObject("BackToMenuButton", { 600, 500 });
+		GameObject* backToMenuButton = CreateGameObject("BackToMenuButton", { 600, 550 });
 		backToMenuButton->GetTransform().origin = sf::Vector2f(0.5f, 0.5f);
 		backToMenuButton->SetIsAlwaysLoaded(true);
-		backToMenuButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Back To Menu", []() {
+		backToMenuButton->AddComponent<ButtonRenderer>("Assets/UI/MainMenu_Unhovered.png", "Assets/UI/MainMenu_Hovered.png", "", []() {
 
 			Engine::GetModule<SceneModule>()->SetScene("MainMenuScene");
 

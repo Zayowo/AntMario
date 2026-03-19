@@ -21,22 +21,22 @@ public:
 		background->AddComponent<SpriteRenderer>("Assets/MainMenu.png");
 		background->GetTransform().scale = sf::Vector2f(1.f, 1.f);
 
-		GameObject* playButton = CreateGameObject("Button", { 600, 300 });
-		playButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Play", []() {
+		GameObject* playButton = CreateGameObject("Button", { 600, 250 });
+		playButton->AddComponent<ButtonRenderer>("Assets/UI/StartGame_Unhovered.png", "Assets/UI/StartGame_Hovered.png", "", []() {
 
 			Engine::GetModule<SceneModule>()->SetScene("LevelScene_1_1");
 
 		});
 
-		GameObject* editorButton = CreateGameObject("Button", { 600, 400 });
-		editorButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Settings", []() {
+		GameObject* settingsButton = CreateGameObject("Button", { 600, 400 });
+		settingsButton->AddComponent<ButtonRenderer>("Assets/UI/Settings_Unhovered.png", "Assets/UI/Settings_Hovered.png", "", []() {
 
-			// À ajouter!
+			// Euh, bon! :)
 
 		});
 
-		GameObject* quitButton = CreateGameObject("Button", { 600, 500 });
-		quitButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Quit", []() {
+		GameObject* quitButton = CreateGameObject("Button", { 600, 550 });
+		quitButton->AddComponent<ButtonRenderer>("Assets/UI/QuitGame_Unhovered.png", "Assets/UI/QuitGame_Hovered.png", "", []() {
 
 			Engine::GetInstance()->Stop();
 
