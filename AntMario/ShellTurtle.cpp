@@ -50,9 +50,13 @@ void ShellTurtle::Execute(TurtleContext& ctx, float dt)
 		velocity->SetX(turtleDir * 3.f);
 	}*/
 
-	if (IsHitByPlayer(ctx) && !isMoving) {
-		velocity->SetX(playerDir * 3);
+	bool hitByPlayer = IsHitByPlayer(ctx);
+	if (hitByPlayer && !isMoving) {
+		velocity->SetX(std::round(playerDir) * 3);
 		isMoving = true;
+	} else if (hitByPlayer && isMoving) {
+		velocity->SetX(0.f);
+		isMoving = false;
 	}
 
 	if (velocity->GetVelocity().x == 0 && isMoving == true)
@@ -87,8 +91,9 @@ void ShellTurtle::DestroyGoomba(GameObject* other) {
 	GoombaComponent* GComponent = other->GetComponent<GoombaComponent>();
 	if (GComponent == nullptr)
 		std::cerr << "Error : in ShellTurtle missing GoombaComponent" << std::endl;
-
-	GComponent->Destroy();
+	
+	if (isMoving)
+		GComponent->Kill();
 }
 
 void ShellTurtle::DestroyTurtle(GameObject* other) {
@@ -96,5 +101,6 @@ void ShellTurtle::DestroyTurtle(GameObject* other) {
 	if (TComponent == nullptr)
 		std::cerr << "Error : in ShellTurtle missing TurtleComponent" << std::endl;
 
-	other->GetScene()->DeleteGameObject(other);
+	if (isMoving)
+		TComponent->Kill();
 }

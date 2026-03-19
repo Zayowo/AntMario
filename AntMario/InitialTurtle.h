@@ -7,6 +7,5 @@ class InitialTurtle : public State<TurtleContext>
 {
 	void Enter(TurtleContext& ctx) override;
 	void Execute(TurtleContext& ctx, float dt) override;
-	void ChangeDirection(GameObject* other, float dir);
 };
 

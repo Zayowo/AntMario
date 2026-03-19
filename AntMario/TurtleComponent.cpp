@@ -22,8 +22,14 @@ void TurtleComponent::Init()
 
 	VelocityComponent* velocity = owner->GetComponent<VelocityComponent>();
 
-	velocity->RegisterHit("Block", VelocityHitType::LEFT, [this](GameObject* other) { ChangeDirection(-1); });
-	velocity->RegisterHit("Block", VelocityHitType::RIGHT, [this](GameObject* other) { ChangeDirection(1); });
+	velocity->RegisterHit("Terrain", VelocityHitType::LEFT, [this](GameObject* other) { ChangeDirection(-1); });
+	velocity->RegisterHit("Terrain", VelocityHitType::RIGHT, [this](GameObject* other) { ChangeDirection(1); });
+	
+	velocity->RegisterHit("Goomba", VelocityHitType::LEFT, [this](GameObject* other) { ChangeDirection(-1); });
+	velocity->RegisterHit("Goomba", VelocityHitType::RIGHT, [this](GameObject* other) { ChangeDirection(1); });
+	
+	velocity->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* other) { ChangeDirection(-1); });
+	velocity->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* other) { ChangeDirection(1); });
 
 }
 
@@ -46,5 +52,7 @@ void TurtleComponent::StepByPlayer(GameObject* other)
 }
 
 void TurtleComponent::ChangeDirection(float dir) {
-	owner->GetTransform().scale.x = dir;
+
+	owner->GetComponent<FSMComponent<TurtleContext>>()->GetContext().direction = dir;
+
 }
