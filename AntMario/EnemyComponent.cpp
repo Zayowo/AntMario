@@ -9,15 +9,12 @@
 
 void EnemyComponent::Init()
 {
+
 	SquareCollider* collider = owner->GetComponent<SquareCollider>();
-	collider->RegisterCallback("Fireball", [this](GameObject* o) {
-		TouchByBall(o); });
+	collider->RegisterCallback("Fireball", [this](GameObject* other) { Kill(); });
+
 }
 
-
-void EnemyComponent::TouchByBall(GameObject* other) {
-	owner->GetScene()->DeleteGameObject(owner);
-}
 
 void EnemyComponent::Move()
 {

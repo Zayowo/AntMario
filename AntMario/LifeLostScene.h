@@ -18,12 +18,10 @@ public:
 		isBreakingUpdate = true;
 
 		GameObject* titleText = CreateGameObject("LifeLostTitle", { 600, 250 });
-		titleText->GetTransform().origin = sf::Vector2f(0.5f, 0.5f);
 		titleText->SetIsAlwaysLoaded(true);
 		titleText->AddComponent<TextRenderer>("Assets/UI/Font.ttf", "Oof...");
 
-		GameObject* livesText = CreateGameObject("LivesText", {600, 350});
-		titleText->GetTransform().origin = sf::Vector2f(0.5f, 0.5f);
+		GameObject* livesText = CreateGameObject("LivesText", { 600, 350 });
 		livesText->SetIsAlwaysLoaded(true);
 		livesText->AddComponent<TextRenderer>("Assets/UI/Font.ttf", "You have " + std::to_string(GameStateManager::GetLives()) + " lives remaining...");
 

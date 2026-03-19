@@ -17,9 +17,9 @@ public:
 		GameObject* titleText = CreateGameObject("GameOverTitle", { 600, 250 });
 		titleText->GetTransform().origin = sf::Vector2f(0.5f, 0.5f);
 		titleText->SetIsAlwaysLoaded(true);
-		titleText->AddComponent<TextRenderer>("Assets/UI/Font.ttf", "It's over.");
+		titleText->AddComponent<TextRenderer>("Assets/UI/Font.ttf", "Game Over.");
 
-		GameObject* tryAgainButton = CreateGameObject("TryAgainButton", { 450, 400 });
+		GameObject* tryAgainButton = CreateGameObject("TryAgainButton", { 600, 400 });
 		tryAgainButton->GetTransform().origin = sf::Vector2f(0.5f, 0.5f);
 		tryAgainButton->SetIsAlwaysLoaded(true);
 		tryAgainButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Try Again", []() {
@@ -28,7 +28,7 @@ public:
 
 		});
 
-		GameObject* backToMenuButton = CreateGameObject("BackToMenuButton", { 750, 400 });
+		GameObject* backToMenuButton = CreateGameObject("BackToMenuButton", { 600, 500 });
 		backToMenuButton->GetTransform().origin = sf::Vector2f(0.5f, 0.5f);
 		backToMenuButton->SetIsAlwaysLoaded(true);
 		backToMenuButton->AddComponent<ButtonRenderer>("Assets/UI/UnhoveredButton.png", "Assets/UI/HoveredButton.png", "Back To Menu", []() {

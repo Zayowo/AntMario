@@ -13,11 +13,11 @@ void VelocityComponent::Init()
 	if (!collider)
 		return;
 
-	collider->RegisterCallback("Terrain", [this](GameObject* other) { ResolveCollisions(other); });
-    collider->RegisterCallback("Block", [this](GameObject* other) { ResolveCollisions(other); });
-    collider->RegisterCallback("Goomba", [this](GameObject* other) { ResolveCollisions(other); });
-    collider->RegisterCallback("Piranha", [this](GameObject* other) { ResolveCollisions(other); });
-    collider->RegisterCallback("Turtle", [this](GameObject* other) { ResolveCollisions(other); });
+	collider->RegisterCallback("Terrain", [this](GameObject* other) { ResolveCollisions(other, true); });
+    collider->RegisterCallback("Block", [this](GameObject* other) { ResolveCollisions(other, true); });
+    collider->RegisterCallback("Goomba", [this](GameObject* other) { ResolveCollisions(other, false); });
+    collider->RegisterCallback("Piranha", [this](GameObject* other) { ResolveCollisions(other, false); });
+    collider->RegisterCallback("Turtle", [this](GameObject* other) { ResolveCollisions(other, false); });
 
 }
 
@@ -102,18 +102,19 @@ void VelocityComponent::RegisterHit(std::string name, VelocityHitType hitType, s
 
 }
 
-void VelocityComponent::ResolveCollisions(GameObject* other) {
+void VelocityComponent::ResolveCollisions(GameObject* other, bool isFixPosition) {
 
     if (other == owner)
         return;
     
-    if (!other) return;
+    if (!other)
+        return;
 
     auto collider = owner->GetComponent<SquareCollider>();
     auto otherCollider = other->GetComponent<SquareCollider>();
 
-    if (!collider || !otherCollider) return;
-
+    if (!collider || !otherCollider)
+        return;
 
     sf::FloatRect playerBounds = collider->GetBounds();
     sf::FloatRect otherBounds = otherCollider->GetBounds();
@@ -134,14 +135,18 @@ void VelocityComponent::ResolveCollisions(GameObject* other) {
         if (playerBounds.position.x < otherBounds.position.x)
         {
 
-            transform.pos.x = otherBounds.position.x - (playerBounds.size.x * (1.0f - transform.origin.x));
+            if (isFixPosition)
+                transform.pos.x = otherBounds.position.x - (playerBounds.size.x * (1.0f - transform.origin.x));
+            
             SendHit(other, VelocityHitType::LEFT);
 
         }
         else
         {
 
-            transform.pos.x = otherBounds.position.x + otherBounds.size.x + (playerBounds.size.x * transform.origin.x);
+            if (isFixPosition)
+                transform.pos.x = otherBounds.position.x + otherBounds.size.x + (playerBounds.size.x * transform.origin.x);
+            
             SendHit(other, VelocityHitType::RIGHT);
 
         }
@@ -153,26 +158,28 @@ void VelocityComponent::ResolveCollisions(GameObject* other) {
         if (playerBounds.position.y < otherBounds.position.y)
         {
 
-            if (velocity.y > 0)
-            {
-                velocity.y = 0.f;
-                isGrounded = true;
-                transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y)) + 0.1f;
-            }
-            else
-                transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y));
+            if (isFixPosition)
+                if (velocity.y > 0.f)
+                {
+                    velocity.y = 0.f;
+                    isGrounded = true;
+                    transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y)) + 0.1f;
+                }
+                else
+                    transform.pos.y = otherBounds.position.y - (playerBounds.size.y * (1.0f - transform.origin.y));
 
-            SendHit(other, VelocityHitType::TOP);
+            if (velocity.y > 0.f)
+                SendHit(other, VelocityHitType::TOP);
 
         }
         else
         {
 
-            transform.pos.y = otherBounds.position.y + otherBounds.size.y + (playerBounds.size.y * transform.origin.y);
-            float _velocityY = velocity.y;
-            if (velocity.y < 0) velocity.y = 0.01f;
-            
-            if (_velocityY < 0.f)
+            if (isFixPosition)
+                transform.pos.y = otherBounds.position.y + otherBounds.size.y + (playerBounds.size.y * transform.origin.y);
+
+            if (velocity.y < 0.f)
+                velocity.y = 0.01f;
                 SendHit(other, VelocityHitType::BOTTOM);
 
         }
