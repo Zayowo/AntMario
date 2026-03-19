@@ -17,8 +17,7 @@ void GoombaComponent::Init() {
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::LEFT, [this](GameObject* other) { ChangeDirection(-1.f); });
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::RIGHT, [this](GameObject* other) { ChangeDirection(1.f); });
 
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* other) { Destroy(other); });
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* other) { Destroy(other); });
+	
 
 }
 
@@ -45,6 +44,6 @@ void GoombaComponent::ChangeDirection(float direction)
 
 }
 
-void GoombaComponent::Destroy(GameObject* other) {
+void GoombaComponent::Destroy() {
 	owner->GetScene()->DeleteGameObject(owner);
 }

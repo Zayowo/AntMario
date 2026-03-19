@@ -1,6 +1,10 @@
 #include "Condition.h"
 #include "SquareCollider.h"
 #include <Scene.h>
+#include "InitialTurtle.h"
+#include <FSMComponent.h>
+#include <VelocityComponent.h>
+#include "ShellTurtle.h"
 
 
 bool Condition::collisionWithEnemy(PlayerContext& p)
@@ -106,5 +110,21 @@ bool Condition::IsHitByPlayer(TurtleContext& ctx)
 	}
 
 	return false;
+
+}
+
+// C'est ignoble, mais c'est pas grave, au moins ça fait le taff
+bool Condition::IsTurtleInInitialState(GameObject* turtle)
+{
+
+	return dynamic_cast<InitialTurtle*>(turtle->GetComponent<FSMComponent<TurtleContext>>()->GetState());
+
+}
+
+bool Condition::IsTurtleInShellWithoutMoving(GameObject* turtle)
+{
+
+	return dynamic_cast<ShellTurtle*>(turtle->GetComponent<FSMComponent<TurtleContext>>()->GetState()) &&
+		turtle->GetComponent<VelocityComponent>()->GetVelocity().x == 0.f;
 
 }

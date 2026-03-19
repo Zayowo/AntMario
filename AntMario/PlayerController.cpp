@@ -18,6 +18,7 @@
 #include "Condition.h"
 #include "EnemyComponent.h"
 #include "InitialTurtle.h"
+#include "ShellTurtle.h"
 #include "GameStateManager.h"
 
 void PlayerController::Init()
@@ -77,16 +78,19 @@ void PlayerController::Init()
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::RIGHT, [this](GameObject* goomba) { HitByEnemy(goomba);  });
 	velocityComponent->RegisterHit("Goomba", VelocityHitType::BOTTOM, [this](GameObject* goomba) { HitByEnemy(goomba);  });
 
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* turtle) { BouncePlayer(); StepOnTurtle(turtle);  });
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* turtle) { if (dynamic_cast<InitialTurtle*>(fsm->GetState())) HitByEnemy(turtle); });
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* turtle) { if (dynamic_cast<InitialTurtle*>(fsm->GetState())) HitByEnemy(turtle);  });
-	velocityComponent->RegisterHit("Turtle", VelocityHitType::BOTTOM, [this](GameObject* turtle) { if (dynamic_cast<InitialTurtle*>(fsm->GetState())) HitByEnemy(turtle);  });
-
 	velocityComponent->RegisterHit("Piranha", VelocityHitType::TOP, [this](GameObject* piranha) { HitByEnemy(piranha); });
 	velocityComponent->RegisterHit("Piranha", VelocityHitType::LEFT, [this](GameObject* piranha) { HitByEnemy(piranha);  });
 	velocityComponent->RegisterHit("Piranha", VelocityHitType::RIGHT, [this](GameObject* piranha) { HitByEnemy(piranha);  });
 	velocityComponent->RegisterHit("Piranha", VelocityHitType::BOTTOM, [this](GameObject* piranha) { HitByEnemy(piranha);  });
 
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::TOP, [this](GameObject* turtle) { BouncePlayer(); StepOnTurtle(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* turtle) { if (Condition::IsTurtleInInitialState(turtle)) HitByEnemy(turtle); });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* turtle) { if (Condition::IsTurtleInInitialState(turtle)) HitByEnemy(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::BOTTOM, [this](GameObject* turtle) { if (Condition::IsTurtleInInitialState(turtle)) HitByEnemy(turtle);  });
+	
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::LEFT, [this](GameObject* turtle) { if (Condition::IsTurtleInShellWithoutMoving(turtle)) StepOnTurtle(turtle); });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::RIGHT, [this](GameObject* turtle) { if (Condition::IsTurtleInShellWithoutMoving(turtle)) StepOnTurtle(turtle);  });
+	velocityComponent->RegisterHit("Turtle", VelocityHitType::BOTTOM, [this](GameObject* turtle) { if (Condition::IsTurtleInShellWithoutMoving(turtle)) StepOnTurtle(turtle);  });
 
 	// Gestion du collider
 	collider = owner->GetComponent<SquareCollider>();
@@ -288,6 +292,7 @@ void PlayerController::StepOnTurtle(GameObject* turtle)
 	if (!fsm)
 		return;
 
+	LogPrint("Le joueur a intéragi avec une Turtle");
 	fsm->GetContext().isHitByPlayer = true;
 
 }

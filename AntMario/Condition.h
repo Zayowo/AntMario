@@ -16,5 +16,7 @@ public:
 
 	//turtle 
 	static bool IsHitByPlayer(TurtleContext& ctx);
+	static bool IsTurtleInInitialState(GameObject* turtle);
+	static bool IsTurtleInShellWithoutMoving(GameObject* turtle);
 };
 

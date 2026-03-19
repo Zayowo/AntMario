@@ -8,6 +8,10 @@ class ShellTurtle : public State<TurtleContext>
 
 	bool IsHitByPlayer(TurtleContext& ctx);
 
+	void DestroyGoomba(GameObject* other);
+
+	void DestroyTurtle(GameObject* other);
+
 	bool isMoving = false;
 };
 
